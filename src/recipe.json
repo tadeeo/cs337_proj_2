@@ -1,0 +1,55 @@
+{
+  "title": "Spicy Grilled Chicken",
+  "prep_time": "15 mins",
+  "cook_time": "15 mins",
+  "additional_time": "1 hr",
+  "total_time": "1 hr 30 mins",
+  "yield": "6",
+  "ingredients": [
+    {
+      "qty": "⅓",
+      "unit": "cup",
+      "name": "vegetable oil"
+    },
+    {
+      "qty": "2",
+      "unit": "tablespoons",
+      "name": "lime juice"
+    },
+    {
+      "qty": "½",
+      "unit": "teaspoon",
+      "name": "grated lime zest"
+    },
+    {
+      "qty": "2",
+      "unit": "cloves",
+      "name": "crushed garlic"
+    },
+    {
+      "qty": "1 ½",
+      "unit": "teaspoons",
+      "name": "fresh oregano"
+    },
+    {
+      "qty": "¼",
+      "unit": "teaspoon",
+      "name": "red pepper flakes"
+    },
+    {
+      "qty": "1",
+      "unit": "teaspoon",
+      "name": "salt"
+    },
+    {
+      "qty": "¼",
+      "unit": "teaspoon",
+      "name": "ground black pepper"
+    },
+    {
+      "qty": "6",
+      "unit": "",
+      "name": "skinless, boneless chicken breast halves"
+    }
+  ]
+}
