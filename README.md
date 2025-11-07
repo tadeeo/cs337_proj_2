@@ -1,0 +1,1 @@
+python3 src/ingredient_scraper.py <allrecipes.com url>
