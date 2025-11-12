@@ -81,7 +81,7 @@ def extract_ingredients(soup: BeautifulSoup) -> list[dict]:
     return items
 _SENTENCE_SPLIT = re.compile(r"(?<=[.!?])\s+")
 
-def extract_steps(soup: BeautifulSoup) -> list[dict]:
+def extract_steps(soup: BeautifulSoup, ingredients) -> list[dict]:
     """Extract ordered steps, then split each into sentence-level substeps."""
     steps: list[dict] = []
 
@@ -107,6 +107,8 @@ def extract_steps(soup: BeautifulSoup) -> list[dict]:
         substeps = [{"sub_number": f"{i}.{j}", "text": s} for j, s in enumerate(sentences, start=1)]
 
         # add structured action tags using spaCy
+        COMMON_INGREDIENTS = {"water", "salt", "pepper", "oil", "butter"}
+        ingredient_set = set(normalize_ingredient(ing["name"]) for ing in ingredients) | COMMON_INGREDIENTS
         actions = extract_actions_rule_based(full_text, ingredient_set, COOKING_VERBS, tools_list)
 
         steps.append({
@@ -139,55 +141,43 @@ def extract_steps(soup: BeautifulSoup) -> list[dict]:
 
 #     return steps
 
-def extract_actions_from_step(text: str) -> list[dict]:
-    """Use spaCy to extract verbs (actions) and their direct objects/tools."""
-    doc = nlp(text)
-    actions = []
-
-    for token in doc:
-        # Look for main verbs
-        if token.pos_ == "VERB":
-            action = {"verb": token.lemma_, "ingredients": [], "tool": None}
-
-            # Find direct objects (potential ingredients)
-            for child in token.children:
-                if child.dep_ in ("dobj", "pobj", "conj"):
-                    action["ingredients"].append(child.text)
-
-                # Look for prepositional phrase tools (e.g., "in a bowl")
-                if child.dep_ == "prep":
-                    for obj in child.children:
-                        if obj.dep_ == "pobj":
-                            action["tool"] = obj.text
-
-            if action["ingredients"] or action["tool"]:
-                actions.append(action)
-
-    return actions
-
-
 def extract_actions_rule_based(text, ingredient_set, cooking_verbs, tools_list):
-    actions = []
     doc = nlp(text)
-    
+    actions = []
+
+    ingredients_found = find_ingredients_in_text(text, ingredient_set)
+    tools_found = [tool for tool in tools_list if tool in text.lower()]
+
     for token in doc:
-        # Only look for verbs in the whitelist
-        if token.lemma_.lower() in cooking_verbs:
-            action = {"verb": token.lemma_.lower(), "ingredients": [], "tool": None}
-            
-            # Attach ingredients mentioned in this step
-            for child in token.children:
-                if child.text.lower() in ingredient_set:
-                    action["ingredients"].append(child.text)
-            
-            # Attach kitchen tools if mentioned
-            for token2 in doc:
-                if token2.text.lower() in tools_list:
-                    action["tool"] = token2.text
-            
-            actions.append(action)
-    
+        verb_lemma = token.lemma_.lower()
+        if verb_lemma in cooking_verbs:
+            actions.append({
+                "verb": verb_lemma,
+                "ingredients": ingredients_found,
+                "tool": tools_found[0] if tools_found else None
+            })
+
     return actions
+
+def normalize_ingredient(name: str) -> str:
+    # Lowercase
+    name = name.lower()
+    # Remove things like "shredded", "chopped", "(16 ounce) package", "or to taste"
+    name = re.sub(r'\([^)]*\)', '', name)        # remove parenthesis
+    name = re.sub(r'\b(shredded|chopped|diced|sliced|fresh|lean|ground)\b', '', name)
+    name = re.sub(r'or to taste', '', name)
+    name = re.sub(r'\s+', ' ', name)            # normalize spaces
+    return name.strip()
+
+def find_ingredients_in_text(text: str, ingredient_set: set) -> list[str]:
+    text_lower = text.lower()
+    found = []
+    for ing in ingredient_set:
+        ing_tokens = [t for t in re.findall(r"\b\w+\b", ing)]
+        match_count = sum(1 for t in ing_tokens if t in text_lower)
+        if match_count / len(ing_tokens) >= 0.5:  # at least half the tokens match
+            found.append(ing)
+    return found
 
 def main():
     if len(sys.argv) != 2:
@@ -197,8 +187,7 @@ def main():
     soup = fetch_soup(sys.argv[1])
     meta = extract_basic_meta(soup)
     ingredients = extract_ingredients(soup)
-    ingredient_set = {ing['name'].lower() for ing in ingredients}
-    steps = extract_steps(soup)
+    steps = extract_steps(soup, ingredients)
 
     data = {
         "title": meta["title"],

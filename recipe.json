@@ -96,12 +96,24 @@
       "actions": [
         {
           "verb": "boil",
-          "ingredients": [],
+          "ingredients": [
+            "water",
+            "salt and black pepper to taste",
+            "whole wheat lasagna noodles",
+            "oil",
+            "salt"
+          ],
           "tool": "pot"
         },
         {
           "verb": "add",
-          "ingredients": [],
+          "ingredients": [
+            "water",
+            "salt and black pepper to taste",
+            "whole wheat lasagna noodles",
+            "oil",
+            "salt"
+          ],
           "tool": "pot"
         }
       ]
@@ -118,7 +130,15 @@
       "actions": [
         {
           "verb": "stir",
-          "ingredients": [],
+          "ingredients": [
+            "pepper",
+            "dried oregano,",
+            "beef",
+            "salt and black pepper to taste",
+            "garlic,",
+            "salt",
+            "garlic powder"
+          ],
           "tool": "skillet"
         }
       ]
@@ -135,7 +155,12 @@
       "actions": [
         {
           "verb": "mix",
-          "ingredients": [],
+          "ingredients": [
+            "mozzarella cheese",
+            "eggs",
+            "cottage cheese",
+            "parmesan cheese"
+          ],
           "tool": "bowl"
         }
       ]
@@ -160,38 +185,87 @@
       "actions": [
         {
           "verb": "bake",
-          "ingredients": [],
-          "tool": "foil"
+          "ingredients": [
+            "mozzarella cheese",
+            "beef",
+            "cottage cheese",
+            "tomato-basil pasta sauce",
+            "parmesan cheese",
+            "oil"
+          ],
+          "tool": "pan"
         },
         {
           "verb": "layer",
-          "ingredients": [],
-          "tool": "foil"
+          "ingredients": [
+            "mozzarella cheese",
+            "beef",
+            "cottage cheese",
+            "tomato-basil pasta sauce",
+            "parmesan cheese",
+            "oil"
+          ],
+          "tool": "pan"
         },
         {
           "verb": "layer",
-          "ingredients": [],
-          "tool": "foil"
+          "ingredients": [
+            "mozzarella cheese",
+            "beef",
+            "cottage cheese",
+            "tomato-basil pasta sauce",
+            "parmesan cheese",
+            "oil"
+          ],
+          "tool": "pan"
         },
         {
           "verb": "layer",
-          "ingredients": [],
-          "tool": "foil"
+          "ingredients": [
+            "mozzarella cheese",
+            "beef",
+            "cottage cheese",
+            "tomato-basil pasta sauce",
+            "parmesan cheese",
+            "oil"
+          ],
+          "tool": "pan"
         },
         {
           "verb": "layer",
-          "ingredients": [],
-          "tool": "foil"
+          "ingredients": [
+            "mozzarella cheese",
+            "beef",
+            "cottage cheese",
+            "tomato-basil pasta sauce",
+            "parmesan cheese",
+            "oil"
+          ],
+          "tool": "pan"
         },
         {
           "verb": "layer",
-          "ingredients": [],
-          "tool": "foil"
+          "ingredients": [
+            "mozzarella cheese",
+            "beef",
+            "cottage cheese",
+            "tomato-basil pasta sauce",
+            "parmesan cheese",
+            "oil"
+          ],
+          "tool": "pan"
         },
         {
           "verb": "sprinkle",
-          "ingredients": [],
-          "tool": "foil"
+          "ingredients": [
+            "mozzarella cheese",
+            "beef",
+            "cottage cheese",
+            "tomato-basil pasta sauce",
+            "parmesan cheese",
+            "oil"
+          ],
+          "tool": "pan"
         }
       ]
     },
@@ -215,18 +289,33 @@
       "actions": [
         {
           "verb": "bake",
-          "ingredients": [],
-          "tool": "foil"
+          "ingredients": [
+            "mozzarella cheese",
+            "cottage cheese",
+            "parmesan cheese",
+            "oil"
+          ],
+          "tool": "oven"
         },
         {
           "verb": "remove",
-          "ingredients": [],
-          "tool": "foil"
+          "ingredients": [
+            "mozzarella cheese",
+            "cottage cheese",
+            "parmesan cheese",
+            "oil"
+          ],
+          "tool": "oven"
         },
         {
           "verb": "bake",
-          "ingredients": [],
-          "tool": "foil"
+          "ingredients": [
+            "mozzarella cheese",
+            "cottage cheese",
+            "parmesan cheese",
+            "oil"
+          ],
+          "tool": "oven"
         }
       ]
     }
