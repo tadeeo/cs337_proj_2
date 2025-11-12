@@ -1,6 +1,9 @@
 import sys, re, json
 import requests
 from bs4 import BeautifulSoup
+import spacy
+
+nlp = spacy.load("en_core_web_sm")
 
 def fetch_soup(url: str) -> BeautifulSoup:
     """Return BeautifulSoup for the page; force Allrecipes print view."""
@@ -18,6 +21,13 @@ _LABEL_MAP = {
     "total time": "total_time",
     "servings": "yield",
 }
+
+COOKING_VERBS = ["mix", "bake", "grill", "stir", "preheat", "add", "chop",
+    "saute", "boil", "fry", "sprinkle", "layer", "remove", "pour"]
+
+ingredient_set = {}
+tools_list = ["bowl", "pan", "skillet", "oven", "spatula", "dish", "grate", "foil", "pot"]
+
 
 def extract_basic_meta(soup: BeautifulSoup) -> dict:
     """Extract title and times/yield from the details rows."""
@@ -96,10 +106,14 @@ def extract_steps(soup: BeautifulSoup) -> list[dict]:
         sentences = [s.strip() for s in _SENTENCE_SPLIT.split(full_text) if s.strip()]
         substeps = [{"sub_number": f"{i}.{j}", "text": s} for j, s in enumerate(sentences, start=1)]
 
+        # add structured action tags using spaCy
+        actions = extract_actions_rule_based(full_text, ingredient_set, COOKING_VERBS, tools_list)
+
         steps.append({
             "step_number": i,
             "text": full_text,
-            "substeps": substeps
+            "substeps": substeps,
+            "actions": actions
         })
 
     return steps
@@ -125,6 +139,56 @@ def extract_steps(soup: BeautifulSoup) -> list[dict]:
 
 #     return steps
 
+def extract_actions_from_step(text: str) -> list[dict]:
+    """Use spaCy to extract verbs (actions) and their direct objects/tools."""
+    doc = nlp(text)
+    actions = []
+
+    for token in doc:
+        # Look for main verbs
+        if token.pos_ == "VERB":
+            action = {"verb": token.lemma_, "ingredients": [], "tool": None}
+
+            # Find direct objects (potential ingredients)
+            for child in token.children:
+                if child.dep_ in ("dobj", "pobj", "conj"):
+                    action["ingredients"].append(child.text)
+
+                # Look for prepositional phrase tools (e.g., "in a bowl")
+                if child.dep_ == "prep":
+                    for obj in child.children:
+                        if obj.dep_ == "pobj":
+                            action["tool"] = obj.text
+
+            if action["ingredients"] or action["tool"]:
+                actions.append(action)
+
+    return actions
+
+
+def extract_actions_rule_based(text, ingredient_set, cooking_verbs, tools_list):
+    actions = []
+    doc = nlp(text)
+    
+    for token in doc:
+        # Only look for verbs in the whitelist
+        if token.lemma_.lower() in cooking_verbs:
+            action = {"verb": token.lemma_.lower(), "ingredients": [], "tool": None}
+            
+            # Attach ingredients mentioned in this step
+            for child in token.children:
+                if child.text.lower() in ingredient_set:
+                    action["ingredients"].append(child.text)
+            
+            # Attach kitchen tools if mentioned
+            for token2 in doc:
+                if token2.text.lower() in tools_list:
+                    action["tool"] = token2.text
+            
+            actions.append(action)
+    
+    return actions
+
 def main():
     if len(sys.argv) != 2:
         print("usage: python recipe_scraper.py <allrecipes_url>")
@@ -133,6 +197,7 @@ def main():
     soup = fetch_soup(sys.argv[1])
     meta = extract_basic_meta(soup)
     ingredients = extract_ingredients(soup)
+    ingredient_set = {ing['name'].lower() for ing in ingredients}
     steps = extract_steps(soup)
 
     data = {
