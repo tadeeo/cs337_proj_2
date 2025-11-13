@@ -71,13 +71,6 @@
           "sub_number": "1.1",
           "text": "Preheat the oven to 350 degrees F (175 degrees C)."
         }
-      ],
-      "actions": [
-        {
-          "verb": "preheat",
-          "ingredients": [],
-          "tool": "oven"
-        }
       ]
     },
     {
@@ -92,30 +85,6 @@
           "sub_number": "2.2",
           "text": "Add lasagna noodles and cook for 10 minutes or until al dente; drain."
         }
-      ],
-      "actions": [
-        {
-          "verb": "boil",
-          "ingredients": [
-            "water",
-            "salt and black pepper to taste",
-            "whole wheat lasagna noodles",
-            "oil",
-            "salt"
-          ],
-          "tool": "pot"
-        },
-        {
-          "verb": "add",
-          "ingredients": [
-            "water",
-            "salt and black pepper to taste",
-            "whole wheat lasagna noodles",
-            "oil",
-            "salt"
-          ],
-          "tool": "pot"
-        }
       ]
     },
     {
@@ -126,21 +95,6 @@
           "sub_number": "3.1",
           "text": "Meanwhile, place ground beef, garlic, oregano, garlic powder, salt, and black pepper in a large skillet over medium heat; cook and stir until beef is crumbly and evenly browned, about 10 minutes."
         }
-      ],
-      "actions": [
-        {
-          "verb": "stir",
-          "ingredients": [
-            "pepper",
-            "dried oregano,",
-            "beef",
-            "salt and black pepper to taste",
-            "garlic,",
-            "salt",
-            "garlic powder"
-          ],
-          "tool": "skillet"
-        }
       ]
     },
     {
@@ -150,18 +104,6 @@
         {
           "sub_number": "4.1",
           "text": "Mix cottage cheese, Parmesan cheese, and eggs together in a large bowl until thoroughly combined."
-        }
-      ],
-      "actions": [
-        {
-          "verb": "mix",
-          "ingredients": [
-            "mozzarella cheese",
-            "eggs",
-            "cottage cheese",
-            "parmesan cheese"
-          ],
-          "tool": "bowl"
         }
       ]
     },
@@ -181,92 +123,6 @@
           "sub_number": "5.3",
           "text": "Cover the dish with aluminum foil."
         }
-      ],
-      "actions": [
-        {
-          "verb": "bake",
-          "ingredients": [
-            "mozzarella cheese",
-            "beef",
-            "cottage cheese",
-            "tomato-basil pasta sauce",
-            "parmesan cheese",
-            "oil"
-          ],
-          "tool": "pan"
-        },
-        {
-          "verb": "layer",
-          "ingredients": [
-            "mozzarella cheese",
-            "beef",
-            "cottage cheese",
-            "tomato-basil pasta sauce",
-            "parmesan cheese",
-            "oil"
-          ],
-          "tool": "pan"
-        },
-        {
-          "verb": "layer",
-          "ingredients": [
-            "mozzarella cheese",
-            "beef",
-            "cottage cheese",
-            "tomato-basil pasta sauce",
-            "parmesan cheese",
-            "oil"
-          ],
-          "tool": "pan"
-        },
-        {
-          "verb": "layer",
-          "ingredients": [
-            "mozzarella cheese",
-            "beef",
-            "cottage cheese",
-            "tomato-basil pasta sauce",
-            "parmesan cheese",
-            "oil"
-          ],
-          "tool": "pan"
-        },
-        {
-          "verb": "layer",
-          "ingredients": [
-            "mozzarella cheese",
-            "beef",
-            "cottage cheese",
-            "tomato-basil pasta sauce",
-            "parmesan cheese",
-            "oil"
-          ],
-          "tool": "pan"
-        },
-        {
-          "verb": "layer",
-          "ingredients": [
-            "mozzarella cheese",
-            "beef",
-            "cottage cheese",
-            "tomato-basil pasta sauce",
-            "parmesan cheese",
-            "oil"
-          ],
-          "tool": "pan"
-        },
-        {
-          "verb": "sprinkle",
-          "ingredients": [
-            "mozzarella cheese",
-            "beef",
-            "cottage cheese",
-            "tomato-basil pasta sauce",
-            "parmesan cheese",
-            "oil"
-          ],
-          "tool": "pan"
-        }
       ]
     },
     {
@@ -284,38 +140,6 @@
         {
           "sub_number": "6.3",
           "text": "Allow to stand at least 10 minutes before serving."
-        }
-      ],
-      "actions": [
-        {
-          "verb": "bake",
-          "ingredients": [
-            "mozzarella cheese",
-            "cottage cheese",
-            "parmesan cheese",
-            "oil"
-          ],
-          "tool": "oven"
-        },
-        {
-          "verb": "remove",
-          "ingredients": [
-            "mozzarella cheese",
-            "cottage cheese",
-            "parmesan cheese",
-            "oil"
-          ],
-          "tool": "oven"
-        },
-        {
-          "verb": "bake",
-          "ingredients": [
-            "mozzarella cheese",
-            "cottage cheese",
-            "parmesan cheese",
-            "oil"
-          ],
-          "tool": "oven"
         }
       ]
     }

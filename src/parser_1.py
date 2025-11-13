@@ -18,6 +18,16 @@ import json
 import re
 import sys
 from typing import List, Dict
+import spacy
+
+nlp = spacy.load("en_core_web_sm")
+
+COOKING_VERBS = ["mix", "bake", "grill", "stir", "preheat", "add", "chop",
+                 "saute", "boil", "fry", "sprinkle", "layer", "remove",
+                 "pour", "place", "cook"]
+
+ingredient_set = {}
+tools_list = ["bowl", "pan", "skillet", "oven", "spatula", "dish", "grate", "foil", "pot"]
 
 
 def load_list_from_file(filepath: str) -> List[str]:
@@ -90,15 +100,44 @@ def parse_step(step_number: int, step: str, ingredients: List[str], tools: List[
     time_info = extract_time(step)
     temp_info = extract_temperature(step, step_ingredients)
 
+    # add structured action tags using spaCy
+    actions = extract_actions_rule_based(step, ingredients, COOKING_VERBS, tools_list)
+
     return {
         "step_number": step_number,
         "description": step.strip(),
-        "ingredients": step_ingredients,
-        "tools": step_tools,
-        "methods": methods,
+        "actions": actions,
         "time": time_info if time_info else {},
         "temperature": temp_info if temp_info else {}
     }
+
+
+def extract_actions_rule_based(text, ingredients, cooking_verbs, tools_list):
+    doc = nlp(text)
+    actions = []
+
+    ingredients_found = find_ingredients_in_text(text, ingredients)
+    tools_found = [tool for tool in tools_list if tool in text.lower()]
+
+    for token in doc:
+        verb_lemma = token.lemma_.lower()
+        if verb_lemma in cooking_verbs:
+            actions.append({
+                "verb": verb_lemma,
+                "ingredients": ingredients_found,
+                "tool": tools_found[0] if tools_found else None
+            })
+
+    return actions
+
+def find_ingredients_in_text(text, ingredients):
+    text_lower = text.lower()
+    found = []
+    for ing in ingredients:
+        # Require full-word boundary match
+        if re.search(rf"\b{re.escape(ing.lower())}\b", text_lower):
+            found.append(ing)
+    return found
 
 
 def main():
@@ -110,7 +149,13 @@ def main():
     tools_file = sys.argv[2]
     step_sentence = sys.argv[3]
 
-    ingredients = load_list_from_file(ingredients_file)
+    with open("recipe.json", "r") as f:
+        data = json.load(f)
+
+    ingredients = [item["name"] for item in data["ingredients"]]
+    print("*********ingredients:", ingredients)
+
+    #ingredients = load_list_from_file(ingredients_file)
     tools = load_list_from_file(tools_file)
 
     parsed = parse_step(1, step_sentence, ingredients, tools)

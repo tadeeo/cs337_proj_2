@@ -1,9 +1,6 @@
 import sys, re, json
 import requests
 from bs4 import BeautifulSoup
-import spacy
-
-nlp = spacy.load("en_core_web_sm")
 
 def fetch_soup(url: str) -> BeautifulSoup:
     """Return BeautifulSoup for the page; force Allrecipes print view."""
@@ -21,13 +18,6 @@ _LABEL_MAP = {
     "total time": "total_time",
     "servings": "yield",
 }
-
-COOKING_VERBS = ["mix", "bake", "grill", "stir", "preheat", "add", "chop",
-    "saute", "boil", "fry", "sprinkle", "layer", "remove", "pour"]
-
-ingredient_set = {}
-tools_list = ["bowl", "pan", "skillet", "oven", "spatula", "dish", "grate", "foil", "pot"]
-
 
 def extract_basic_meta(soup: BeautifulSoup) -> dict:
     """Extract title and times/yield from the details rows."""
@@ -81,7 +71,7 @@ def extract_ingredients(soup: BeautifulSoup) -> list[dict]:
     return items
 _SENTENCE_SPLIT = re.compile(r"(?<=[.!?])\s+")
 
-def extract_steps(soup: BeautifulSoup, ingredients) -> list[dict]:
+def extract_steps(soup: BeautifulSoup) -> list[dict]:
     """Extract ordered steps, then split each into sentence-level substeps."""
     steps: list[dict] = []
 
@@ -106,16 +96,11 @@ def extract_steps(soup: BeautifulSoup, ingredients) -> list[dict]:
         sentences = [s.strip() for s in _SENTENCE_SPLIT.split(full_text) if s.strip()]
         substeps = [{"sub_number": f"{i}.{j}", "text": s} for j, s in enumerate(sentences, start=1)]
 
-        # add structured action tags using spaCy
-        COMMON_INGREDIENTS = {"water", "salt", "pepper", "oil", "butter"}
-        ingredient_set = set(normalize_ingredient(ing["name"]) for ing in ingredients) | COMMON_INGREDIENTS
-        actions = extract_actions_rule_based(full_text, ingredient_set, COOKING_VERBS, tools_list)
-
+        
         steps.append({
             "step_number": i,
             "text": full_text,
-            "substeps": substeps,
-            "actions": actions
+            "substeps": substeps
         })
 
     return steps
@@ -141,44 +126,6 @@ def extract_steps(soup: BeautifulSoup, ingredients) -> list[dict]:
 
 #     return steps
 
-def extract_actions_rule_based(text, ingredient_set, cooking_verbs, tools_list):
-    doc = nlp(text)
-    actions = []
-
-    ingredients_found = find_ingredients_in_text(text, ingredient_set)
-    tools_found = [tool for tool in tools_list if tool in text.lower()]
-
-    for token in doc:
-        verb_lemma = token.lemma_.lower()
-        if verb_lemma in cooking_verbs:
-            actions.append({
-                "verb": verb_lemma,
-                "ingredients": ingredients_found,
-                "tool": tools_found[0] if tools_found else None
-            })
-
-    return actions
-
-def normalize_ingredient(name: str) -> str:
-    # Lowercase
-    name = name.lower()
-    # Remove things like "shredded", "chopped", "(16 ounce) package", "or to taste"
-    name = re.sub(r'\([^)]*\)', '', name)        # remove parenthesis
-    name = re.sub(r'\b(shredded|chopped|diced|sliced|fresh|lean|ground)\b', '', name)
-    name = re.sub(r'or to taste', '', name)
-    name = re.sub(r'\s+', ' ', name)            # normalize spaces
-    return name.strip()
-
-def find_ingredients_in_text(text: str, ingredient_set: set) -> list[str]:
-    text_lower = text.lower()
-    found = []
-    for ing in ingredient_set:
-        ing_tokens = [t for t in re.findall(r"\b\w+\b", ing)]
-        match_count = sum(1 for t in ing_tokens if t in text_lower)
-        if match_count / len(ing_tokens) >= 0.5:  # at least half the tokens match
-            found.append(ing)
-    return found
-
 def main():
     if len(sys.argv) != 2:
         print("usage: python recipe_scraper.py <allrecipes_url>")
@@ -187,7 +134,7 @@ def main():
     soup = fetch_soup(sys.argv[1])
     meta = extract_basic_meta(soup)
     ingredients = extract_ingredients(soup)
-    steps = extract_steps(soup, ingredients)
+    steps = extract_steps(soup)
 
     data = {
         "title": meta["title"],
