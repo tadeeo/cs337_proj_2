@@ -19,6 +19,7 @@ import re
 import sys
 from typing import List, Dict
 import spacy
+from spacy.matcher import Matcher
 
 nlp = spacy.load("en_core_web_sm")
 
@@ -113,10 +114,12 @@ def parse_step(step_number: int, step: str, ingredients: List[str], tools: List[
 
 
 def extract_actions_rule_based(text, ingredients, cooking_verbs, tools_list):
+    matcher = Matcher(nlp.vocab)
     doc = nlp(text)
     actions = []
-
-    ingredients_found = find_ingredients_in_text(text, ingredients)
+    print(matcher(doc))
+    
+    ingredients_found = find_ingredients_in_text(text, ingredients, matcher)
     tools_found = [tool for tool in tools_list if tool in text.lower()]
 
     for token in doc:
@@ -130,13 +133,31 @@ def extract_actions_rule_based(text, ingredients, cooking_verbs, tools_list):
 
     return actions
 
-def find_ingredients_in_text(text, ingredients):
+def normalize_ingredient(name: str) -> str:
+    # Lowercase
+    name = name.lower()
+    # Remove things like "shredded", "chopped", "(16 ounce) package", "or to taste"
+    name = re.sub(r'\([^)]*\)', '', name)        # remove parenthesis
+    name = re.sub(r'\b(shredded|chopped|diced|sliced|fresh|lean|ground)\b', '', name)
+    name = re.sub(r'or to taste|to taste', '', name)
+    name = re.sub(r'\,|\.', '', name)
+    name = re.sub(r'\s+', ' ', name)            # normalize spaces
+    return name.strip()
+
+def find_ingredients_in_text(text, ingredients, matcher):
+    COMMON_INGREDIENTS = {"water", "salt", "pepper", "oil", "butter"}
+    ingredient_set = set(normalize_ingredient(ing) for ing in ingredients) | COMMON_INGREDIENTS
+    
     text_lower = text.lower()
     found = []
-    for ing in ingredients:
-        # Require full-word boundary match
-        if re.search(rf"\b{re.escape(ing.lower())}\b", text_lower):
-            found.append(ing)
+    for ing in ingredient_set:
+        # ing_tokens = [t for t in re.findall(r"\b\w+\b", ing)]
+        # print(ing_tokens)
+        # match_count = sum(1 for t in ing_tokens if t in text_lower)
+        # if match_count / len(ing_tokens) >= 0.25:  # at least quarter of the tokens match
+        #     found.append(ing)
+        pattern = [{"TEXT": {"FUZZY": {"IN": ing}}}]
+        matcher.add(text_lower, [pattern])
     return found
 
 
