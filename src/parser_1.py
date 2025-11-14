@@ -20,6 +20,7 @@ import sys
 from typing import List, Dict
 import spacy
 from spacy.matcher import Matcher
+from rapidfuzz import process, fuzz
 
 nlp = spacy.load("en_core_web_sm")
 
@@ -90,8 +91,32 @@ def extract_temperature(step: str, ingredients: List[str]) -> Dict:
                 if ingredient in step.lower():
                     result[ingredient] = temps[0] + "°"
                     break
-    return result
+    
+    HEAT_REGEX = re.compile(
+        r"""
+        \b
+        (?:over|on|to|at)?\s*
+        (?:
+            (?P<low>low|very\s+low) |
+            (?P<med_low>med(?:ium)?[-\s]?low) |
+            (?P<med_high>med(?:ium)?[-\s]?high) |
+            (?P<medium>med(?:ium)?) |
+            (?P<high>high|very\s+high)
+        )
+        (?:[-\s]?heat)?
+        \b
+        """,
+        re.IGNORECASE | re.VERBOSE
+    )
 
+    match = HEAT_REGEX.search(step)
+    if match:
+        for level, value in match.groupdict().items():
+            if value:
+                result["stove/burner"] = level.upper()
+                break
+
+    return result
 
 def parse_step(step_number: int, step: str, ingredients: List[str], tools: List[str]) -> Dict:
     """Parse a single recipe step into a structured dict."""
@@ -102,7 +127,7 @@ def parse_step(step_number: int, step: str, ingredients: List[str], tools: List[
     temp_info = extract_temperature(step, step_ingredients)
 
     # add structured action tags using spaCy
-    actions = extract_actions_rule_based(step, ingredients, COOKING_VERBS, tools_list)
+    actions = extract_actions_rule_based(step, ingredients, COOKING_VERBS, step_tools)
 
     return {
         "step_number": step_number,
@@ -148,17 +173,37 @@ def find_ingredients_in_text(text, ingredients, matcher):
     COMMON_INGREDIENTS = {"water", "salt", "pepper", "oil", "butter"}
     ingredient_set = set(normalize_ingredient(ing) for ing in ingredients) | COMMON_INGREDIENTS
     
-    text_lower = text.lower()
-    found = []
-    for ing in ingredient_set:
-        # ing_tokens = [t for t in re.findall(r"\b\w+\b", ing)]
-        # print(ing_tokens)
-        # match_count = sum(1 for t in ing_tokens if t in text_lower)
-        # if match_count / len(ing_tokens) >= 0.25:  # at least quarter of the tokens match
-        #     found.append(ing)
-        pattern = [{"TEXT": {"FUZZY": {"IN": ing}}}]
-        matcher.add(text_lower, [pattern])
-    return found
+    step_lower = text.lower()
+
+    matches = []
+    for ingredient in ingredient_set:
+        ingredient_lower = ingredient.lower()
+
+        # Fuzzy match the ingredient against the step text
+        score = fuzz.partial_ratio(ingredient_lower, step_lower)
+
+        if score >= 70:
+            matches.append((ingredient, score))
+            print(ingredient + " " + str(score))
+
+    # Sort by descending match strength
+    matches.sort(key=lambda x: x[1], reverse=True)
+
+    # Return only the ingredient names
+    
+    # return [m[0] for m in matches]
+    # text_lower = text.lower()
+    # found = []
+    
+    # for ing in ingredient_set:
+    #     # ing_tokens = [t for t in re.findall(r"\b\w+\b", ing)]
+    #     # print(ing_tokens)
+    #     # match_count = sum(1 for t in ing_tokens if t in text_lower)
+    #     # if match_count / len(ing_tokens) >= 0.25:  # at least quarter of the tokens match
+    #     #     found.append(ing)
+    #     pattern = [{"TEXT": {"FUZZY": {"IN": ing}}}]
+    #     matcher.add(text_lower, [pattern])
+    # return found
 
 
 def main():
