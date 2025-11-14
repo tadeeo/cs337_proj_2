@@ -77,13 +77,14 @@ def extract_time(step: str) -> Dict:
 
 def extract_temperature(step: str, ingredients: List[str]) -> Dict:
     """Extract temperature info (oven or ingredient-specific)."""
-    temp_pattern = re.compile(r'(\d{2,3})\s*°\s*[cf]', re.IGNORECASE)
+    temp_pattern = re.compile(r'(\d{2,3})\s*(?:°|degrees)\s*[cf]', re.IGNORECASE)
     temps = temp_pattern.findall(step)
     result = {}
 
     if temps:
         # If oven is mentioned or implied
         if re.search(r'oven', step.lower()):
+            print(temps[0])
             result["oven"] = temps[0] + "°"
         else:
             # Try to link to ingredient mentioned near the temp
@@ -207,7 +208,8 @@ def find_ingredients_in_text(text, ingredients, matcher):
 
 def parse_step_main(step, tools, ingredients):
     parsed = parse_step(1, step, ingredients, tools)
-    print(json.dumps(parsed, indent=4))
+    #print(json.dumps(parsed, indent=4))
+    return parsed
 
 def main():
     # if len(sys.argv) != 4:
