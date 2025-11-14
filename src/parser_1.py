@@ -29,7 +29,7 @@ COOKING_VERBS = ["mix", "bake", "grill", "stir", "preheat", "add", "chop",
                  "pour", "place", "cook"]
 
 ingredient_set = {}
-tools_list = ["bowl", "pan", "skillet", "oven", "spatula", "dish", "grate", "foil", "pot"]
+
 
 
 def load_list_from_file(filepath: str) -> List[str]:
@@ -191,41 +191,47 @@ def find_ingredients_in_text(text, ingredients, matcher):
 
     # Return only the ingredient names
     
-    # return [m[0] for m in matches]
+    return [m[0] for m in matches]
     # text_lower = text.lower()
     # found = []
     
     # for ing in ingredient_set:
-    #     # ing_tokens = [t for t in re.findall(r"\b\w+\b", ing)]
-    #     # print(ing_tokens)
-    #     # match_count = sum(1 for t in ing_tokens if t in text_lower)
-    #     # if match_count / len(ing_tokens) >= 0.25:  # at least quarter of the tokens match
-    #     #     found.append(ing)
-    #     pattern = [{"TEXT": {"FUZZY": {"IN": ing}}}]
-    #     matcher.add(text_lower, [pattern])
+    #     ing_tokens = [t for t in re.findall(r"\b\w+\b", ing)]
+    #     print(ing_tokens)
+    #     match_count = sum(1 for t in ing_tokens if t in text_lower)
+    #     if match_count / len(ing_tokens) >= 0.25:  # at least quarter of the tokens match
+    #         found.append(ing)
+    #     # pattern = [{"TEXT": {"FUZZY": {"IN": ing}}}]
+    #     # matcher.add(text_lower, [pattern])
     # return found
 
+def parse_step_main(step, tools, ingredients):
+    parsed = parse_step(1, step, ingredients, tools)
+    print(json.dumps(parsed, indent=4))
 
 def main():
-    if len(sys.argv) != 4:
-        print("Usage: python parser.py ingredients.txt tools.txt 'Step sentence here'") #assumes scraper outputs an ingrediant list
-        sys.exit(1)
+    # if len(sys.argv) != 4:
+    #     print("Usage: python parser.py ingredients.txt tools.txt 'Step sentence here'") #assumes scraper outputs an ingrediant list
+    #     sys.exit(1)
 
-    ingredients_file = sys.argv[1]
-    tools_file = sys.argv[2]
-    step_sentence = sys.argv[3]
+    # ingredients_file = sys.argv[1]
+    # tools_file = sys.argv[2]
+    # step_sentence = sys.argv[3]
 
     with open("recipe.json", "r") as f:
         data = json.load(f)
 
     ingredients = [item["name"] for item in data["ingredients"]]
-    print("*********ingredients:", ingredients)
+    # print("*********ingredients:", ingredients)
 
-    #ingredients = load_list_from_file(ingredients_file)
+    # #ingredients = load_list_from_file(ingredients_file)
+    tools_file = 'src/tools.txt'
     tools = load_list_from_file(tools_file)
 
-    parsed = parse_step(1, step_sentence, ingredients, tools)
-    print(json.dumps(parsed, indent=4))
+    # parsed = parse_step(1, step_sentence, ingredients, tools)
+    # print(json.dumps(parsed, indent=4))
+    step = 'Lay 4 noodles side by side on the bottom of a 9x13-inch baking pan; top with a layer of prepared tomato-basil sauce, a layer of ground beef mixture, and a layer of cottage cheese mixture.'
+    parse_step_main(step, tools, ingredients)
 
 
 if __name__ == "__main__":
