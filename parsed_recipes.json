@@ -1,0 +1,161 @@
+[
+  {
+    "step_number": 1,
+    "description": "Preheat the oven to 350 degrees F (175 degrees C).",
+    "actions": [
+      {
+        "verb": "preheat",
+        "ingredients": [],
+        "tool": null
+      }
+    ],
+    "time": {},
+    "temperature": {
+      "oven": "350°"
+    }
+  },
+  {
+    "step_number": 1,
+    "description": "Bring a large pot of lightly salted water to a boil.",
+    "actions": [
+      {
+        "verb": "boil",
+        "ingredients": [
+          "salt",
+          "water",
+          "oil"
+        ],
+        "tool": null
+      }
+    ],
+    "time": {},
+    "temperature": {}
+  },
+  {
+    "step_number": 1,
+    "description": "Meanwhile, place ground beef, garlic, oregano, garlic powder, salt, and black pepper in a large skillet over medium heat; cook and stir until beef is crumbly and evenly browned, about 10 minutes.",
+    "actions": [
+      {
+        "verb": "place",
+        "ingredients": [
+          "pepper",
+          "beef",
+          "salt",
+          "garlic powder",
+          "garlic",
+          "salt and black pepper",
+          "dried oregano"
+        ],
+        "tool": "skillet"
+      },
+      {
+        "verb": "cook",
+        "ingredients": [
+          "pepper",
+          "beef",
+          "salt",
+          "garlic powder",
+          "garlic",
+          "salt and black pepper",
+          "dried oregano"
+        ],
+        "tool": "skillet"
+      },
+      {
+        "verb": "stir",
+        "ingredients": [
+          "pepper",
+          "beef",
+          "salt",
+          "garlic powder",
+          "garlic",
+          "salt and black pepper",
+          "dried oregano"
+        ],
+        "tool": "skillet"
+      }
+    ],
+    "time": {
+      "duration": "10 minutes"
+    },
+    "temperature": {
+      "stove/burner": "MEDIUM"
+    }
+  },
+  {
+    "step_number": 1,
+    "description": "Mix cottage cheese, Parmesan cheese, and eggs together in a large bowl until thoroughly combined.",
+    "actions": [
+      {
+        "verb": "mix",
+        "ingredients": [
+          "parmesan cheese",
+          "cottage cheese",
+          "eggs"
+        ],
+        "tool": null
+      }
+    ],
+    "time": {},
+    "temperature": {}
+  },
+  {
+    "step_number": 1,
+    "description": "Lay 4 noodles side by side on the bottom of a 9x13-inch baking pan; top with a layer of prepared tomato-basil sauce, a layer of ground beef mixture, and a layer of cottage cheese mixture.",
+    "actions": [
+      {
+        "verb": "bake",
+        "ingredients": [
+          "beef",
+          "cottage cheese",
+          "tomato-basil pasta sauce"
+        ],
+        "tool": null
+      },
+      {
+        "verb": "layer",
+        "ingredients": [
+          "beef",
+          "cottage cheese",
+          "tomato-basil pasta sauce"
+        ],
+        "tool": null
+      },
+      {
+        "verb": "layer",
+        "ingredients": [
+          "beef",
+          "cottage cheese",
+          "tomato-basil pasta sauce"
+        ],
+        "tool": null
+      },
+      {
+        "verb": "layer",
+        "ingredients": [
+          "beef",
+          "cottage cheese",
+          "tomato-basil pasta sauce"
+        ],
+        "tool": null
+      }
+    ],
+    "time": {},
+    "temperature": {}
+  },
+  {
+    "step_number": 1,
+    "description": "Bake in the preheated oven until the lasagna is bubbling and the cheese has melted, about 30 minutes.",
+    "actions": [
+      {
+        "verb": "bake",
+        "ingredients": [],
+        "tool": null
+      }
+    ],
+    "time": {
+      "duration": "30 minutes"
+    },
+    "temperature": {}
+  }
+]

@@ -96,6 +96,7 @@ def extract_steps(soup: BeautifulSoup) -> list[dict]:
         sentences = [s.strip() for s in _SENTENCE_SPLIT.split(full_text) if s.strip()]
         substeps = [{"sub_number": f"{i}.{j}", "text": s} for j, s in enumerate(sentences, start=1)]
 
+        
         steps.append({
             "step_number": i,
             "text": full_text,
