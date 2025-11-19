@@ -28,6 +28,16 @@ COOKING_VERBS = ["mix", "bake", "grill", "stir", "preheat", "add", "chop",
                  "saute", "boil", "fry", "sprinkle", "layer", "remove",
                  "pour", "place", "cook"]
 
+NON_ACTIONABLE_PATTERNS = [ #includes patterns for observation, warning, and advice
+    "be careful", "careful", "avoid", "do not", "don’t",
+    "never", "be sure", "make sure", 
+    "you can", "you could", "optional",
+    "can substitute", "you may", "if you prefer",
+    "will thicken", "will change", "will form",
+    "should look", "you'll see", "you will see",
+    "as it", "it will", "it should"
+]
+
 ingredient_set = {}
 
 
@@ -211,6 +221,41 @@ def parse_step_main(step, tools, ingredients):
     #print(json.dumps(parsed, indent=4))
     return parsed
 
+def check_actionable(step: str) -> bool:
+    """
+    Classify a recipe step using spaCy, with fallback = actionable.
+    """
+    doc = nlp(step.strip())
+    lower = step.lower().strip()
+
+    # --- 1) Non-actionable pattern detection ---
+    def contains(patterns):
+        return any(p in lower for p in patterns)
+
+    if contains(NON_ACTIONABLE_PATTERNS):
+        return False
+
+    # --- 2) Imperative verb detection ---
+    # Identify true root token
+    root = [t for t in doc if t.head == t][0]
+
+    # Imperative = root verb + no subject
+    if root.pos_ == "VERB":
+        has_subject = any(child.dep_ in ("nsubj", "nsubjpass") for child in root.children)
+        if not has_subject:
+            return True
+
+    # Starts with a verb (common recipe style)
+    if doc[0].pos_ == "VERB":
+        return True
+
+    # Contains cooking-relevant verbs
+    if any(token.lemma_ in COOKING_VERBS for token in doc):
+        return True
+
+    # --- 3) DEFAULT FALLBACK (more likely actionable) ---
+    return True
+
 def main():
     # if len(sys.argv) != 4:
     #     print("Usage: python parser.py ingredients.txt tools.txt 'Step sentence here'") #assumes scraper outputs an ingrediant list
@@ -232,8 +277,31 @@ def main():
 
     # parsed = parse_step(1, step_sentence, ingredients, tools)
     # print(json.dumps(parsed, indent=4))
+    """
+        I added more testing steps to test specific actionable/non-actionable cases. Decided to group all 
+        non-actionable cases together, because I think that the most reasonable handling/storing of them
+        is just to add them to the preivous step stored as plain-text. Ideal functionality would be for 
+        the UI to check if the step has a warning or observation and output it after. I think that the
+        warnings will gain minimal benefit from being parsed. 
+        If we do decide to parse them we should store them as a normal step and add Actionable/non-actionable
+        to all step tags. I'll then move non-actionable functionality into the parse_step.
+    """
+    testing_steps = {
+        "Be careful not to overmix.",
+        "You can substitute butter for oil.",
+        "The sauce will thicken as it cools.",
+        "Stir the mixture for 2 minutes.",
+        "Bake at 350°F for 20 minutes.",
+        "Once the dough rises, it should double in size.",
+        "Chop the onions finely."
+    }
     step = 'Lay 4 noodles side by side on the bottom of a 9x13-inch baking pan; top with a layer of prepared tomato-basil sauce, a layer of ground beef mixture, and a layer of cottage cheese mixture.'
-    parse_step_main(step, tools, ingredients)
+    for step in testing_steps:
+        actionable = check_actionable(step)
+        if (actionable):
+            parse_step_main(step, tools, ingredients)
+        else:
+            print(step + ": Non-actionable step, probably want to append to the previous step in a 'non-actionable' line\n")
 
 
 if __name__ == "__main__":
