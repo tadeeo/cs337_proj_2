@@ -2,7 +2,7 @@ import json
 from parser_1 import load_list_from_file, parse_step_main
 
 def load_tools():
-    tools_file = 'src/tools.txt'
+    tools_file = 'tools.txt'
     tools = load_list_from_file(tools_file)
     return tools
 
@@ -36,7 +36,7 @@ def get_parsed_steps():
 def main():
     data = get_parsed_steps()
     with open("parsed_recipes.json", "w") as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
+        json.dump(data, f, indent=4, ensure_ascii=False)
 
 
 if __name__ == "__main__":

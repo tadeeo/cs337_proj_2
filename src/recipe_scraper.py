@@ -2,14 +2,6 @@ import sys, re, json
 import requests
 from bs4 import BeautifulSoup
 
-def fetch_soup(url: str) -> BeautifulSoup:
-    """Return BeautifulSoup for the page; force Allrecipes print view."""
-    if "allrecipes.com" in url and "print=" not in url:
-        url += ("&" if "?" in url else "?") + "print="
-    resp = requests.get(url, timeout=20)
-    resp.raise_for_status()
-    return BeautifulSoup(resp.text, "html.parser")
-
 # Labels observed in the HTML
 _LABEL_MAP = {
     "prep time": "prep_time",
@@ -18,6 +10,16 @@ _LABEL_MAP = {
     "total time": "total_time",
     "servings": "yield",
 }
+
+_SENTENCE_SPLIT = re.compile(r"(?<=[.!?])\s+")
+
+def fetch_soup(url: str) -> BeautifulSoup:
+    """Return BeautifulSoup for the page; force Allrecipes print view."""
+    if "allrecipes.com" in url and "print=" not in url:
+        url += ("&" if "?" in url else "?") + "print="
+    resp = requests.get(url, timeout=20)
+    resp.raise_for_status()
+    return BeautifulSoup(resp.text, "html.parser")
 
 def extract_basic_meta(soup: BeautifulSoup) -> dict:
     """Extract title and times/yield from the details rows."""
@@ -69,7 +71,6 @@ def extract_ingredients(soup: BeautifulSoup) -> list[dict]:
             items.append({"qty": qty, "unit": unit, "name": name})
 
     return items
-_SENTENCE_SPLIT = re.compile(r"(?<=[.!?])\s+")
 
 def extract_steps(soup: BeautifulSoup) -> list[dict]:
     """Extract ordered steps, then split each into sentence-level substeps."""
@@ -126,12 +127,14 @@ def extract_steps(soup: BeautifulSoup) -> list[dict]:
 
 #     return steps
 
-def main():
-    if len(sys.argv) != 2:
-        print("usage: python recipe_scraper.py <allrecipes_url>")
-        sys.exit(1)
+def main(url=None):
+    if url is None:
+        if len(sys.argv) != 2:
+            print("usage: python recipe_scraper.py <allrecipes_url>")
+            sys.exit(1)
+        url = sys.argv[1]
 
-    soup = fetch_soup(sys.argv[1])
+    soup = fetch_soup(url)
     meta = extract_basic_meta(soup)
     ingredients = extract_ingredients(soup)
     steps = extract_steps(soup)
@@ -148,9 +151,9 @@ def main():
     }
 
     with open("recipe.json", "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
+        json.dump(data, f, indent=4, ensure_ascii=False)
 
-    print("done")
+    print("Consider the recipe scraped!")
 
 if __name__ == "__main__":
     main()

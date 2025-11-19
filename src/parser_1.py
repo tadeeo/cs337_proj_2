@@ -31,7 +31,6 @@ COOKING_VERBS = ["mix", "bake", "grill", "stir", "preheat", "add", "chop",
 ingredient_set = {}
 
 
-
 def load_list_from_file(filepath: str) -> List[str]:
     """Load items (ingredients or tools) from a text file."""
     try:
@@ -84,7 +83,7 @@ def extract_temperature(step: str, ingredients: List[str]) -> Dict:
     if temps:
         # If oven is mentioned or implied
         if re.search(r'oven', step.lower()):
-            print(temps[0])
+            #print(temps[0])
             result["oven"] = temps[0] + "°"
         else:
             # Try to link to ingredient mentioned near the temp
@@ -143,7 +142,7 @@ def extract_actions_rule_based(text, ingredients, cooking_verbs, tools_list):
     matcher = Matcher(nlp.vocab)
     doc = nlp(text)
     actions = []
-    print(matcher(doc))
+    # print(matcher(doc))
     
     ingredients_found = find_ingredients_in_text(text, ingredients, matcher)
     tools_found = [tool for tool in tools_list if tool in text.lower()]
@@ -164,8 +163,8 @@ def normalize_ingredient(name: str) -> str:
     name = name.lower()
     # Remove things like "shredded", "chopped", "(16 ounce) package", "or to taste"
     name = re.sub(r'\([^)]*\)', '', name)        # remove parenthesis
-    name = re.sub(r'\b(shredded|chopped|diced|sliced|fresh|lean|ground)\b', '', name)
-    name = re.sub(r'or to taste|to taste', '', name)
+    # name = re.sub(r'\b(shredded|chopped|diced|sliced|fresh|lean|ground)\b', '', name)
+    # name = re.sub(r'or to taste|to taste', '', name)
     name = re.sub(r'\,|\.', '', name)
     name = re.sub(r'\s+', ' ', name)            # normalize spaces
     return name.strip()
@@ -185,7 +184,7 @@ def find_ingredients_in_text(text, ingredients, matcher):
 
         if score >= 70:
             matches.append((ingredient, score))
-            print(ingredient + " " + str(score))
+            # print(ingredient + " " + str(score))
 
     # Sort by descending match strength
     matches.sort(key=lambda x: x[1], reverse=True)
@@ -227,7 +226,7 @@ def main():
     # print("*********ingredients:", ingredients)
 
     # #ingredients = load_list_from_file(ingredients_file)
-    tools_file = 'src/tools.txt'
+    tools_file = 'tools.txt'
     tools = load_list_from_file(tools_file)
 
     # parsed = parse_step(1, step_sentence, ingredients, tools)
