@@ -29,8 +29,12 @@ def get_parsed_steps():
     ingredients = load_ingredients()
     parsed_steps = []
 
+    step_number = 1
     for step in steps:
-        parsed_steps.append(parse_step_main(step, tools, ingredients))
+        parsed_step = parse_step_main(step, tools, ingredients)
+        parsed_step["step_number"] = step_number
+        step_number += 1
+        parsed_steps.append(parsed_step)
     return parsed_steps
 
 def main():

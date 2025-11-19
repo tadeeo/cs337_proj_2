@@ -15,14 +15,14 @@
     }
   },
   {
-    "step_number": 1,
+    "step_number": 2,
     "description": "Bring a large pot of lightly salted water to a boil.",
     "actions": [
       {
         "verb": "boil",
         "ingredients": [
-          "salt",
           "water",
+          "salt",
           "oil"
         ],
         "tool": null
@@ -32,17 +32,17 @@
     "temperature": {}
   },
   {
-    "step_number": 1,
+    "step_number": 3,
     "description": "Meanwhile, place ground beef, garlic, oregano, garlic powder, salt, and black pepper in a large skillet over medium heat; cook and stir until beef is crumbly and evenly browned, about 10 minutes.",
     "actions": [
       {
         "verb": "place",
         "ingredients": [
-          "pepper",
           "beef",
           "salt",
-          "garlic powder",
           "garlic",
+          "pepper",
+          "garlic powder",
           "salt and black pepper",
           "dried oregano"
         ],
@@ -51,11 +51,11 @@
       {
         "verb": "cook",
         "ingredients": [
-          "pepper",
           "beef",
           "salt",
-          "garlic powder",
           "garlic",
+          "pepper",
+          "garlic powder",
           "salt and black pepper",
           "dried oregano"
         ],
@@ -64,11 +64,11 @@
       {
         "verb": "stir",
         "ingredients": [
-          "pepper",
           "beef",
           "salt",
-          "garlic powder",
           "garlic",
+          "pepper",
+          "garlic powder",
           "salt and black pepper",
           "dried oregano"
         ],
@@ -83,14 +83,14 @@
     }
   },
   {
-    "step_number": 1,
+    "step_number": 4,
     "description": "Mix cottage cheese, Parmesan cheese, and eggs together in a large bowl until thoroughly combined.",
     "actions": [
       {
         "verb": "mix",
         "ingredients": [
-          "parmesan cheese",
           "cottage cheese",
+          "parmesan cheese",
           "eggs"
         ],
         "tool": null
@@ -100,14 +100,14 @@
     "temperature": {}
   },
   {
-    "step_number": 1,
+    "step_number": 5,
     "description": "Lay 4 noodles side by side on the bottom of a 9x13-inch baking pan; top with a layer of prepared tomato-basil sauce, a layer of ground beef mixture, and a layer of cottage cheese mixture.",
     "actions": [
       {
         "verb": "bake",
         "ingredients": [
-          "beef",
           "cottage cheese",
+          "beef",
           "tomato-basil pasta sauce"
         ],
         "tool": null
@@ -115,8 +115,8 @@
       {
         "verb": "layer",
         "ingredients": [
-          "beef",
           "cottage cheese",
+          "beef",
           "tomato-basil pasta sauce"
         ],
         "tool": null
@@ -124,8 +124,8 @@
       {
         "verb": "layer",
         "ingredients": [
-          "beef",
           "cottage cheese",
+          "beef",
           "tomato-basil pasta sauce"
         ],
         "tool": null
@@ -133,8 +133,8 @@
       {
         "verb": "layer",
         "ingredients": [
-          "beef",
           "cottage cheese",
+          "beef",
           "tomato-basil pasta sauce"
         ],
         "tool": null
@@ -144,7 +144,7 @@
     "temperature": {}
   },
   {
-    "step_number": 1,
+    "step_number": 6,
     "description": "Bake in the preheated oven until the lasagna is bubbling and the cheese has melted, about 30 minutes.",
     "actions": [
       {
