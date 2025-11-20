@@ -1,6 +1,83 @@
 [
     {
         "step_number": 1,
+        "description": "Gather all your ingredients.",
+        "actions": [],
+        "time": {},
+        "temperature": {}
+    },
+    {
+        "step_number": 1,
+        "description": "Cook sausage, ground beef, onion, and garlic in a Dutch oven over medium heat until well browned.",
+        "actions": [
+            {
+                "verb": "cook",
+                "ingredients": [
+                    "lean ground beef"
+                ],
+                "tool": null
+            }
+        ],
+        "time": {},
+        "temperature": {
+            "stove/burner": "MEDIUM"
+        }
+    },
+    {
+        "step_number": 1,
+        "description": "Stir in crushed tomatoes, tomato sauce, tomato paste, and water.",
+        "actions": [
+            {
+                "verb": "stir",
+                "ingredients": [
+                    "crushed tomatoes",
+                    "tomato paste",
+                    "water",
+                    "canned tomato sauce",
+                    "garlic crushed"
+                ],
+                "tool": null
+            }
+        ],
+        "time": {},
+        "temperature": {}
+    },
+    {
+        "step_number": 1,
+        "description": "Bring a large pot of lightly salted water to a boil.",
+        "actions": [
+            {
+                "verb": "boil",
+                "ingredients": [
+                    "salt",
+                    "oil",
+                    "water"
+                ],
+                "tool": null
+            }
+        ],
+        "time": {},
+        "temperature": {}
+    },
+    {
+        "step_number": 1,
+        "description": "In a mixing bowl, combine ricotta cheese with egg, remaining 2 tablespoons parsley, and 1/2 teaspoon salt.",
+        "actions": [
+            {
+                "verb": "mix",
+                "ingredients": [
+                    "salt",
+                    "egg",
+                    "ricotta cheese"
+                ],
+                "tool": "mixing bowl"
+            }
+        ],
+        "time": {},
+        "temperature": {}
+    },
+    {
+        "step_number": 1,
         "description": "Preheat the oven to 375 degrees F (190 degrees C).",
         "actions": [
             {
@@ -16,42 +93,11 @@
     },
     {
         "step_number": 1,
-        "description": "Cook sausage, ground beef, and garlic in a large skillet over medium-high heat, stirring occasionally, until browned and crumbly, 5 to 7 minutes.",
+        "description": "To assemble, spread 1 ½ cups of meat sauce in the bottom of a 9x13-inch baking dish.",
         "actions": [
             {
-                "verb": "cook",
-                "ingredients": [
-                    "ground beef",
-                    "ground pork sausage"
-                ],
-                "tool": "skillet"
-            },
-            {
-                "verb": "stir",
-                "ingredients": [
-                    "ground beef",
-                    "ground pork sausage"
-                ],
-                "tool": "skillet"
-            }
-        ],
-        "time": {
-            "duration": "7 minutes"
-        },
-        "temperature": {
-            "stove/burner": "MED_HIGH"
-        }
-    },
-    {
-        "step_number": 1,
-        "description": "Stir in diced tomatoes, tomato sauce, parsley, basil, oregano, and sugar.",
-        "actions": [
-            {
-                "verb": "stir",
-                "ingredients": [
-                    "diced tomatoes",
-                    "tomato sauce"
-                ],
+                "verb": "bake",
+                "ingredients": [],
                 "tool": null
             }
         ],
@@ -60,55 +106,12 @@
     },
     {
         "step_number": 1,
-        "description": "When the sauce has simmered for about 15 minutes, bring a large pot of lightly salted water to a boil.",
-        "actions": [
-            {
-                "verb": "boil",
-                "ingredients": [
-                    "salt",
-                    "oil",
-                    "water"
-                ],
-                "tool": null
-            }
-        ],
-        "time": {
-            "duration": "15 minutes"
-        },
-        "temperature": {}
-    },
-    {
-        "step_number": 1,
-        "description": "Stir sour cream, 1/2 of the mozzarella, Parmesan, olives, eggs, salt, and pepper together in a bowl.",
-        "actions": [
-            {
-                "verb": "stir",
-                "ingredients": [
-                    "salt",
-                    "sour cream",
-                    "pepper"
-                ],
-                "tool": null
-            }
-        ],
-        "time": {},
-        "temperature": {}
-    },
-    {
-        "step_number": 1,
-        "description": "Assemble the lasagna: Spread a thin layer of meat sauce evenly over the bottom of a 9x13-inch baking dish.",
+        "description": "Repeat layers, and top with remaining mozzarella and Parmesan cheese.",
         "actions": [
             {
                 "verb": "layer",
                 "ingredients": [
-                    "tomato sauce"
-                ],
-                "tool": null
-            },
-            {
-                "verb": "bake",
-                "ingredients": [
-                    "tomato sauce"
+                    "grated parmesan cheese"
                 ],
                 "tool": null
             }
@@ -118,7 +121,7 @@
     },
     {
         "step_number": 1,
-        "description": "Bake in the preheated oven until sauce is bubbly and the cheese is golden brown, about 30 minutes.",
+        "description": "Bake in the preheated oven for 25 minutes.",
         "actions": [
             {
                 "verb": "bake",
@@ -127,7 +130,16 @@
             }
         ],
         "time": {
-            "duration": "30 minutes"
+            "duration": "25 minutes"
+        },
+        "temperature": {}
+    },
+    {
+        "step_number": 1,
+        "description": "Rest lasagna for 15 minutes before serving.",
+        "actions": [],
+        "time": {
+            "duration": "15 minutes"
         },
         "temperature": {}
     }

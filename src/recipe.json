@@ -1,189 +1,250 @@
 {
-    "title": "Grandma's Best Ever Sour Cream Lasagna",
-    "prep_time": "25 mins",
-    "cook_time": "1 hr 10 mins",
-    "additional_time": null,
-    "total_time": "1 hr 35 mins",
-    "yield": "8",
+    "title": "World's Best Lasagna",
+    "prep_time": "30 mins",
+    "cook_time": "2 hrs 30 mins",
+    "additional_time": "15 mins",
+    "total_time": "3 hrs 15 mins",
+    "yield": "12",
     "ingredients": [
         {
-            "qty": "½",
-            "unit": "pound",
-            "name": "ground pork sausage"
-        },
-        {
-            "qty": "½",
-            "unit": "pound",
-            "name": "ground beef"
-        },
-        {
             "qty": "1",
-            "unit": "clove",
-            "name": "garlic, minced"
+            "unit": "pound",
+            "name": "sweet Italian sausage"
+        },
+        {
+            "qty": "¾",
+            "unit": "pound",
+            "name": "lean ground beef"
+        },
+        {
+            "qty": "½",
+            "unit": "cup",
+            "name": "minced onion"
+        },
+        {
+            "qty": "2",
+            "unit": "cloves",
+            "name": "garlic, crushed"
         },
         {
             "qty": "1",
             "unit": "(28 ounce) can",
-            "name": "diced tomatoes"
+            "name": "crushed tomatoes"
         },
         {
-            "qty": "1",
-            "unit": "(8 ounce) can",
-            "name": "tomato sauce"
+            "qty": "2",
+            "unit": "(6.5 ounce) cans",
+            "name": "canned tomato sauce"
         },
         {
-            "qty": "1",
-            "unit": "tablespoon",
-            "name": "dried parsley"
-        },
-        {
-            "qty": "½",
-            "unit": "teaspoon",
-            "name": "dried basil"
+            "qty": "2",
+            "unit": "(6 ounce) cans",
+            "name": "tomato paste"
         },
         {
             "qty": "½",
-            "unit": "teaspoon",
-            "name": "dried oregano"
+            "unit": "cup",
+            "name": "water"
         },
         {
-            "qty": "1",
-            "unit": "pinch",
+            "qty": "2",
+            "unit": "tablespoons",
             "name": "white sugar"
         },
         {
-            "qty": "1",
-            "unit": "(8 ounce) package",
-            "name": "lasagna noodles"
+            "qty": "4",
+            "unit": "tablespoons",
+            "name": "chopped fresh parsley, divided"
+        },
+        {
+            "qty": "1 ½",
+            "unit": "teaspoons",
+            "name": "dried basil leaves"
+        },
+        {
+            "qty": "1 ½",
+            "unit": "teaspoons",
+            "name": "salt, divided, or to taste"
         },
         {
             "qty": "1",
-            "unit": "(16 ounce) container",
-            "name": "sour cream"
-        },
-        {
-            "qty": "2",
-            "unit": "(12 ounce) packages",
-            "name": "shredded mozzarella cheese, divided"
-        },
-        {
-            "qty": "¾",
-            "unit": "cup",
-            "name": "grated Parmesan cheese"
+            "unit": "teaspoon",
+            "name": "Italian seasoning"
         },
         {
             "qty": "½",
-            "unit": "cup",
-            "name": "chopped pitted green olives"
-        },
-        {
-            "qty": "3",
-            "unit": "large",
-            "name": "eggs, lightly beaten"
-        },
-        {
-            "qty": "2",
-            "unit": "teaspoons",
-            "name": "salt"
+            "unit": "teaspoon",
+            "name": "fennel seeds"
         },
         {
             "qty": "¼",
             "unit": "teaspoon",
             "name": "ground black pepper"
+        },
+        {
+            "qty": "12",
+            "unit": "",
+            "name": "lasagna noodles"
+        },
+        {
+            "qty": "16",
+            "unit": "ounces",
+            "name": "ricotta cheese"
+        },
+        {
+            "qty": "1",
+            "unit": "",
+            "name": "egg"
+        },
+        {
+            "qty": "¾",
+            "unit": "pound",
+            "name": "mozzarella cheese, sliced"
+        },
+        {
+            "qty": "¾",
+            "unit": "cup",
+            "name": "grated Parmesan cheese"
         }
     ],
     "steps": [
         {
             "step_number": 1,
-            "text": "Preheat the oven to 375 degrees F (190 degrees C).",
+            "text": "Gather all your ingredients.",
             "substeps": [
                 {
                     "sub_number": "1.1",
-                    "text": "Preheat the oven to 375 degrees F (190 degrees C)."
+                    "text": "Gather all your ingredients."
                 }
             ]
         },
         {
             "step_number": 2,
-            "text": "Cook sausage, ground beef, and garlic in a large skillet over medium-high heat, stirring occasionally, until browned and crumbly, 5 to 7 minutes. Drain any excess grease.",
+            "text": "Cook sausage, ground beef, onion, and garlic in a Dutch oven over medium heat until well browned.",
             "substeps": [
                 {
                     "sub_number": "2.1",
-                    "text": "Cook sausage, ground beef, and garlic in a large skillet over medium-high heat, stirring occasionally, until browned and crumbly, 5 to 7 minutes."
-                },
-                {
-                    "sub_number": "2.2",
-                    "text": "Drain any excess grease."
+                    "text": "Cook sausage, ground beef, onion, and garlic in a Dutch oven over medium heat until well browned."
                 }
             ]
         },
         {
             "step_number": 3,
-            "text": "Stir in diced tomatoes, tomato sauce, parsley, basil, oregano, and sugar. Bring to a boil over high heat, then reduce the heat to medium-low and simmer, stirring occasionally, until thickened, about 30 minutes.",
+            "text": "Stir in crushed tomatoes, tomato sauce, tomato paste, and water. Season with sugar, 2 tablespoons parsley, basil, 1 teaspoon salt, Italian seasoning, fennel seeds, and pepper. Simmer, covered, for about 1 ½ hours, stirring occasionally.",
             "substeps": [
                 {
                     "sub_number": "3.1",
-                    "text": "Stir in diced tomatoes, tomato sauce, parsley, basil, oregano, and sugar."
+                    "text": "Stir in crushed tomatoes, tomato sauce, tomato paste, and water."
                 },
                 {
                     "sub_number": "3.2",
-                    "text": "Bring to a boil over high heat, then reduce the heat to medium-low and simmer, stirring occasionally, until thickened, about 30 minutes."
+                    "text": "Season with sugar, 2 tablespoons parsley, basil, 1 teaspoon salt, Italian seasoning, fennel seeds, and pepper."
+                },
+                {
+                    "sub_number": "3.3",
+                    "text": "Simmer, covered, for about 1 ½ hours, stirring occasionally."
                 }
             ]
         },
         {
             "step_number": 4,
-            "text": "When the sauce has simmered for about 15 minutes, bring a large pot of lightly salted water to a boil. Add lasagna noodles and cook, uncovered, stirring occasionally, until tender yet firm to the bite, about 8 minutes. Drain.",
+            "text": "Bring a large pot of lightly salted water to a boil. Cook lasagna noodles in boiling water for 8 to 10 minutes. Drain noodles, and rinse with cold water.",
             "substeps": [
                 {
                     "sub_number": "4.1",
-                    "text": "When the sauce has simmered for about 15 minutes, bring a large pot of lightly salted water to a boil."
+                    "text": "Bring a large pot of lightly salted water to a boil."
                 },
                 {
                     "sub_number": "4.2",
-                    "text": "Add lasagna noodles and cook, uncovered, stirring occasionally, until tender yet firm to the bite, about 8 minutes."
+                    "text": "Cook lasagna noodles in boiling water for 8 to 10 minutes."
                 },
                 {
                     "sub_number": "4.3",
-                    "text": "Drain."
+                    "text": "Drain noodles, and rinse with cold water."
                 }
             ]
         },
         {
             "step_number": 5,
-            "text": "Stir sour cream, 1/2 of the mozzarella, Parmesan, olives, eggs, salt, and pepper together in a bowl.",
+            "text": "In a mixing bowl, combine ricotta cheese with egg, remaining 2 tablespoons parsley, and 1/2 teaspoon salt.",
             "substeps": [
                 {
                     "sub_number": "5.1",
-                    "text": "Stir sour cream, 1/2 of the mozzarella, Parmesan, olives, eggs, salt, and pepper together in a bowl."
+                    "text": "In a mixing bowl, combine ricotta cheese with egg, remaining 2 tablespoons parsley, and 1/2 teaspoon salt."
                 }
             ]
         },
         {
             "step_number": 6,
-            "text": "Assemble the lasagna: Spread a thin layer of meat sauce evenly over the bottom of a 9x13-inch baking dish. Cover with 1/3 of the lasagna noodles, 1/3 of the remaining meat sauce, and 1/3 of the cheese mixture; repeat layers two more times with remaining noodles, sauce, and cheese mixture. Sprinkle remaining mozzarella evenly over top.",
+            "text": "Preheat the oven to 375 degrees F (190 degrees C).",
             "substeps": [
                 {
                     "sub_number": "6.1",
-                    "text": "Assemble the lasagna: Spread a thin layer of meat sauce evenly over the bottom of a 9x13-inch baking dish."
-                },
-                {
-                    "sub_number": "6.2",
-                    "text": "Cover with 1/3 of the lasagna noodles, 1/3 of the remaining meat sauce, and 1/3 of the cheese mixture; repeat layers two more times with remaining noodles, sauce, and cheese mixture."
-                },
-                {
-                    "sub_number": "6.3",
-                    "text": "Sprinkle remaining mozzarella evenly over top."
+                    "text": "Preheat the oven to 375 degrees F (190 degrees C)."
                 }
             ]
         },
         {
             "step_number": 7,
-            "text": "Bake in the preheated oven until sauce is bubbly and the cheese is golden brown, about 30 minutes.",
+            "text": "To assemble, spread 1 ½ cups of meat sauce in the bottom of a 9x13-inch baking dish. Arrange 6 noodles lengthwise over meat sauce, overlapping slightly. Spread with 1/2 of the ricotta cheese mixture. Top with 1/3 of the mozzarella cheese slices. Spoon 1 ½ cups meat sauce over mozzarella, and sprinkle with 1/4 cup Parmesan cheese.",
             "substeps": [
                 {
                     "sub_number": "7.1",
-                    "text": "Bake in the preheated oven until sauce is bubbly and the cheese is golden brown, about 30 minutes."
+                    "text": "To assemble, spread 1 ½ cups of meat sauce in the bottom of a 9x13-inch baking dish."
+                },
+                {
+                    "sub_number": "7.2",
+                    "text": "Arrange 6 noodles lengthwise over meat sauce, overlapping slightly."
+                },
+                {
+                    "sub_number": "7.3",
+                    "text": "Spread with 1/2 of the ricotta cheese mixture."
+                },
+                {
+                    "sub_number": "7.4",
+                    "text": "Top with 1/3 of the mozzarella cheese slices."
+                },
+                {
+                    "sub_number": "7.5",
+                    "text": "Spoon 1 ½ cups meat sauce over mozzarella, and sprinkle with 1/4 cup Parmesan cheese."
+                }
+            ]
+        },
+        {
+            "step_number": 8,
+            "text": "Repeat layers, and top with remaining mozzarella and Parmesan cheese. Cover with foil: to prevent sticking, either spray foil with cooking spray or make sure the foil does not touch the cheese.",
+            "substeps": [
+                {
+                    "sub_number": "8.1",
+                    "text": "Repeat layers, and top with remaining mozzarella and Parmesan cheese."
+                },
+                {
+                    "sub_number": "8.2",
+                    "text": "Cover with foil: to prevent sticking, either spray foil with cooking spray or make sure the foil does not touch the cheese."
+                }
+            ]
+        },
+        {
+            "step_number": 9,
+            "text": "Bake in the preheated oven for 25 minutes. Remove the foil and bake for an additional 25 minutes.",
+            "substeps": [
+                {
+                    "sub_number": "9.1",
+                    "text": "Bake in the preheated oven for 25 minutes."
+                },
+                {
+                    "sub_number": "9.2",
+                    "text": "Remove the foil and bake for an additional 25 minutes."
+                }
+            ]
+        },
+        {
+            "step_number": 10,
+            "text": "Rest lasagna for 15 minutes before serving.",
+            "substeps": [
+                {
+                    "sub_number": "10.1",
+                    "text": "Rest lasagna for 15 minutes before serving."
                 }
             ]
         }

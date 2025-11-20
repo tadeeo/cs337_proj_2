@@ -14,7 +14,7 @@ with open("culinary_dictionary.json", "r", encoding="utf-8") as f:
     culinary_dict = json.load(f)
 
 def load_cooking_tools():
-    # Returns a dict: {"Hand whisk": "...", "...": "..."}
+    # returns a dict: {"Hand whisk": "...", "...": "..."}
     tools = {}
     with open("common_cooking_tools.txt", "r", encoding="utf-8") as f:
         for line in f:
@@ -33,7 +33,7 @@ def slow_print(*args, delay=0.03):
     tactical_pause()
     print()  # Move to the next line after printing
 
-def word_print(*args, delay=0.2):
+def word_print(*args, delay=0.15):
     text = ' '.join(str(arg) for arg in args)
     words = text.split()
     for word in words:
@@ -57,7 +57,7 @@ def startup_base():
     scrape_and_parse(url)
     tactical_pause(3)
     slow_print("Let's see what we have!")
-    word_print("\nRecipe Details:\n", delay=0.35)
+    word_print("\nRecipe Details:\n", delay=0.3)
     word_print("Title:", recipe_data["title"],), tactical_pause()
     word_print("Prep time:", recipe_data["prep_time"]), tactical_pause()
     word_print("Cook time:", recipe_data["cook_time"]), tactical_pause()
@@ -68,7 +68,7 @@ def startup_base():
     
     for ingredient in recipe_data["ingredients"]:
         slow_print("- ", ingredient["qty"]," ", ingredient["unit"]," ", ingredient["name"], delay=0.02), tactical_pause()
-    tactical_pause(1)
+    tactical_pause(.5)
     
     print("\n\n")
     slow_print(" And the steps are as follows:\n")
@@ -211,6 +211,5 @@ def main():
     else:
         print("Invalid input. Please enter 'y' or 'n'.")
 
-    
 if __name__ == "__main__":
     main()
