@@ -10,6 +10,9 @@ _DELAY_MULTIPLIER = 1.0 # for testing, set to 0.0 to skip delays
 with open("recipe.json", "r", encoding="utf-8") as f:
     recipe_data = json.load(f)
 
+with open("parsed_recipes.json", "r", encoding="utf-8") as f:
+    parsed_recipe_data = json.load(f)
+
 with open("culinary_dictionary.json", "r", encoding="utf-8") as f:
     culinary_dict = json.load(f)
 
@@ -78,6 +81,8 @@ def startup_base():
         word_print("Step ", step["step_number"], ": ", step["text"], delay=0.15), tactical_pause(1.5)
 
 def handle_step_query(query, recipe_data, curr_idx):
+    """ Handles step navigation queries.
+        Returns (handled: bool, new_curr_idx: int)"""
     steps = recipe_data["steps"]
     handled = False
     
