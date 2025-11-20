@@ -1,250 +1,119 @@
 {
-    "title": "World's Best Lasagna",
+    "title": "Italian Lasagna",
     "prep_time": "30 mins",
-    "cook_time": "2 hrs 30 mins",
-    "additional_time": "15 mins",
-    "total_time": "3 hrs 15 mins",
+    "cook_time": "5 hrs 40 mins",
+    "additional_time": null,
+    "total_time": "6 hrs 10 mins",
     "yield": "12",
     "ingredients": [
         {
-            "qty": "1",
-            "unit": "pound",
-            "name": "sweet Italian sausage"
-        },
-        {
-            "qty": "¾",
-            "unit": "pound",
-            "name": "lean ground beef"
-        },
-        {
-            "qty": "½",
-            "unit": "cup",
-            "name": "minced onion"
-        },
-        {
-            "qty": "2",
-            "unit": "cloves",
-            "name": "garlic, crushed"
+            "qty": "9",
+            "unit": "thick slices",
+            "name": "bacon, diced"
         },
         {
             "qty": "1",
-            "unit": "(28 ounce) can",
-            "name": "crushed tomatoes"
+            "unit": "medium",
+            "name": "onion, chopped"
         },
         {
             "qty": "2",
-            "unit": "(6.5 ounce) cans",
-            "name": "canned tomato sauce"
-        },
-        {
-            "qty": "2",
-            "unit": "(6 ounce) cans",
-            "name": "tomato paste"
-        },
-        {
-            "qty": "½",
-            "unit": "cup",
-            "name": "water"
-        },
-        {
-            "qty": "2",
-            "unit": "tablespoons",
-            "name": "white sugar"
-        },
-        {
-            "qty": "4",
-            "unit": "tablespoons",
-            "name": "chopped fresh parsley, divided"
+            "unit": "(28 ounce) cans",
+            "name": "tomato sauce"
         },
         {
             "qty": "1 ½",
             "unit": "teaspoons",
-            "name": "dried basil leaves"
-        },
-        {
-            "qty": "1 ½",
-            "unit": "teaspoons",
-            "name": "salt, divided, or to taste"
-        },
-        {
-            "qty": "1",
-            "unit": "teaspoon",
             "name": "Italian seasoning"
         },
         {
-            "qty": "½",
+            "qty": "1",
             "unit": "teaspoon",
-            "name": "fennel seeds"
-        },
-        {
-            "qty": "¼",
-            "unit": "teaspoon",
-            "name": "ground black pepper"
-        },
-        {
-            "qty": "12",
-            "unit": "",
-            "name": "lasagna noodles"
-        },
-        {
-            "qty": "16",
-            "unit": "ounces",
-            "name": "ricotta cheese"
+            "name": "fennel seed"
         },
         {
             "qty": "1",
-            "unit": "",
-            "name": "egg"
+            "unit": "teaspoon",
+            "name": "dried oregano"
         },
         {
-            "qty": "¾",
-            "unit": "pound",
-            "name": "mozzarella cheese, sliced"
-        },
-        {
-            "qty": "¾",
-            "unit": "cup",
-            "name": "grated Parmesan cheese"
+            "qty": "2",
+            "unit": "pounds",
+            "name": "Italian sausage links"
         }
     ],
     "steps": [
         {
             "step_number": 1,
-            "text": "Gather all your ingredients.",
+            "text": "Make the sauce: Brown bacon and onion in a large pan over medium heat until bacon is crisp and onion is translucent, 7 to 9 minutes. Stir in tomato sauce, Italian seasoning, fennel seed, and oregano. Reduce the heat to low, cover, and simmer until thick, 4 to 6 hours.",
             "substeps": [
                 {
                     "sub_number": "1.1",
-                    "text": "Gather all your ingredients."
+                    "text": "Make the sauce: Brown bacon and onion in a large pan over medium heat until bacon is crisp and onion is translucent, 7 to 9 minutes."
+                },
+                {
+                    "sub_number": "1.2",
+                    "text": "Stir in tomato sauce, Italian seasoning, fennel seed, and oregano."
+                },
+                {
+                    "sub_number": "1.3",
+                    "text": "Reduce the heat to low, cover, and simmer until thick, 4 to 6 hours."
                 }
             ]
         },
         {
             "step_number": 2,
-            "text": "Cook sausage, ground beef, onion, and garlic in a Dutch oven over medium heat until well browned.",
+            "text": "Cook the sausage: When the sauce is almost ready, brown sausage links in a large skillet. Drain on paper towels and cut into 1-inch pieces.",
             "substeps": [
                 {
                     "sub_number": "2.1",
-                    "text": "Cook sausage, ground beef, onion, and garlic in a Dutch oven over medium heat until well browned."
+                    "text": "Cook the sausage: When the sauce is almost ready, brown sausage links in a large skillet."
+                },
+                {
+                    "sub_number": "2.2",
+                    "text": "Drain on paper towels and cut into 1-inch pieces."
                 }
             ]
         },
         {
             "step_number": 3,
-            "text": "Stir in crushed tomatoes, tomato sauce, tomato paste, and water. Season with sugar, 2 tablespoons parsley, basil, 1 teaspoon salt, Italian seasoning, fennel seeds, and pepper. Simmer, covered, for about 1 ½ hours, stirring occasionally.",
+            "text": "Make the lasagna: Mix ricotta cheese, milk, eggs, parsley, and oregano together in a medium bowl.",
             "substeps": [
                 {
                     "sub_number": "3.1",
-                    "text": "Stir in crushed tomatoes, tomato sauce, tomato paste, and water."
-                },
-                {
-                    "sub_number": "3.2",
-                    "text": "Season with sugar, 2 tablespoons parsley, basil, 1 teaspoon salt, Italian seasoning, fennel seeds, and pepper."
-                },
-                {
-                    "sub_number": "3.3",
-                    "text": "Simmer, covered, for about 1 ½ hours, stirring occasionally."
+                    "text": "Make the lasagna: Mix ricotta cheese, milk, eggs, parsley, and oregano together in a medium bowl."
                 }
             ]
         },
         {
             "step_number": 4,
-            "text": "Bring a large pot of lightly salted water to a boil. Cook lasagna noodles in boiling water for 8 to 10 minutes. Drain noodles, and rinse with cold water.",
+            "text": "Spread 1 cup sauce over the bottom of a 9x13-inch pan. Layer with 1/3 of the lasagna noodles, 1/2 of the ricotta mixture, 1/2 of the sausage pieces, 2 cups mozzarella, 4 slices provolone, and 1/3 of the sauce. Repeat layers once more, then top with remaining noodles. Spread remaining sauce over noodles and sprinkle with remaining mozzarella.",
             "substeps": [
                 {
                     "sub_number": "4.1",
-                    "text": "Bring a large pot of lightly salted water to a boil."
+                    "text": "Spread 1 cup sauce over the bottom of a 9x13-inch pan."
                 },
                 {
                     "sub_number": "4.2",
-                    "text": "Cook lasagna noodles in boiling water for 8 to 10 minutes."
+                    "text": "Layer with 1/3 of the lasagna noodles, 1/2 of the ricotta mixture, 1/2 of the sausage pieces, 2 cups mozzarella, 4 slices provolone, and 1/3 of the sauce."
                 },
                 {
                     "sub_number": "4.3",
-                    "text": "Drain noodles, and rinse with cold water."
+                    "text": "Repeat layers once more, then top with remaining noodles."
+                },
+                {
+                    "sub_number": "4.4",
+                    "text": "Spread remaining sauce over noodles and sprinkle with remaining mozzarella."
                 }
             ]
         },
         {
             "step_number": 5,
-            "text": "In a mixing bowl, combine ricotta cheese with egg, remaining 2 tablespoons parsley, and 1/2 teaspoon salt.",
+            "text": "Bake in the preheated oven for 1 1/2 hours.",
             "substeps": [
                 {
                     "sub_number": "5.1",
-                    "text": "In a mixing bowl, combine ricotta cheese with egg, remaining 2 tablespoons parsley, and 1/2 teaspoon salt."
-                }
-            ]
-        },
-        {
-            "step_number": 6,
-            "text": "Preheat the oven to 375 degrees F (190 degrees C).",
-            "substeps": [
-                {
-                    "sub_number": "6.1",
-                    "text": "Preheat the oven to 375 degrees F (190 degrees C)."
-                }
-            ]
-        },
-        {
-            "step_number": 7,
-            "text": "To assemble, spread 1 ½ cups of meat sauce in the bottom of a 9x13-inch baking dish. Arrange 6 noodles lengthwise over meat sauce, overlapping slightly. Spread with 1/2 of the ricotta cheese mixture. Top with 1/3 of the mozzarella cheese slices. Spoon 1 ½ cups meat sauce over mozzarella, and sprinkle with 1/4 cup Parmesan cheese.",
-            "substeps": [
-                {
-                    "sub_number": "7.1",
-                    "text": "To assemble, spread 1 ½ cups of meat sauce in the bottom of a 9x13-inch baking dish."
-                },
-                {
-                    "sub_number": "7.2",
-                    "text": "Arrange 6 noodles lengthwise over meat sauce, overlapping slightly."
-                },
-                {
-                    "sub_number": "7.3",
-                    "text": "Spread with 1/2 of the ricotta cheese mixture."
-                },
-                {
-                    "sub_number": "7.4",
-                    "text": "Top with 1/3 of the mozzarella cheese slices."
-                },
-                {
-                    "sub_number": "7.5",
-                    "text": "Spoon 1 ½ cups meat sauce over mozzarella, and sprinkle with 1/4 cup Parmesan cheese."
-                }
-            ]
-        },
-        {
-            "step_number": 8,
-            "text": "Repeat layers, and top with remaining mozzarella and Parmesan cheese. Cover with foil: to prevent sticking, either spray foil with cooking spray or make sure the foil does not touch the cheese.",
-            "substeps": [
-                {
-                    "sub_number": "8.1",
-                    "text": "Repeat layers, and top with remaining mozzarella and Parmesan cheese."
-                },
-                {
-                    "sub_number": "8.2",
-                    "text": "Cover with foil: to prevent sticking, either spray foil with cooking spray or make sure the foil does not touch the cheese."
-                }
-            ]
-        },
-        {
-            "step_number": 9,
-            "text": "Bake in the preheated oven for 25 minutes. Remove the foil and bake for an additional 25 minutes.",
-            "substeps": [
-                {
-                    "sub_number": "9.1",
-                    "text": "Bake in the preheated oven for 25 minutes."
-                },
-                {
-                    "sub_number": "9.2",
-                    "text": "Remove the foil and bake for an additional 25 minutes."
-                }
-            ]
-        },
-        {
-            "step_number": 10,
-            "text": "Rest lasagna for 15 minutes before serving.",
-            "substeps": [
-                {
-                    "sub_number": "10.1",
-                    "text": "Rest lasagna for 15 minutes before serving."
+                    "text": "Bake in the preheated oven for 1 1/2 hours."
                 }
             ]
         }

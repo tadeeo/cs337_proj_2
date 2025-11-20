@@ -3,6 +3,7 @@ import sys
 import time
 import recipe_scraper
 import recipe_parser
+import step_manager
 import json
 
 _DELAY_MULTIPLIER = 1.0 # for testing, set to 0.0 to skip delays
@@ -50,6 +51,7 @@ def tactical_pause(seconds = 0.5):
 def scrape_and_parse(url: str):
     recipe_scraper.main(url)
     recipe_parser.main()
+    step_manager.main()
     slow_print("Scraping and parsing complete!")
 
 def startup_base():

@@ -18,9 +18,12 @@ def load_steps():
         data = json.load(f)
 
     text = []
-    sub_steps = [item["substeps"] for item in data["steps"]]
-    for sub in sub_steps:
-        text.append(sub[0]["text"])
+    #sub_steps = [{"substeps": item["substeps"], "step_number": step for item in data["steps"]]
+    for sub in data["steps"]:
+        for i in range(len(sub["substeps"])):
+            text.append({ "step_number": sub["step_number"], "substep_number": sub["substeps"][i]["sub_number"], "text": sub["substeps"][i]["text"] })
+    
+    print(text)        
     return text
 
 def get_parsed_steps():
@@ -29,11 +32,10 @@ def get_parsed_steps():
     ingredients = load_ingredients()
     parsed_steps = []
 
-    step_number = 1
     for step in steps:
-        parsed_step = parse_step_main(step, tools, ingredients)
-        parsed_step["step_number"] = step_number
-        step_number += 1
+        parsed_step = parse_step_main(step['text'], tools, ingredients)
+        parsed_step["step_number"] = step["step_number"]
+        parsed_step["substep_number"] = step["substep_number"]
         parsed_steps.append(parsed_step)
     return parsed_steps
 
