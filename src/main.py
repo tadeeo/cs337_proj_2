@@ -14,13 +14,13 @@ with open("recipe.json", "r", encoding="utf-8") as f:
 with open("parsed_recipes.json", "r", encoding="utf-8") as f:
     parsed_recipe_data = json.load(f)
 
-with open("culinary_dictionary.json", "r", encoding="utf-8") as f:
+with open("src/culinary_dictionary.json", "r", encoding="utf-8") as f:
     culinary_dict = json.load(f)
 
 def load_cooking_tools():
     # returns a dict: {"Hand whisk": "...", "...": "..."}
     tools = {}
-    with open("common_cooking_tools.txt", "r", encoding="utf-8") as f:
+    with open("src/common_cooking_tools.txt", "r", encoding="utf-8") as f:
         for line in f:
             if ':' in line:
                 name, desc = line.split(':', 1)
@@ -85,7 +85,8 @@ def startup_base():
 def handle_step_query(query, recipe_data, curr_idx):
     """ Handles step navigation queries.
         Returns (handled: bool, new_curr_idx: int)"""
-    steps = recipe_data["steps"]
+    steps = step_manager.get_steps()
+    total_steps = steps[len(steps)-1]["step_number"]
     handled = False
     
     q = query.lower().strip()
@@ -97,46 +98,48 @@ def handle_step_query(query, recipe_data, curr_idx):
     first_step = re.compile(r"\b(first step|start|begin)\b")
     
     if next_step.search(q):
-        if curr_idx < len(steps) - 1:
+        if curr_idx < total_steps:
             curr_idx += 1
             handled = True
-            step = steps[curr_idx]
-            word_print("Step", step['step_number'], ":")
-            for sub in step.get("substeps", []):
-                word_print(sub['sub_number'], ":", sub['text'])
+            step = step_manager.get_current_step(steps, curr_idx)
+            print(step)
+            word_print("Step", step[0]['step_number'], ":")
+            for sub in step:
+                word_print(sub['substep_number'], ":", sub['description'])
                 tactical_pause()
         else:
             slow_print("You’re already on the last step!")
             handled = True
             
     elif prev_step.search(q):
-        if curr_idx > 0:
+        print(curr_idx)
+        if curr_idx > 1:
             curr_idx -= 1
             handled = True
-            step = steps[curr_idx]
-            word_print("Step", step['step_number'], ":")
-            for sub in step.get("substeps", []):
-                word_print(sub['sub_number'], ":", sub['text'])
+            step = step_manager.get_current_step(steps, curr_idx)
+            word_print("Step", step[0]['step_number'], ":")
+            for sub in step:
+                word_print(sub['substep_number'], ":", sub['description'])
                 tactical_pause()
         else:
             slow_print("You’re already on the first step!")
             handled = True
             
     elif repeat_step.search(q):
-        step = steps[curr_idx]
-        word_print("Step", step['step_number'], ":")
-        for sub in step.get("substeps", []):
-            word_print(sub['sub_number'], ":", sub['text'])
+        step = step_manager.get_current_step(steps, curr_idx)
+        word_print("Step", step[0]['step_number'], ":")
+        for sub in step:
+            word_print(sub['substep_number'], ":", sub['description'])
             tactical_pause()
         handled = True
         
     elif first_step.search(q):
-        curr_idx = 0
+        curr_idx = 1
         handled = True
-        step = steps[curr_idx]
-        word_print("Step", step['step_number'], ":")
-        for sub in step.get("substeps", []):
-            word_print(sub['sub_number'], ":", sub['text'])
+        step = step_manager.get_current_step(steps, curr_idx)
+        word_print("Step", step[0]['step_number'], ":")
+        for sub in step:
+            word_print(sub['substep_number'], ":", sub['description'])
             tactical_pause()
 
     return handled, curr_idx
@@ -189,7 +192,7 @@ def query_handler():
     slow_print(" Great!")
     slow_print(" Now, we will begin navigating the recipe! At any point during the experience, you can type 'exit' to quit.")
     slow_print(" Whenever you're ready, ask 'What is the first step?' to begin.")
-    idx = 0
+    idx = 1
     while True:
         query = input("\n q -- ")
         query = query.strip().lower()

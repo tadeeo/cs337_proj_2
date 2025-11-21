@@ -1,147 +1,147 @@
 {
-  "title": "Classic and Simple Meat Lasagna",
-  "prep_time": "25 mins",
-  "cook_time": "1 hr",
-  "additional_time": "10 mins",
-  "total_time": "1 hr 35 mins",
-  "yield": "8",
-  "ingredients": [
-    {
-      "qty": "12",
-      "unit": "",
-      "name": "whole wheat lasagna noodles"
-    },
-    {
-      "qty": "1",
-      "unit": "pound",
-      "name": "lean ground beef"
-    },
-    {
-      "qty": "2",
-      "unit": "cloves",
-      "name": "garlic, chopped"
-    },
-    {
-      "qty": "1",
-      "unit": "teaspoon",
-      "name": "dried oregano, or to taste"
-    },
-    {
-      "qty": "½",
-      "unit": "teaspoon",
-      "name": "garlic powder"
-    },
-    {
-      "qty": "",
-      "unit": "",
-      "name": "salt and ground black pepper to taste"
-    },
-    {
-      "qty": "1",
-      "unit": "(16 ounce) package",
-      "name": "cottage cheese"
-    },
-    {
-      "qty": "½",
-      "unit": "cup",
-      "name": "shredded Parmesan cheese"
-    },
-    {
-      "qty": "2",
-      "unit": "",
-      "name": "eggs"
-    },
-    {
-      "qty": "4 ½",
-      "unit": "cups",
-      "name": "tomato-basil pasta sauce"
-    },
-    {
-      "qty": "2",
-      "unit": "cups",
-      "name": "shredded mozzarella cheese"
-    }
-  ],
-  "steps": [
-    {
-      "step_number": 1,
-      "text": "Preheat the oven to 350 degrees F (175 degrees C).",
-      "substeps": [
+    "title": "Classic and Simple Meat Lasagna",
+    "prep_time": "25 mins",
+    "cook_time": "1 hr",
+    "additional_time": "10 mins",
+    "total_time": "1 hr 35 mins",
+    "yield": "8",
+    "ingredients": [
         {
-          "sub_number": "1.1",
-          "text": "Preheat the oven to 350 degrees F (175 degrees C)."
-        }
-      ]
-    },
-    {
-      "step_number": 2,
-      "text": "Bring a large pot of lightly salted water to a boil. Add lasagna noodles and cook for 10 minutes or until al dente; drain.",
-      "substeps": [
-        {
-          "sub_number": "2.1",
-          "text": "Bring a large pot of lightly salted water to a boil."
+            "qty": "12",
+            "unit": "",
+            "name": "whole wheat lasagna noodles"
         },
         {
-          "sub_number": "2.2",
-          "text": "Add lasagna noodles and cook for 10 minutes or until al dente; drain."
-        }
-      ]
-    },
-    {
-      "step_number": 3,
-      "text": "Meanwhile, place ground beef, garlic, oregano, garlic powder, salt, and black pepper in a large skillet over medium heat; cook and stir until beef is crumbly and evenly browned, about 10 minutes.",
-      "substeps": [
-        {
-          "sub_number": "3.1",
-          "text": "Meanwhile, place ground beef, garlic, oregano, garlic powder, salt, and black pepper in a large skillet over medium heat; cook and stir until beef is crumbly and evenly browned, about 10 minutes."
-        }
-      ]
-    },
-    {
-      "step_number": 4,
-      "text": "Mix cottage cheese, Parmesan cheese, and eggs together in a large bowl until thoroughly combined.",
-      "substeps": [
-        {
-          "sub_number": "4.1",
-          "text": "Mix cottage cheese, Parmesan cheese, and eggs together in a large bowl until thoroughly combined."
-        }
-      ]
-    },
-    {
-      "step_number": 5,
-      "text": "Lay 4 noodles side by side on the bottom of a 9x13-inch baking pan; top with a layer of prepared tomato-basil sauce, a layer of ground beef mixture, and a layer of cottage cheese mixture. Repeat layers twice more, ending with a layer of sauce; sprinkle mozzarella cheese on top. Cover the dish with aluminum foil.",
-      "substeps": [
-        {
-          "sub_number": "5.1",
-          "text": "Lay 4 noodles side by side on the bottom of a 9x13-inch baking pan; top with a layer of prepared tomato-basil sauce, a layer of ground beef mixture, and a layer of cottage cheese mixture."
+            "qty": "1",
+            "unit": "pound",
+            "name": "lean ground beef"
         },
         {
-          "sub_number": "5.2",
-          "text": "Repeat layers twice more, ending with a layer of sauce; sprinkle mozzarella cheese on top."
+            "qty": "2",
+            "unit": "cloves",
+            "name": "garlic, chopped"
         },
         {
-          "sub_number": "5.3",
-          "text": "Cover the dish with aluminum foil."
+            "qty": "1",
+            "unit": "teaspoon",
+            "name": "dried oregano, or to taste"
+        },
+        {
+            "qty": "½",
+            "unit": "teaspoon",
+            "name": "garlic powder"
+        },
+        {
+            "qty": "",
+            "unit": "",
+            "name": "salt and ground black pepper to taste"
+        },
+        {
+            "qty": "1",
+            "unit": "(16 ounce) package",
+            "name": "cottage cheese"
+        },
+        {
+            "qty": "½",
+            "unit": "cup",
+            "name": "shredded Parmesan cheese"
+        },
+        {
+            "qty": "2",
+            "unit": "",
+            "name": "eggs"
+        },
+        {
+            "qty": "4 ½",
+            "unit": "cups",
+            "name": "tomato-basil pasta sauce"
+        },
+        {
+            "qty": "2",
+            "unit": "cups",
+            "name": "shredded mozzarella cheese"
         }
-      ]
-    },
-    {
-      "step_number": 6,
-      "text": "Bake in the preheated oven until the lasagna is bubbling and the cheese has melted, about 30 minutes. Remove foil and bake until cheese has begun to brown, about 10 more minutes. Allow to stand at least 10 minutes before serving.",
-      "substeps": [
+    ],
+    "steps": [
         {
-          "sub_number": "6.1",
-          "text": "Bake in the preheated oven until the lasagna is bubbling and the cheese has melted, about 30 minutes."
+            "step_number": 1,
+            "text": "Preheat the oven to 350 degrees F (175 degrees C).",
+            "substeps": [
+                {
+                    "sub_number": "1.1",
+                    "text": "Preheat the oven to 350 degrees F (175 degrees C)."
+                }
+            ]
         },
         {
-          "sub_number": "6.2",
-          "text": "Remove foil and bake until cheese has begun to brown, about 10 more minutes."
+            "step_number": 2,
+            "text": "Bring a large pot of lightly salted water to a boil. Add lasagna noodles and cook for 10 minutes or until al dente; drain.",
+            "substeps": [
+                {
+                    "sub_number": "2.1",
+                    "text": "Bring a large pot of lightly salted water to a boil."
+                },
+                {
+                    "sub_number": "2.2",
+                    "text": "Add lasagna noodles and cook for 10 minutes or until al dente; drain."
+                }
+            ]
         },
         {
-          "sub_number": "6.3",
-          "text": "Allow to stand at least 10 minutes before serving."
+            "step_number": 3,
+            "text": "Meanwhile, place ground beef, garlic, oregano, garlic powder, salt, and black pepper in a large skillet over medium heat; cook and stir until beef is crumbly and evenly browned, about 10 minutes.",
+            "substeps": [
+                {
+                    "sub_number": "3.1",
+                    "text": "Meanwhile, place ground beef, garlic, oregano, garlic powder, salt, and black pepper in a large skillet over medium heat; cook and stir until beef is crumbly and evenly browned, about 10 minutes."
+                }
+            ]
+        },
+        {
+            "step_number": 4,
+            "text": "Mix cottage cheese, Parmesan cheese, and eggs together in a large bowl until thoroughly combined.",
+            "substeps": [
+                {
+                    "sub_number": "4.1",
+                    "text": "Mix cottage cheese, Parmesan cheese, and eggs together in a large bowl until thoroughly combined."
+                }
+            ]
+        },
+        {
+            "step_number": 5,
+            "text": "Lay 4 noodles side by side on the bottom of a 9x13-inch baking pan; top with a layer of prepared tomato-basil sauce, a layer of ground beef mixture, and a layer of cottage cheese mixture. Repeat layers twice more, ending with a layer of sauce; sprinkle mozzarella cheese on top. Cover the dish with aluminum foil.",
+            "substeps": [
+                {
+                    "sub_number": "5.1",
+                    "text": "Lay 4 noodles side by side on the bottom of a 9x13-inch baking pan; top with a layer of prepared tomato-basil sauce, a layer of ground beef mixture, and a layer of cottage cheese mixture."
+                },
+                {
+                    "sub_number": "5.2",
+                    "text": "Repeat layers twice more, ending with a layer of sauce; sprinkle mozzarella cheese on top."
+                },
+                {
+                    "sub_number": "5.3",
+                    "text": "Cover the dish with aluminum foil."
+                }
+            ]
+        },
+        {
+            "step_number": 6,
+            "text": "Bake in the preheated oven until the lasagna is bubbling and the cheese has melted, about 30 minutes. Remove foil and bake until cheese has begun to brown, about 10 more minutes. Allow to stand at least 10 minutes before serving.",
+            "substeps": [
+                {
+                    "sub_number": "6.1",
+                    "text": "Bake in the preheated oven until the lasagna is bubbling and the cheese has melted, about 30 minutes."
+                },
+                {
+                    "sub_number": "6.2",
+                    "text": "Remove foil and bake until cheese has begun to brown, about 10 more minutes."
+                },
+                {
+                    "sub_number": "6.3",
+                    "text": "Allow to stand at least 10 minutes before serving."
+                }
+            ]
         }
-      ]
-    }
-  ]
+    ]
 }
