@@ -6,7 +6,7 @@ curr_step = 1
 
 def get_steps():
     global steps
-    with open("parsed_recipes.json", "r") as f:
+    with open("src/parsed_recipes.json", "r") as f:
         steps = json.load(f)
     return steps
 

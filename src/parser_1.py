@@ -76,7 +76,7 @@ def extract_methods(step: str) -> List[str]:
 
 def extract_time(step: str) -> Dict:
     """Extract time information from the step (e.g., 'bake for 20 minutes')."""
-    time_pattern = re.compile(r'(\d+)\s*(seconds?|minutes?|hours?)')
+    time_pattern = re.compile(r'(\d+(?:\s+\d+/\d+)?|\d+/\d+|\d+\.\d+)\s*(seconds?|minutes?|hours?)')
     times = time_pattern.findall(step.lower())
     if times:
         total_time = ", ".join([f"{n} {unit}" for n, unit in times])
