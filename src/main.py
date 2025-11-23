@@ -5,14 +5,15 @@ import recipe_scraper
 import recipe_parser
 import step_manager
 import json
+from typing import Tuple
 
 _DELAY_MULTIPLIER = 1.0 # for testing, set to 0.0 to skip delays
 
 with open("recipe.json", "r", encoding="utf-8") as f:
     recipe_data = json.load(f)
 
-with open("parsed_recipes.json", "r", encoding="utf-8") as f:
-    parsed_recipe_data = json.load(f)
+# with open("parsed_recipes.json", "r", encoding="utf-8") as f:
+#     parsed_recipe_data = json.load(f)
 
 with open("src/culinary_dictionary.json", "r", encoding="utf-8") as f:
     culinary_dict = json.load(f)
@@ -144,7 +145,7 @@ def handle_step_query(query, recipe_data, curr_idx):
 
     return handled, curr_idx
 
-def handle_info_query(query):
+def handle_info_query(query: str, speech: bool) -> Tuple[bool, str]:
     handled = False
     q = query.lower().strip()
 
@@ -157,16 +158,28 @@ def handle_info_query(query):
         term = m.group(2).strip()
         # check culinary dictionary
         definition = culinary_dict.get(term)
-        if definition:
-            word_print(term, "means:", definition)
-            handled = True
-        #  check cooking tools
-        elif term in cooking_tools:
-            word_print(term, ":", cooking_tools[term])
-            handled = True
+        if speech: # Could also move speech check inside the ifs
+            if definition:
+                output = term + "means " + definition
+                return True, output
+            #  check cooking tools
+            elif term in cooking_tools:
+                output = term + " " + cooking_tools[term]
+                return True, output
+            else:
+                output = "Sorry, I couldn't find a definition for " + term
+                return True, output
         else:
-            word_print("Sorry, I couldn't find a definition for", term)
-            handled = True
+            if definition:
+                word_print(term, "means:", definition)
+                handled = True
+            #  check cooking tools
+            elif term in cooking_tools:
+                word_print(term, ":", cooking_tools[term])
+                handled = True
+            else:
+                word_print("Sorry, I couldn't find a definition for", term)
+                handled = True
     
     
     # how-to lookup
@@ -174,19 +187,30 @@ def handle_info_query(query):
     if m:
         procedure = m.group(4).strip()
         definition = culinary_dict.get(procedure)
-        if definition:
-            word_print(procedure, "means:", definition)
-        # check tools
-        elif procedure in cooking_tools:
-            word_print(procedure, ":", cooking_tools[procedure])
+        if speech: # I mimicked the existing code here, but am unsure of the purpose? Why would procedure ever be in cooking tools? Also, you're youtube searching no matter what?
+            if definition:
+                output = procedure + "means " + definition
+                return True, output
+            # check tools
+            elif procedure in cooking_tools:
+                output = procedure + " " + cooking_tools[procedure]
+                return True, output
+        else:
+            if definition:
+                word_print(procedure, "means:", definition)
+            # check tools
+            elif procedure in cooking_tools:
+                word_print(procedure, ":", cooking_tools[procedure])
     
             # generate YouTube search link for the procedure
     yt_query = q.replace(" ", "+")
     youtube_url = f"https://www.youtube.com/results?search_query={yt_query}"
     word_print("To learn, feel free to try this YouTube search:")
     word_print(youtube_url)
+    output = "I lack the knowledge to answer that. Try the youtube search I outputed to the terminal"
+    # Why use the variable handled at all? You don't return in any cases where handled is false? Interrupts?
     handled = True
-    return handled
+    return handled, output
     
 def query_handler():
     slow_print(" Great!")
@@ -203,7 +227,7 @@ def query_handler():
         handled, idx = handle_step_query(query, recipe_data, idx)
         if handled:
             continue
-        handled = handle_info_query(query)
+        handled, output = handle_info_query(query)
         if handled:
             continue
         slow_print("Sorry, I didn't understand that. Please try again.")
