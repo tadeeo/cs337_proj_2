@@ -415,10 +415,13 @@ def handle_step_query(query, recipe_data, curr_idx, speech: bool) -> Tuple[bool,
         curr_idx = 1
 
     elif repeat_step.search(q):
-        curr_idx = curr_idx
+        pass
     
     else:
         return False, curr_idx, ""
+
+    # Get all entries for this step_number
+    step_entries = step_manager.get_current_step(steps, curr_idx)
 
     step = step_manager.get_current_step(steps, curr_idx)
     if speech:
@@ -452,7 +455,7 @@ def handle_can_i_query(query):
             handled = True
     return handled
 
-def handle_info_query(query: str, speech: bool, curr_idx) -> Tuple[bool, str]:
+def handle_info_query(query: str, speech: bool) -> Tuple[bool, str]:
     handled = False
     output = ""
     q = query.lower().strip()
@@ -514,18 +517,26 @@ def handle_info_query(query: str, speech: bool, curr_idx) -> Tuple[bool, str]:
                 word_print(procedure, ":", cooking_tools[procedure])
 
     # how-much / how-many lookup
-    if not handled:
-        m = how_much_pat.match(q)
-        #print('how much: ' + m)
-        if m:
-            target = m.group(3).strip()
-            steps = step_manager.get_steps()
-            amount = step_manager.get_current_step(steps, curr_idx)
-            print(amount)
-            if amount:
-                word_print("You typically need", amount["qty"], amount["unit"], "of", target)
-            else:
-                word_print("Sorry, I don't know how much", target, "you need.")
+    m = how_much_pat.match(q)
+    if m:
+        target = m.group(3).strip().lower()
+        #print("target: ", target)
+        found = None
+        for step in parsed_recipe_data:
+            for ing in step.get("ingredients", []):
+                #print(ing)
+                if target in ing.get("name", "").lower():
+                    qty = ing.get("qty", "").strip()
+                    unit = ing.get("unit", "").strip()
+                    if qty or unit:
+                        found = f"{qty} {unit}".strip()
+                        output = f"You typically need {found} of {ing['name']}"
+                        handled = True
+                        break
+            if handled:
+                break
+        if not handled:
+            output = f"Sorry, I don't know how much {target} you need."
             handled = True
 
     # Can't find lookup
