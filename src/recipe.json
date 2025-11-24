@@ -1,145 +1,173 @@
 {
-    "title": "Classic and Simple Meat Lasagna",
-    "prep_time": "25 mins",
-    "cook_time": "1 hr",
-    "additional_time": "10 mins",
-    "total_time": "1 hr 35 mins",
-    "yield": "8",
+    "title": "Orange Cake with Semolina and Almonds",
+    "prep_time": "30 mins",
+    "cook_time": "1 hr 20 mins",
+    "additional_time": "20 mins",
+    "total_time": "2 hrs 10 mins",
+    "yield": "10",
     "ingredients": [
         {
-            "qty": "12",
-            "unit": "",
-            "name": "whole wheat lasagna noodles"
-        },
-        {
-            "qty": "1",
-            "unit": "pound",
-            "name": "lean ground beef"
-        },
-        {
             "qty": "2",
-            "unit": "cloves",
-            "name": "garlic, chopped"
+            "unit": "large",
+            "name": "organic oranges, scrubbed and coarsely chopped (with the skin)"
+        },
+        {
+            "qty": "5",
+            "unit": "",
+            "name": "eggs, separated"
         },
         {
             "qty": "1",
-            "unit": "teaspoon",
-            "name": "dried oregano, or to taste"
+            "unit": "cup",
+            "name": "white sugar, divided"
+        },
+        {
+            "qty": "¾",
+            "unit": "cup",
+            "name": "ground almonds"
+        },
+        {
+            "qty": "¾",
+            "unit": "cup",
+            "name": "semolina flour"
         },
         {
             "qty": "½",
             "unit": "teaspoon",
-            "name": "garlic powder"
+            "name": "vanilla extract"
         },
         {
             "qty": "",
             "unit": "",
-            "name": "salt and ground black pepper to taste"
+            "name": "1/2 teaspoon fiori di Sicilia (optional)"
         },
         {
-            "qty": "1",
-            "unit": "(16 ounce) package",
-            "name": "cottage cheese"
+            "qty": "3",
+            "unit": "tablespoons",
+            "name": "brandy-based orange liqueur (such as Grand Marnier®)"
         },
         {
             "qty": "½",
-            "unit": "cup",
-            "name": "shredded Parmesan cheese"
-        },
-        {
-            "qty": "2",
-            "unit": "",
-            "name": "eggs"
-        },
-        {
-            "qty": "4 ½",
-            "unit": "cups",
-            "name": "tomato-basil pasta sauce"
-        },
-        {
-            "qty": "2",
-            "unit": "cups",
-            "name": "shredded mozzarella cheese"
+            "unit": "teaspoon",
+            "name": "confectioners' sugar (Optional)"
         }
     ],
     "steps": [
         {
             "step_number": 1,
-            "text": "Preheat the oven to 350 degrees F (175 degrees C).",
+            "text": "Combine chopped oranges and 1 tablespoon water in a small saucepan, cover, and cook over medium-low heat until oranges are soft and excess liquid has evaporated, about 30 minutes. Set aside to cool, about 20 minutes.",
             "substeps": [
                 {
                     "sub_number": "1.1",
-                    "text": "Preheat the oven to 350 degrees F (175 degrees C)."
+                    "text": "Combine chopped oranges and 1 tablespoon water in a small saucepan, cover, and cook over medium-low heat until oranges are soft and excess liquid has evaporated, about 30 minutes."
+                },
+                {
+                    "sub_number": "1.2",
+                    "text": "Set aside to cool, about 20 minutes."
                 }
             ]
         },
         {
             "step_number": 2,
-            "text": "Bring a large pot of lightly salted water to a boil. Add lasagna noodles and cook for 10 minutes or until al dente; drain.",
+            "text": "Preheat oven to 350 degrees F (175 degrees C). Line the bottom and sides of an 8-inch springform pan with parchment paper.",
             "substeps": [
                 {
                     "sub_number": "2.1",
-                    "text": "Bring a large pot of lightly salted water to a boil."
+                    "text": "Preheat oven to 350 degrees F (175 degrees C)."
                 },
                 {
                     "sub_number": "2.2",
-                    "text": "Add lasagna noodles and cook for 10 minutes or until al dente; drain."
+                    "text": "Line the bottom and sides of an 8-inch springform pan with parchment paper."
                 }
             ]
         },
         {
             "step_number": 3,
-            "text": "Meanwhile, place ground beef, garlic, oregano, garlic powder, salt, and black pepper in a large skillet over medium heat; cook and stir until beef is crumbly and evenly browned, about 10 minutes.",
+            "text": "Place oranges in the bowl of a food processor; pulse until finely chopped.",
             "substeps": [
                 {
                     "sub_number": "3.1",
-                    "text": "Meanwhile, place ground beef, garlic, oregano, garlic powder, salt, and black pepper in a large skillet over medium heat; cook and stir until beef is crumbly and evenly browned, about 10 minutes."
+                    "text": "Place oranges in the bowl of a food processor; pulse until finely chopped."
                 }
             ]
         },
         {
             "step_number": 4,
-            "text": "Mix cottage cheese, Parmesan cheese, and eggs together in a large bowl until thoroughly combined.",
+            "text": "Beat egg whites in a glass, metal, or ceramic bowl until stiff peaks form. Gradually add 1/2 cup sugar, continuing to beat for 1 more minute.",
             "substeps": [
                 {
                     "sub_number": "4.1",
-                    "text": "Mix cottage cheese, Parmesan cheese, and eggs together in a large bowl until thoroughly combined."
+                    "text": "Beat egg whites in a glass, metal, or ceramic bowl until stiff peaks form."
+                },
+                {
+                    "sub_number": "4.2",
+                    "text": "Gradually add 1/2 cup sugar, continuing to beat for 1 more minute."
                 }
             ]
         },
         {
             "step_number": 5,
-            "text": "Lay 4 noodles side by side on the bottom of a 9x13-inch baking pan; top with a layer of prepared tomato-basil sauce, a layer of ground beef mixture, and a layer of cottage cheese mixture. Repeat layers twice more, ending with a layer of sauce; sprinkle mozzarella cheese on top. Cover the dish with aluminum foil.",
+            "text": "Beat egg yolks and remaining 1/2 cup sugar in a separate bowl until pale and thick, 2 to 3 minutes. Whisk in finely chopped oranges. Fold in ground almonds, semolina, vanilla extract, and fiori di Sicilia. Stir in 3 spoonfuls of whisked egg white to loosen the batter. Gently fold in remaining egg whites with a spatula or large metal spoon. Pour batter into prepared springform and level the top.",
             "substeps": [
                 {
                     "sub_number": "5.1",
-                    "text": "Lay 4 noodles side by side on the bottom of a 9x13-inch baking pan; top with a layer of prepared tomato-basil sauce, a layer of ground beef mixture, and a layer of cottage cheese mixture."
+                    "text": "Beat egg yolks and remaining 1/2 cup sugar in a separate bowl until pale and thick, 2 to 3 minutes."
                 },
                 {
                     "sub_number": "5.2",
-                    "text": "Repeat layers twice more, ending with a layer of sauce; sprinkle mozzarella cheese on top."
+                    "text": "Whisk in finely chopped oranges."
                 },
                 {
                     "sub_number": "5.3",
-                    "text": "Cover the dish with aluminum foil."
+                    "text": "Fold in ground almonds, semolina, vanilla extract, and fiori di Sicilia."
+                },
+                {
+                    "sub_number": "5.4",
+                    "text": "Stir in 3 spoonfuls of whisked egg white to loosen the batter."
+                },
+                {
+                    "sub_number": "5.5",
+                    "text": "Gently fold in remaining egg whites with a spatula or large metal spoon."
+                },
+                {
+                    "sub_number": "5.6",
+                    "text": "Pour batter into prepared springform and level the top."
                 }
             ]
         },
         {
             "step_number": 6,
-            "text": "Bake in the preheated oven until the lasagna is bubbling and the cheese has melted, about 30 minutes. Remove foil and bake until cheese has begun to brown, about 10 more minutes. Allow to stand at least 10 minutes before serving.",
+            "text": "Bake in the preheated oven until cake is golden and a skewer inserted in the center comes out clean, about 50 minutes. Check cake after 20 and 30 minutes to see if it is starting to brown too quickly. Cover top lightly with aluminum foil once cake starts to brown.",
             "substeps": [
                 {
                     "sub_number": "6.1",
-                    "text": "Bake in the preheated oven until the lasagna is bubbling and the cheese has melted, about 30 minutes."
+                    "text": "Bake in the preheated oven until cake is golden and a skewer inserted in the center comes out clean, about 50 minutes."
                 },
                 {
                     "sub_number": "6.2",
-                    "text": "Remove foil and bake until cheese has begun to brown, about 10 more minutes."
+                    "text": "Check cake after 20 and 30 minutes to see if it is starting to brown too quickly."
                 },
                 {
                     "sub_number": "6.3",
-                    "text": "Allow to stand at least 10 minutes before serving."
+                    "text": "Cover top lightly with aluminum foil once cake starts to brown."
+                }
+            ]
+        },
+        {
+            "step_number": 7,
+            "text": "Remove from oven and cool in the pan. Remove ring, peel away parchment paper and transfer cake to a serving plate. Drizzle with liqueur and dust with confectioners' sugar.",
+            "substeps": [
+                {
+                    "sub_number": "7.1",
+                    "text": "Remove from oven and cool in the pan."
+                },
+                {
+                    "sub_number": "7.2",
+                    "text": "Remove ring, peel away parchment paper and transfer cake to a serving plate."
+                },
+                {
+                    "sub_number": "7.3",
+                    "text": "Drizzle with liqueur and dust with confectioners' sugar."
                 }
             ]
         }

@@ -144,7 +144,8 @@ def parse_step(step_number: int, step: str, ingredients: List[str], tools: List[
         "actions": actions,
         "time": time_info if time_info else {},
         "temperature": temp_info if temp_info else {},
-        "actionable": check_actionable(step)
+        "actionable": check_actionable(step),
+        "notes": []
     }
 
 

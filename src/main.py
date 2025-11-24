@@ -134,10 +134,12 @@ def handle_step_query(query, recipe_data, curr_idx, speech: bool) -> Tuple[bool,
     step = step_manager.get_current_step(steps, curr_idx)
     if speech:
         output += "Step " + str(step['step_number']) + ": " + str(step['description'] + " ")
+        output += "Notes: \n" + (s + "\n" for s in step["notes"])
         print(output)
     else:
         print(step)
         word_print("Step", step['step_number'], ":", step['description'])
+        word_print("Notes: \n" + print(s + "\n") for s in step["notes"])
     handled = True
     return handled, curr_idx, output
 
