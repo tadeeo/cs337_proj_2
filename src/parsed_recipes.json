@@ -1,0 +1,290 @@
+[
+    {
+        "step_number": 1,
+        "description": "Preheat the oven to 350 degrees F (175 degrees C).",
+        "actions": [
+            {
+                "verb": "preheat",
+                "ingredients": [],
+                "tool": null
+            }
+        ],
+        "time": {},
+        "temperature": {
+            "oven": "350°"
+        },
+        "substep_number": "1.1"
+    },
+    {
+        "step_number": 2,
+        "description": "Bring a large pot of lightly salted water to a boil.",
+        "actions": [
+            {
+                "verb": "boil",
+                "ingredients": [
+                    "water",
+                    "oil",
+                    "salt"
+                ],
+                "tool": null
+            }
+        ],
+        "time": {},
+        "temperature": {
+            "oven": "350°"
+        },
+        "substep_number": "2.1"
+    },
+    {
+        "step_number": 3,
+        "description": "Add lasagna noodles and cook for 10 minutes or until al dente; drain.",
+        "actions": [
+            {
+                "verb": "add",
+                "ingredients": [
+                    "whole wheat lasagna noodles"
+                ],
+                "tool": null
+            },
+            {
+                "verb": "cook",
+                "ingredients": [
+                    "whole wheat lasagna noodles"
+                ],
+                "tool": null
+            }
+        ],
+        "time": {
+            "duration": "10 minutes"
+        },
+        "temperature": {
+            "oven": "350°"
+        },
+        "substep_number": "2.2"
+    },
+    {
+        "step_number": 4,
+        "description": "Meanwhile, place ground beef, garlic, oregano, garlic powder, salt, and black pepper in a large skillet over medium heat; cook and stir until beef is crumbly and evenly browned, about 10 minutes.",
+        "actions": [
+            {
+                "verb": "place",
+                "ingredients": [
+                    "pepper",
+                    "garlic powder",
+                    "salt",
+                    "lean ground beef"
+                ],
+                "tool": "skillet"
+            },
+            {
+                "verb": "cook",
+                "ingredients": [
+                    "pepper",
+                    "garlic powder",
+                    "salt",
+                    "lean ground beef"
+                ],
+                "tool": "skillet"
+            },
+            {
+                "verb": "stir",
+                "ingredients": [
+                    "pepper",
+                    "garlic powder",
+                    "salt",
+                    "lean ground beef"
+                ],
+                "tool": "skillet"
+            }
+        ],
+        "time": {
+            "duration": "10 minutes"
+        },
+        "temperature": {
+            "oven": "350°",
+            "stove/burner": "MEDIUM"
+        },
+        "substep_number": "3.1"
+    },
+    {
+        "step_number": 5,
+        "description": "Mix cottage cheese, Parmesan cheese, and eggs together in a large bowl until thoroughly combined.",
+        "actions": [
+            {
+                "verb": "mix",
+                "ingredients": [
+                    "eggs",
+                    "cottage cheese",
+                    "shredded parmesan cheese"
+                ],
+                "tool": null
+            }
+        ],
+        "time": {
+            "duration": "10 minutes"
+        },
+        "temperature": {
+            "oven": "350°",
+            "stove/burner": "MEDIUM"
+        },
+        "substep_number": "4.1"
+    },
+    {
+        "step_number": 6,
+        "description": "Lay 4 noodles side by side on the bottom of a 9x13-inch baking pan; top with a layer of prepared tomato-basil sauce, a layer of ground beef mixture, and a layer of cottage cheese mixture.",
+        "actions": [
+            {
+                "verb": "bake",
+                "ingredients": [
+                    "cottage cheese",
+                    "lean ground beef",
+                    "tomato-basil pasta sauce"
+                ],
+                "tool": null
+            },
+            {
+                "verb": "layer",
+                "ingredients": [
+                    "cottage cheese",
+                    "lean ground beef",
+                    "tomato-basil pasta sauce"
+                ],
+                "tool": null
+            },
+            {
+                "verb": "layer",
+                "ingredients": [
+                    "cottage cheese",
+                    "lean ground beef",
+                    "tomato-basil pasta sauce"
+                ],
+                "tool": null
+            },
+            {
+                "verb": "layer",
+                "ingredients": [
+                    "cottage cheese",
+                    "lean ground beef",
+                    "tomato-basil pasta sauce"
+                ],
+                "tool": null
+            }
+        ],
+        "time": {
+            "duration": "10 minutes"
+        },
+        "temperature": {
+            "oven": "350°",
+            "stove/burner": "MEDIUM"
+        },
+        "substep_number": "5.1"
+    },
+    {
+        "step_number": 7,
+        "description": "Repeat layers twice more, ending with a layer of sauce; sprinkle mozzarella cheese on top.",
+        "actions": [
+            {
+                "verb": "layer",
+                "ingredients": [
+                    "shredded mozzarella cheese"
+                ],
+                "tool": null
+            },
+            {
+                "verb": "layer",
+                "ingredients": [
+                    "shredded mozzarella cheese"
+                ],
+                "tool": null
+            },
+            {
+                "verb": "sprinkle",
+                "ingredients": [
+                    "shredded mozzarella cheese"
+                ],
+                "tool": null
+            }
+        ],
+        "time": {
+            "duration": "10 minutes"
+        },
+        "temperature": {
+            "oven": "350°",
+            "stove/burner": "MEDIUM"
+        },
+        "substep_number": "5.2"
+    },
+    {
+        "step_number": 8,
+        "description": "Cover the dish with aluminum foil.",
+        "actions": [],
+        "time": {
+            "duration": "10 minutes"
+        },
+        "temperature": {
+            "oven": "350°",
+            "stove/burner": "MEDIUM"
+        },
+        "substep_number": "5.3"
+    },
+    {
+        "step_number": 9,
+        "description": "Bake in the preheated oven until the lasagna is bubbling and the cheese has melted, about 30 minutes.",
+        "actions": [
+            {
+                "verb": "bake",
+                "ingredients": [],
+                "tool": null
+            }
+        ],
+        "time": {
+            "duration": "30 minutes"
+        },
+        "temperature": {
+            "oven": "350°",
+            "stove/burner": "MEDIUM"
+        },
+        "substep_number": "6.1"
+    },
+    {
+        "step_number": 10,
+        "description": "Remove foil and bake until cheese has begun to brown, about 10 more minutes.",
+        "actions": [
+            {
+                "verb": "remove",
+                "ingredients": [
+                    "oil"
+                ],
+                "tool": null
+            },
+            {
+                "verb": "bake",
+                "ingredients": [
+                    "oil"
+                ],
+                "tool": null
+            }
+        ],
+        "time": {
+            "duration": "30 minutes"
+        },
+        "temperature": {
+            "oven": "350°",
+            "stove/burner": "MEDIUM"
+        },
+        "substep_number": "6.2"
+    },
+    {
+        "step_number": 11,
+        "description": "Allow to stand at least 10 minutes before serving.",
+        "actions": [],
+        "time": {
+            "duration": "10 minutes"
+        },
+        "temperature": {
+            "oven": "350°",
+            "stove/burner": "MEDIUM"
+        },
+        "substep_number": "6.3"
+    }
+]
