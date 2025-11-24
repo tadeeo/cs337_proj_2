@@ -16,17 +16,17 @@ def get_steps():
         steps = json.load(f)
     return steps
 
-"""
-Return all step dictionaries for the given step number.
-
-Args:
-    steps (list): List of step dictionaries.
-    curr_step (int): The current step number.
-
-Returns:
-    list: List of steps matching the given step number.
-"""
 def get_current_step(steps, curr_step):
+    """
+    Return all step dictionaries for the given step number.
+
+    Args:
+        steps (list): List of step dictionaries.
+        curr_step (int): The current step number.
+
+    Returns:
+        list: List of steps matching the given step number.
+    """
     return steps[curr_step-1]
 
 def set_next_step(steps, curr_step):
