@@ -91,6 +91,190 @@ def startup_base():
         print()
         word_print("Step ", step["step_number"], ": ", step["text"], delay=0.15), tactical_pause(1.5)
 
+# ------------ Helper for handle_vague_query: extract a good replacement phrase ------------
+def get_replacement_phrase(step):
+    """Return the most relevant description for vague noun replacement."""
+    # Prefer action + ingredient ("pour the batter")
+    if step.get("actions"):
+        action = step["actions"][0]
+        verb = action.get("verb")
+        ingredients = action.get("ingredients", [])
+
+        if verb and ingredients:
+            ing_phrase = ", ".join(ingredients)
+            return f"{verb} the {ing_phrase}"
+
+        if verb:
+            return verb
+
+    # Fallback to step description
+    return step.get("description", "the current step")
+
+# ------------ Replace vague terms ------------
+def replace_vague_terms(q: str, phrase: str, vague_terms: str):
+    # Whole-word replace only
+    for vt in vague_terms:
+        q = re.sub(rf"\b{vt}\b", phrase, q, flags=re.I)
+    return q
+
+def handle_vague_query(query, curr_idx, speech: bool) -> Tuple[bool, str]:
+    """Handles vague queries by replacing vague nouns ('it', 'that', etc.) with
+       the most relevant action or ingredient from the current step, then
+       forwarding to handle_info_query(). Returns (handled, output)."""
+
+    steps = step_manager.get_steps()
+    step = step_manager.get_current_step(steps, curr_idx)
+
+    # --- Patterns already defined ---
+    what_is_pat = re.compile(r"(what\s+is|what\s+does)\s+(.+?)(?:\s+mean)?[\?\s]*$", re.I)
+    how_do_pat = re.compile(r"(how\s+(do|to)\s+(i\s+)?)(.+?)[\?\s]*$", re.I)
+    how_much_pat = re.compile(r"(how\s+(much|many)\s+)(.+?)[\?\s]*$", re.I)
+
+    # --- Vague terms ---
+    vague_terms = ["it", "that", "this", "them"]
+
+    replacement_phrase = get_replacement_phrase(step)
+
+    # Normalize for regex matching
+    lower_query = query.lower()
+
+    # # Detect whether any vague pronoun is present
+    # if not any(vt in lower_query.split() for vt in vague_terms):
+    #     return False, ""   # Not vague — not handled here
+
+    rewritten_query = replace_vague_terms(query, replacement_phrase, vague_terms)
+
+    # Change to a fall back phrase instead
+    # ------------ Must match one of the info-query patterns ------------
+    # if not (what_is_pat.match(rewritten_query) or
+    #         how_do_pat.match(rewritten_query) or
+    #         how_much_pat.match(rewritten_query)):
+    #     # Vague but not an info query → handled but no info
+    #     return True, f"I rewrote your question as: '{rewritten_query}', " \
+    #                  "but it doesn’t look like an info question."
+
+    # ------------ Delegate to info handler ------------
+    handled, output = handle_info_query(rewritten_query, speech)
+    return handled, output
+
+def handle_substitution_query(query: str, curr_idx: int, speech: bool) -> Tuple[bool, str]:
+    """
+    Detects when the user asks for a substitution (e.g., "What can I use instead of butter?")
+    Extracts the ingredient, looks up a substitution in substitutions.txt, and returns an answer.
+
+    Returns (handled: bool, output: str)
+    """
+
+    # ---------------- PATTERNS ----------------
+    sub_patterns = [
+        re.compile(r"substitute\s+for\s+(.+)", re.I),
+        re.compile(r"use\s+instead\s+of\s+(.+)", re.I),
+        re.compile(r"replacement\s+for\s+(.+)", re.I),
+        re.compile(r"what\s+can\s+i\s+use\s+for\s+(.+)", re.I),
+        re.compile(r"what\s+can\s+i\s+use\s+instead\s+of\s+(.+)", re.I),
+        re.compile(r"what\s+is\s+a\s+good\s+substitute\s+for\s+(.+)", re.I)
+    ]
+
+    match = None
+    for pat in sub_patterns:
+        match = pat.search(query)
+        if match:
+            break
+
+    if not match:
+        return False, ""   # Not a substitution question
+
+
+
+    # -------------------------------------------------
+    #     EXTRACT RAW INGREDIENT TERM FROM QUERY
+    # -------------------------------------------------
+    raw_ing = match.group(1).strip().lower()
+
+    # Normalize plurals or trailing punctuation
+    raw_ing = re.sub(r"[?.!]", "", raw_ing)
+    raw_ing = raw_ing.rstrip('s') if raw_ing.endswith('s') else raw_ing
+
+
+
+    # -------------------------------------------------
+    #          COLLECT INGREDIENTS FOR MATCHING
+    # -------------------------------------------------
+    steps = step_manager.get_steps()
+    current = step_manager.get_current_step(steps, curr_idx)
+
+    def collect_ingredients(step):
+        ings = []
+        for action in step.get("actions", []):
+            ings.extend(action.get("ingredients", []))
+        return [i.lower() for i in ings]
+
+    # Start with current step ingredients (most relevant)
+    candidate_ings = collect_ingredients(current)
+
+    # If not found, scan entire recipe as fallback
+    if raw_ing not in candidate_ings:
+        for st in steps:
+            step_ings = collect_ingredients(st)
+            candidate_ings.extend(step_ings)
+
+    # Try fuzzy-ish matching: ingredient contains the query word
+    matched_ing = None
+    for ing in candidate_ings:
+        if raw_ing in ing:
+            matched_ing = ing
+            break
+
+    if not matched_ing:
+        return True, f"I couldn't find the ingredient '{raw_ing}' in the recipe."
+
+
+
+    # -------------------------------------------------
+    #             LOAD SUBSTITUTIONS.TXT
+    # -------------------------------------------------
+    subs = {}
+    try:
+        with open("src/substitutions.txt", "r") as f:
+            for line in f:
+                line = line.strip()
+                if not line or ":" not in line:
+                    continue
+                key, vals = line.split(":", 1)
+                key = key.strip().lower()
+                vals = [v.strip() for v in vals.split(",") if v.strip()]
+                subs[key] = vals
+    except Exception as e:
+        return True, f"Error reading substitutions file: {e}"
+
+
+
+    # -------------------------------------------------
+    #             FIND SUBSTITUTIONS
+    # -------------------------------------------------
+    # direct match
+    if matched_ing in subs:
+        sub_list = subs[matched_ing]
+    # plural/singular check
+    elif matched_ing.rstrip("s") in subs:
+        sub_list = subs[matched_ing.rstrip("s")]
+    else:
+        return True, f"I couldn't find any substitutions for {matched_ing}."
+
+    # Format for output
+    if len(sub_list) == 1:
+        sub_text = sub_list[0]
+    else:
+        sub_text = ", ".join(sub_list[:-1]) + f", or {sub_list[-1]}"
+
+
+
+    # -------------------------------------------------
+    #           RETURN FORMATTED SUBSTITUTION
+    # -------------------------------------------------
+    response = f"You can substitute **{matched_ing}** with: {sub_text}."
+    return True, response
+
 def handle_step_query(query, recipe_data, curr_idx, speech: bool) -> Tuple[bool, int, str]:
     """ Handles step navigation queries.
         Returns (handled: bool, new_curr_idx: int)"""
@@ -167,10 +351,9 @@ def handle_can_i_query(query):
             handled = True
     return handled
 
-import re
-
 def handle_info_query(query: str, speech: bool) -> Tuple[bool, str]:
     handled = False
+    output = ""
     q = query.lower().strip()
 
     # what is / what does ... mean
@@ -268,6 +451,7 @@ def query_handler():
     slow_print(" Now, we will begin navigating the recipe! At any point during the experience, you can type 'exit' to quit.")
     slow_print(" Whenever you're ready, ask 'What is the first step?' to begin.")
     idx = 1
+    handled = False
     while True:
         query = input("\n q -- ")
         query = query.strip().lower()
@@ -275,6 +459,12 @@ def query_handler():
             slow_print("Goodbye! Happy cooking!")
             break
         
+        if not handled:
+            handled, idx = handle_vague_query(query, idx, False)
+        
+        if not handled:
+            handled, idx = handle_substitution_query(query, idx, False)
+
         handled, idx, _ = handle_step_query(query, recipe_data, idx, False)
         if handled:
             continue
