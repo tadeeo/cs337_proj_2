@@ -1,6 +1,5 @@
-python3 src/main.py
 ## Installing Requirements
-
+`pip3 install -r requirements.txt`
 
 ## Running
 To run `main.py`, simply run `python3 src/main.py` (this is where user iterpreter lies).
