@@ -1,22 +1,3 @@
-Chef’s knife
-Paring knife
-Bread knife
-Kitchen shears
-Cutting board
-Vegetable peeler
-Mixing spoon
-Whisk
-Spatula
-Tongs
-Mixing bowl
-Wooden spoon
-Measuring cup
-Measuring spoon
-Kitchen scale
-Liquid measuring cup
-Saucepan
-Frying pan
-Ladle
 Aluminum Foil
 Baking Dishes
 Baking Sheet
@@ -38,6 +19,7 @@ Cookie Cutter
 Cooling Rack
 Corer
 Custard Cup
+Cutting Board
 Deep Fat Fryer
 Double Boiler
 Dutch Oven
@@ -60,15 +42,20 @@ Huller
 Immersion Blender
 Jelly-Roll Pan
 Juicer
+Kitchen Shears
 Kitchen Timer
 Knives
+Ladle
 Loaf Pan
 Mandoline
+Measuring Cup
+Measuring Spoon
 Meat Fork
 Meat Mallet
 Melon Baller
 Microwave Oven
 Mixer
+Mixing Bowl
 Mortar and Pestle
 Muffin Pan
 Nut Cracker
@@ -94,6 +81,7 @@ Rice Cooker
 Roasting Pan
 Rolling Pin
 Salad Spinner
+Saucepan
 Scale
 Scoop
 Sifter
@@ -101,50 +89,19 @@ Skewer
 Skillet/Saute Pan
 Slow Cooker
 Spaghetti Server
+Spatula
 Spoon
 Steamer Insert
 Stockpot
 Thermometer
 Toaster
 Toaster Oven
+Tongs
 Toothpick
+Vegetable Peeler
 Waffle Iron
 Wax Paper
+Whisk
 Wok
+Wooden Spoon
 Zester
-Slotted spoon
-Serving spoon
-Soup spoon
-Pie server
-Butter knife
-Salad tongs
-Tray
-Bottle opener
-Timer
-Oven mitts
-Manual juicer
-Grill press
-Mesh strainer
-Plastic knife
-Squeeze bottle
-Baking tray
-Muffin tin
-Piping bag
-Hand whisk
-Rubber spatula
-Silicone mat
-Coffee Maker
-Glass Jar
-Plastic Container
-Vacuum Sealer
-Freezer Bag
-Dish Brush
-Sponge
-Drying Rack
-Microfiber Cloth
-Dish Soap Dispenser
-Apron
-Cut-Resistant Gloves
-Pot Holder
-Chef Hat
-Skillet

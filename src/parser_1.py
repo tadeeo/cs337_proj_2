@@ -51,10 +51,17 @@ def load_list_from_file(filepath: str) -> List[str]:
         return []
 
 
-def extract_ingredients(step: str, ingredients: List[str]) -> List[str]:
-    """Return list of ingredient names found in the step."""
+def extract_ingredients(step: str, ingredient_data: List[Dict]) -> List[Dict]:
+    """
+    Return list of full ingredient dicts found in the step text.
+    """
     step_lower = step.lower()
-    return [i for i in ingredients if i in step_lower]
+    results = []
+    for ing in ingredient_data:
+        ing_name_norm = normalize_ingredient(ing["name"])
+        if ing_name_norm in step_lower:
+            results.append(ing)
+    return results
 
 
 def extract_tools(step: str, tools: List[str]) -> List[str]:
@@ -128,23 +135,23 @@ def extract_temperature(step: str, ingredients: List[str]) -> Dict:
 
     return result
 
-def parse_step(step_number: int, step: str, ingredients: List[str], tools: List[str]) -> Dict:
-    """Parse a single recipe step into a structured dict."""
-    step_ingredients = extract_ingredients(step, ingredients)
-    step_tools = extract_tools(step, tools)
+def parse_step(step_number: int, step: str, ingredient_data: List[Dict], tools: List[str]) -> Dict:
+    """Parse a single recipe step into a structured dict, including ingredient quantities."""
+    step_ingredients = extract_ingredients(step, ingredient_data)  #full ingredient dicts
+    step_tools = extract_tools(step, [tool for tool in tools])
     methods = extract_methods(step)
     time_info = extract_time(step)
-    temp_info = extract_temperature(step, step_ingredients)
+    temp_info = extract_temperature(step, [ing["name"] for ing in step_ingredients])  # Use ingredient names for temperature function
 
-    # add structured action tags using spaCy
-    actions = extract_actions_rule_based(step, ingredients, COOKING_VERBS, step_tools)
+    actions = extract_actions_rule_based(step, [ing["name"] for ing in step_ingredients], COOKING_VERBS, step_tools)
 
     return {
         "step_number": step_number,
         "description": step.strip(),
+        "ingredients": step_ingredients,    # Now a list of dicts {qty, unit, name}
         "actions": actions,
         "time": time_info if time_info else {},
-        "temperature": temp_info if temp_info else {}
+        "temperature": temp_info if temp_info else {},
     }
 
 

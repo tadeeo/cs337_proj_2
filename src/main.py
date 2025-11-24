@@ -12,8 +12,8 @@ _DELAY_MULTIPLIER = 0.0 # for testing, set to 0.0 to skip delays
 with open("recipe.json", "r", encoding="utf-8") as f:
     recipe_data = json.load(f)
 
-# with open("parsed_recipes.json", "r", encoding="utf-8") as f:
-#     parsed_recipe_data = json.load(f)
+with open("parsed_recipes.json", "r", encoding="utf-8") as f:
+    parsed_recipe_data = json.load(f)
 
 with open("src/culinary_dictionary.json", "r", encoding="utf-8") as f:
     culinary_dict = json.load(f)
@@ -92,60 +92,76 @@ def startup_base():
         word_print("Step ", step["step_number"], ": ", step["text"], delay=0.15), tactical_pause(1.5)
 
 def handle_step_query(query, recipe_data, curr_idx, speech: bool) -> Tuple[bool, int, str]:
-    """ Handles step navigation queries.
-        Returns (handled: bool, new_curr_idx: int)"""
+    """Handle step navigation queries (next, previous, first, repeat).
+
+    Args:
+        query (str): User query string.
+        recipe_data: Unused here, kept for interface compatibility.
+        curr_idx (int): Current step number (1-based).
+        speech (bool): If True, return a string for TTS; else print.
+
+    Returns:
+        Tuple[bool, int, str]: (handled, new_curr_idx, output_for_speech).
+    """
     steps = step_manager.get_steps()
-    total_steps = steps[len(steps)-1]["step_number"]
+    total_steps = steps[-1]["step_number"]
     handled = False
-    output = "Output example "
-    
+    output = ""
+
     q = query.lower().strip()
 
-    # regex to id step instruc
-    next_step = re.compile(r"\b(next|forward|advance)\b")
-    prev_step = re.compile(r"\b(previous|prev|last|back|before)\b")
-    repeat_step = re.compile(r"\b(repeat|again|say (that|it) again)\b")
-    first_step = re.compile(r"\b(first step|start|begin)\b")
-    
+    next_step = re.compile(r"\b(next( step)?|forward|advance|go (to|onto) the next step)\b")
+    prev_step = re.compile(r"\b(previous( step)?|prev|last step|go back|back( a step)?)\b")
+    repeat_step = re.compile(r"\b(repeat( that)?|again|say (that|it) again|could you repeat)\b")
+    first_step = re.compile(r"\b(first step|start( from the beginning)?|begin( at the start)?)\b")
+
+    # NEXT
     if next_step.search(q):
         if curr_idx < total_steps:
             curr_idx += 1
         else:
+            msg = "You’re already on the last step!"
             if speech:
-                output = "You’re already on the last step!"
-                return True, curr_idx, output
-            else:
-                slow_print("You’re already on the last step!")
-                return True, curr_idx, output
-            
+                return True, curr_idx, msg
+            slow_print(msg)
+            return True, curr_idx, ""
+
+    # PREVIOUS
     elif prev_step.search(q):
         if curr_idx > 1:
             curr_idx -= 1
         else:
+            msg = "You’re already on the first step!"
             if speech:
-                output = "You’re already on the first step!"
-                return True, curr_idx, output
-            else:
-                slow_print("You’re already on the first step!")
-                return True, curr_idx, output
+                return True, curr_idx, msg
+            slow_print(msg)
+            return True, curr_idx, ""
 
+    # FIRST
     elif first_step.search(q):
         curr_idx = 1
 
-    step = step_manager.get_current_step(steps, curr_idx)
+    # REPEAT: do not change curr_idx, just fall through and re-read current step
+    elif repeat_step.search(q):
+        pass
+
+    # Get all entries for this step_number
+    step_entries = step_manager.get_current_step(steps, curr_idx)
+
     if speech:
-        output += "Step " + str(step[0]['step_number']) + ": "
-        for sub in step:
-            output += str(sub['substep_number']) + ": " + str(sub['description'] + " ")
-        print(output)
+        parts = [f"Step {curr_idx}:"]
+        for entry in step_entries:
+            parts.append(entry["description"])
+        output = " ".join(parts)
     else:
-        print(step)
-        word_print("Step", step[0]['step_number'], ":")
-        for sub in step:
-            word_print(sub['substep_number'], ":", sub['description'])
+        word_print("Step", curr_idx, ":")
+        for entry in step_entries:
+            word_print(entry["description"])
             tactical_pause()
+
     handled = True
     return handled, curr_idx, output
+
 
 def handle_can_i_query(query):
     handled = False
@@ -171,95 +187,104 @@ import re
 
 def handle_info_query(query: str, speech: bool) -> Tuple[bool, str]:
     handled = False
+    output = ""
     q = query.lower().strip()
 
-    # what is / what does ... mean
     what_is_pat = re.compile(r"(what\s+is|what\s+does)\s+(.+?)(?:\s+mean)?[\?\s]*$")
-    # how do / how to ...
     how_do_pat = re.compile(r"(how\s+(do|to)\s+(i\s+)?)(.+?)[\?\s]*$")
-    # how much / how many ...
     how_much_pat = re.compile(r"(how\s+(much|many)\s+)(.+?)[\?\s]*$")
 
-    # what-is lookup
     m = what_is_pat.match(q)
     if m:
         term = m.group(2).strip()
         definition = culinary_dict.get(term)
-        if speech: # Could also move speech check inside the ifs
-            if definition:
-                output = term + "means " + definition
-                return True, output
-            #  check cooking tools
-            elif term in cooking_tools:
-                output = term + " " + cooking_tools[term]
-                return True, output
-            else:
-                output = "Sorry, I couldn't find a definition for " + term
-                return True, output
+        if definition:
+            output = f"{term} means {definition}"
+            handled = True
+        elif term in cooking_tools:
+            output = f"{term}: {cooking_tools[term]}"
+            handled = True
         else:
-            if definition:
-                word_print(term, "means:", definition)
-                handled = True
-            #  check cooking tools
-            elif term in cooking_tools:
-                word_print(term, ":", cooking_tools[term])
-                handled = True
-            else:
-                word_print("Sorry, I couldn't find a definition for", term)
-                handled = True
-    
-    
-    # how-to lookup
+            output = f"Sorry, I couldn't find a definition for {term}. Try searching online!"
+            yt_url = make_youtube_search_url(term)
+            output += f"\nYouTube search: {yt_url}"
+            handled = True
+        if speech:
+            return handled, output
+        else:
+            word_print(output)
+            return handled, output
+
     m = how_do_pat.match(q)
     if m:
         procedure = m.group(4).strip()
         definition = culinary_dict.get(procedure)
-        if speech: # I mimicked the existing code here, but am unsure of the purpose? Why would procedure ever be in cooking tools? Also, you're youtube searching no matter what?
-            if definition:
-                output = procedure + "means " + definition
-                return True, output
-            # check tools
-            elif procedure in cooking_tools:
-                output = procedure + " " + cooking_tools[procedure]
-                return True, output
+        if definition:
+            output = f"{procedure} means {definition}"
+            handled = True
+        elif procedure in cooking_tools:
+            output = f"{procedure}: {cooking_tools[procedure]}"
+            handled = True
         else:
-            if definition:
-                word_print(procedure, "means:", definition)
-            # check tools
-            elif procedure in cooking_tools:
-                word_print(procedure, ":", cooking_tools[procedure])
-
-    # Can't find lookup
-    if not handled:
-          yt_query = q.replace(" ", "+")
-          youtube_url = f"https://www.youtube.com/results?search_query={yt_query}"
-          word_print("For more information, feel free to try this YouTube search:")
-          word_print(youtube_url)
-          handled = True
+            output = f"Sorry, I couldn't find info for {procedure}. Try searching online!"
+            yt_url = make_youtube_search_url(procedure)
+            output += f"\nYouTube search: {yt_url}"
+            handled = True
+        if speech:
+            return handled, output
+        else:
+            word_print(output)
+            return handled, output
 
     # how-much / how-many lookup
-    if not handled:
-        m = how_much_pat.match(q)
-        if m:
-            target = m.group(3).strip()
-            amount = parsed_recipe_data["ingredients"]
-            if amount:
-                word_print("You typically need", amount, "of", target)
-            else:
-                word_print("Sorry, I don't know how much", target, "you need.")
+    m = how_much_pat.match(q)
+    if m:
+        target = m.group(3).strip().lower()
+        found = None
+        for step in parsed_recipe_data:
+            for ing in step.get("ingredients", []):
+                if target in ing.get("name", "").lower():
+                    qty = ing.get("qty", "").strip()
+                    unit = ing.get("unit", "").strip()
+                    if qty or unit:
+                        found = f"{qty} {unit}".strip()
+                        output = f"You typically need {found} of {ing['name']}"
+                        handled = True
+                        break
+            if handled:
+                break
+        if not handled:
+            output = f"Sorry, I don't know how much {target} you need."
             handled = True
+        if speech:
+            return handled, output
+        else:
+            word_print(output)
+            return handled, output
+
+    # Final fallback if nothing matched
+    if not handled:
+        output = "Sorry, I couldn't find an answer. Try searching online!"
+        yt_url = make_youtube_search_url(q)
+        output += f"\nYouTube search: {yt_url}"
+        word_print(output)
+        handled = True
     return handled, output
 
 def handle_temp_query(query):
     handled = False
     q = query.lower().strip()
-    temp_pat = re.compile(r"(what\s+is\s+the\s+temperature\s+for|set\s+the\s+temperature\s+to)[\?\s]*$")
+    temp_pat = re.compile(
+        r"\b(temperature\??|what('s| is)? the temperature|what temperature|set temperature)\b"
+    )
 
-    m = temp_pat.match(q)
-    if m:
+    if temp_pat.search(q):
         temperature_info = step_manager.get_temperature()
-        word_print("The temperature information is as follows:")
-        word_print(temperature_info)
+        if temperature_info and temperature_info.lower() != "no temperatures to give":
+            word_print("The temperature information is as follows:")
+            word_print(temperature_info)
+        else:
+            word_print("Sorry, there is no temperature information for this step.")
         handled = True
     return handled
 
@@ -269,13 +294,15 @@ def query_handler():
     slow_print(" Whenever you're ready, ask 'What is the first step?' to begin.")
     idx = 1
     while True:
-        query = input("\n q -- ")
-        query = query.strip().lower()
-        if query.lower() in ['exit', 'quit']:
+        query = input("\n q -- ").strip().lower()
+        if query in ['exit', 'quit']:
             slow_print("Goodbye! Happy cooking!")
             break
-        
+
         handled, idx, _ = handle_step_query(query, recipe_data, idx, False)
+        if handled:
+            continue
+        handled = handle_temp_query(query)
         if handled:
             continue
         handled, _ = handle_info_query(query, False)
