@@ -8,6 +8,20 @@ from typing import Tuple
 
 _DELAY_MULTIPLIER = 0.0 # for testing, set to 0.0 to skip delays
 
+subs = {}
+with open("src/ingredient_substitutions.json", "r") as f:
+    data = json.load(f)
+
+    # Expecting a list of objects
+    for entry in data:
+        ingredient = entry.get("ingredient")
+        substitution = entry.get("substitution")
+
+        if not ingredient or not substitution:
+            continue  # skip incomplete rows
+
+        subs[ingredient.lower()] = substitution
+
 with open("src/recipe.json", "r", encoding="utf-8") as f:
     recipe_data = json.load(f)
 
@@ -90,10 +104,13 @@ def startup_base():
         print()
         word_print("Step ", step["step_number"], ": ", step["text"], delay=0.15), tactical_pause(1.5)
 
-# ------------ Helper for handle_vague_query: extract a good replacement phrase ------------
+# ------------------------------------------------------------
+# Helper: choose best phrase to replace "it / that / this / them"
+# ------------------------------------------------------------
 def get_replacement_phrase(step):
-    """Return the most relevant description for vague noun replacement."""
-    # Prefer action + ingredient ("pour the batter")
+    """Return the most relevant description for vague-noun replacement."""
+
+    # Prefer an ingredient-targeting phrase
     if step.get("actions"):
         action = step["actions"][0]
         verb = action.get("verb")
@@ -102,59 +119,163 @@ def get_replacement_phrase(step):
         if verb and ingredients:
             ing_phrase = ", ".join(ingredients)
             return f"{verb} the {ing_phrase}"
-
         if verb:
             return verb
 
     # Fallback to step description
     return step.get("description", "the current step")
 
-# ------------ Replace vague terms ------------
-def replace_vague_terms(q: str, phrase: str, vague_terms: str):
-    # Whole-word replace only
+
+# ------------------------------------------------------------
+# Replacement of vague pronouns
+# ------------------------------------------------------------
+def replace_vague_terms(q: str, phrase: str, vague_terms):
     for vt in vague_terms:
         q = re.sub(rf"\b{vt}\b", phrase, q, flags=re.I)
     return q
 
+def contains_vague_term(query):
+    vague_terms = ["it", "that", "this", "them"]
+    for vt in vague_terms:
+        if re.search(rf"\b{vt}\b", query, flags=re.I):
+            return True
+    return False
+
+# ------------------------------------------------------------
+# Extract primary ingredient of current step
+# ------------------------------------------------------------
+def get_primary_ingredient(step):
+    if not step or not isinstance(step, dict):
+        return None
+    if step.get("actions"):
+        ingredients = step["actions"][0].get("ingredients", [])
+        return ingredients[0] if ingredients else None
+    return None
+
+# ------------------------------------------------------------
+# Extract time / temperature if present
+# ------------------------------------------------------------
+def get_step_time_phrase(step):
+    t = step.get("time", {})
+    if not t:
+        return None
+
+    if "duration" in t:
+        return t["duration"]
+
+    if "min" in t and "max" in t:
+        return f"{t['min']} to {t['max']} minutes"
+
+    if "min" in t:
+        return f"{t['min']} minutes"
+
+    return None
+
+
+def get_step_temp_phrase(step):
+    temp = step.get("temperature", {})
+    if not temp:
+        return None
+
+    if "fahrenheit" in temp:
+        return f"{temp['fahrenheit']}°F"
+    if "celsius" in temp:
+        return f"{temp['celsius']}°C"
+
+    return None
+
+# ------------------------------------------------------------
+# Main vague query handler
+# ------------------------------------------------------------
 def handle_vague_query(query, curr_idx, speech: bool) -> Tuple[bool, str]:
-    """Handles vague queries by replacing vague nouns ('it', 'that', etc.) with
-       the most relevant action or ingredient from the current step, then
-       forwarding to handle_info_query(). Returns (handled, output)."""
 
     steps = step_manager.get_steps()
     step = step_manager.get_current_step(steps, curr_idx)
 
-    # --- Patterns already defined ---
-    what_is_pat = re.compile(r"(what\s+is|what\s+does)\s+(.+?)(?:\s+mean)?[\?\s]*$", re.I)
-    how_do_pat = re.compile(r"(how\s+(do|to)\s+(i\s+)?)(.+?)[\?\s]*$", re.I)
-    how_much_pat = re.compile(r"(how\s+(much|many)\s+)(.+?)[\?\s]*$", re.I)
-
-    # --- Vague terms ---
     vague_terms = ["it", "that", "this", "them"]
-
     replacement_phrase = get_replacement_phrase(step)
-
-    # Normalize for regex matching
     lower_query = query.lower()
 
-    # # Detect whether any vague pronoun is present
-    # if not any(vt in lower_query.split() for vt in vague_terms):
-    #     return False, ""   # Not vague — not handled here
+    # --------------------------------------------------------
+    # Specific disambiguation based on question type
+    # --------------------------------------------------------
+
+    # --- Case 1: "how much of that / how much of it" → quantity inquiry
+    how_much_of_pat = re.compile(r"how\s+much\s+of\s+(it|that|this|them)", re.I)
+    if how_much_of_pat.search(query):
+        ingredient = get_primary_ingredient(step)
+        if not ingredient:
+            return True, "I'm not sure which ingredient you're referring to."
+
+        qty = find_ingredient_quantity(ingredient, steps)
+        if qty:
+            return True, f"You need {qty} of {ingredient}."
+        else:
+            return True, f"I couldn't find the quantity for {ingredient}."
+
+    # --- Case 2: "how long do I bake it / how long should I cook that"
+    how_long_pat = re.compile(r"how\s+long.*\b(it|that|this|them)\b", re.I)
+    if how_long_pat.search(query):
+        t = get_step_time_phrase(step)
+        if t:
+            return True, f"You should cook it for {t}."
+        return True, "This step doesn't specify a cooking time."
+
+    # --- Case 3: "what can I use instead of it/that" → ingredient substitution
+    substitution_pat = re.compile(r"(use|substitute|instead of)\s+(it|that|this|them)", re.I)
+    if substitution_pat.search(query):
+        ingredient = get_primary_ingredient(step)
+        if not ingredient:
+            return True, "I'm not sure which ingredient you're referring to."
+        # Let your existing substitution handler take over
+        return handle_substitution_query(f"what can I use instead of {ingredient}", curr_idx, speech)
+
+    # --------------------------------------------------------
+    # Generic ambiguous replacement + forward to info handler
+    # --------------------------------------------------------
 
     rewritten_query = replace_vague_terms(query, replacement_phrase, vague_terms)
 
-    # Change to a fall back phrase instead
-    # ------------ Must match one of the info-query patterns ------------
-    # if not (what_is_pat.match(rewritten_query) or
-    #         how_do_pat.match(rewritten_query) or
-    #         how_much_pat.match(rewritten_query)):
-    #     # Vague but not an info query → handled but no info
-    #     return True, f"I rewrote your question as: '{rewritten_query}', " \
-    #                  "but it doesn’t look like an info question."
-
-    # ------------ Delegate to info handler ------------
     handled, output = handle_info_query(rewritten_query, speech)
     return handled, output
+
+# ------------------------------------------------------------
+# Utility: find ingredient quantity from steps
+# ------------------------------------------------------------
+def find_ingredient_quantity(ingredient, steps): #TODO Pull from original ingredient list
+    """
+    Search ingredients across all steps to find a matching quantity entry.
+    You can customize this depending on how you store quantities.
+    """
+
+    ingredient = ingredient.lower()
+
+    for step in steps:
+        if step.get("actions"):
+            for act in step["actions"]:
+                if "ingredients" not in act:
+                    continue
+
+                # Your ingredients may have associated quantity metadata elsewhere.
+                # If quantity is stored in the ingredient list as a dict:
+                #   { "name": "sugar", "qty": "1 cup" }
+                # then use this version:
+                ing_list = act["ingredients"]
+
+                for ing in ing_list:
+                    if isinstance(ing, dict):
+                        name = ing.get("name", "").lower()
+                        qty = ing.get("qty")
+                        if name == ingredient and qty:
+                            return qty
+
+                    elif isinstance(ing, str):
+                        # If ingredient quantities are not stored in steps,
+                        # they may come from a recipe ingredient list.
+                        # You can plug that in here:
+                        continue
+
+    return None
 
 def handle_substitution_query(query: str, curr_idx: int, speech: bool) -> Tuple[bool, str]:
     """
@@ -183,8 +304,6 @@ def handle_substitution_query(query: str, curr_idx: int, speech: bool) -> Tuple[
     if not match:
         return False, ""   # Not a substitution question
 
-
-
     # -------------------------------------------------
     #     EXTRACT RAW INGREDIENT TERM FROM QUERY
     # -------------------------------------------------
@@ -193,8 +312,6 @@ def handle_substitution_query(query: str, curr_idx: int, speech: bool) -> Tuple[
     # Normalize plurals or trailing punctuation
     raw_ing = re.sub(r"[?.!]", "", raw_ing)
     raw_ing = raw_ing.rstrip('s') if raw_ing.endswith('s') else raw_ing
-
-
 
     # -------------------------------------------------
     #          COLLECT INGREDIENTS FOR MATCHING
@@ -227,26 +344,10 @@ def handle_substitution_query(query: str, curr_idx: int, speech: bool) -> Tuple[
     if not matched_ing:
         return True, f"I couldn't find the ingredient '{raw_ing}' in the recipe."
 
-
-
     # -------------------------------------------------
     #             LOAD SUBSTITUTIONS.TXT
     # -------------------------------------------------
-    subs = {}
-    try:
-        with open("src/substitutions.txt", "r") as f:
-            for line in f:
-                line = line.strip()
-                if not line or ":" not in line:
-                    continue
-                key, vals = line.split(":", 1)
-                key = key.strip().lower()
-                vals = [v.strip() for v in vals.split(",") if v.strip()]
-                subs[key] = vals
-    except Exception as e:
-        return True, f"Error reading substitutions file: {e}"
-
-
+    # Handled globally
 
     # -------------------------------------------------
     #             FIND SUBSTITUTIONS
@@ -265,8 +366,6 @@ def handle_substitution_query(query: str, curr_idx: int, speech: bool) -> Tuple[
         sub_text = sub_list[0]
     else:
         sub_text = ", ".join(sub_list[:-1]) + f", or {sub_list[-1]}"
-
-
 
     # -------------------------------------------------
     #           RETURN FORMATTED SUBSTITUTION
@@ -445,8 +544,8 @@ def query_handler():
     slow_print(" Now, we will begin navigating the recipe! At any point during the experience, you can type 'exit' to quit.")
     slow_print(" Whenever you're ready, ask 'What is the first step?' to begin.")
     idx = 1
-    handled = False
     while True:
+        handled = False
         query = input("\n q -- ")
         query = query.strip().lower()
         if query.lower() in ['exit', 'quit']:
@@ -454,18 +553,26 @@ def query_handler():
             break
         
         if not handled:
-            handled, idx = handle_vague_query(query, idx, False)
+            if (contains_vague_term(query)):
+                handled, output = handle_vague_query(query, idx, True)
+                print("vague: " + output + ":")
         
         if not handled:
-            handled, idx = handle_substitution_query(query, idx, False)
+            handled, output = handle_substitution_query(query, idx, True)
+            print("sub: " + output + ":")
 
-        handled, idx, _ = handle_step_query(query, recipe_data, idx, False)
-        if handled:
-            continue
-        handled, _ = handle_info_query(query, False)
-        if handled:
-            continue
-        slow_print("Sorry, I didn't understand that. Please try again.")
+        if not handled:
+            handled, idx, output = handle_step_query(query, recipe_data, idx, True)
+            print("step: " + output + ":")
+
+        if not handled:
+            handled, output = handle_info_query(query, True)
+            print("info: " + output + ":")
+        
+        if not handled:
+            slow_print("Sorry, I didn't understand that. Please try again.")
+
+        slow_print(output)
     
 def main():
     
