@@ -53,13 +53,14 @@ def load_list_from_file(filepath: str) -> List[str]:
 
 def extract_ingredients(step: str, ingredient_data: List[Dict]) -> List[Dict]:
     """
-    Return list of full ingredient dicts found in the step text.
+    Return list of full ingredient dicts found in the step text, using fuzzy matching.
     """
     step_lower = step.lower()
     results = []
     for ing in ingredient_data:
         ing_name_norm = normalize_ingredient(ing["name"])
-        if ing_name_norm in step_lower:
+        score = fuzz.partial_ratio(ing_name_norm, step_lower)
+        if score >= 70:
             results.append(ing)
     return results
 

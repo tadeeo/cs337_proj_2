@@ -40,11 +40,19 @@
     {
         "step_number": 3,
         "description": "Mix Parmesan cheese, rosemary, and garlic together in a bowl.",
-        "ingredients": [],
+        "ingredients": [
+            {
+                "qty": "1 ½",
+                "unit": "cups",
+                "name": "grated Parmesan cheese"
+            }
+        ],
         "actions": [
             {
                 "verb": "mix",
-                "ingredients": [],
+                "ingredients": [
+                    "grated parmesan cheese"
+                ],
                 "tool": null
             }
         ],
@@ -54,7 +62,13 @@
     {
         "step_number": 4,
         "description": "Slice 3 or 4 potatoes using a mandolin on the thinnest setting.",
-        "ingredients": [],
+        "ingredients": [
+            {
+                "qty": "3 ½",
+                "unit": "pounds",
+                "name": "red potatoes"
+            }
+        ],
         "actions": [],
         "time": {},
         "temperature": {}
@@ -62,7 +76,13 @@
     {
         "step_number": 5,
         "description": "Slice remaining potatoes using a slightly thicker setting on the mandolin.",
-        "ingredients": [],
+        "ingredients": [
+            {
+                "qty": "3 ½",
+                "unit": "pounds",
+                "name": "red potatoes"
+            }
+        ],
         "actions": [],
         "time": {},
         "temperature": {}
@@ -84,7 +104,13 @@
     {
         "step_number": 7,
         "description": "Stand remaining thin slices along the sides of the baking dish so that half an inch sticks over the rim, overlapping them to create a layer that is 4 slices deep.",
-        "ingredients": [],
+        "ingredients": [
+            {
+                "qty": "½",
+                "unit": "teaspoon",
+                "name": "salt"
+            }
+        ],
         "actions": [
             {
                 "verb": "layer",
@@ -100,7 +126,13 @@
     {
         "step_number": 8,
         "description": "Spread 1/3 of the thicker potato slices in the baking dish.",
-        "ingredients": [],
+        "ingredients": [
+            {
+                "qty": "3 ½",
+                "unit": "pounds",
+                "name": "red potatoes"
+            }
+        ],
         "actions": [],
         "time": {},
         "temperature": {}
@@ -108,11 +140,19 @@
     {
         "step_number": 9,
         "description": "Sprinkle 1/3 of the Parmesan cheese mixture on top.",
-        "ingredients": [],
+        "ingredients": [
+            {
+                "qty": "1 ½",
+                "unit": "cups",
+                "name": "grated Parmesan cheese"
+            }
+        ],
         "actions": [
             {
                 "verb": "sprinkle",
-                "ingredients": [],
+                "ingredients": [
+                    "grated parmesan cheese"
+                ],
                 "tool": null
             }
         ],
@@ -138,7 +178,13 @@
     {
         "step_number": 12,
         "description": "Reserve 1/3 of the Parmesan cheese mixture.",
-        "ingredients": [],
+        "ingredients": [
+            {
+                "qty": "1 ½",
+                "unit": "cups",
+                "name": "grated Parmesan cheese"
+            }
+        ],
         "actions": [],
         "time": {},
         "temperature": {}
@@ -224,11 +270,19 @@
     {
         "step_number": 17,
         "description": "Pour sauce evenly over potato slices in the baking dish.",
-        "ingredients": [],
+        "ingredients": [
+            {
+                "qty": "3 ½",
+                "unit": "pounds",
+                "name": "red potatoes"
+            }
+        ],
         "actions": [
             {
                 "verb": "pour",
-                "ingredients": [],
+                "ingredients": [
+                    "red potatoes"
+                ],
                 "tool": null
             }
         ],
@@ -238,11 +292,19 @@
     {
         "step_number": 18,
         "description": "Sprinkle remaining 1/3 of the Parmesan cheese mixture on top.",
-        "ingredients": [],
+        "ingredients": [
+            {
+                "qty": "1 ½",
+                "unit": "cups",
+                "name": "grated Parmesan cheese"
+            }
+        ],
         "actions": [
             {
                 "verb": "sprinkle",
-                "ingredients": [],
+                "ingredients": [
+                    "grated parmesan cheese"
+                ],
                 "tool": null
             }
         ],
@@ -266,11 +328,19 @@
     {
         "step_number": 20,
         "description": "Bake in the preheated oven until potatoes are soft and edges are crusted, 1 hour to 1 hour and 15 minutes.",
-        "ingredients": [],
+        "ingredients": [
+            {
+                "qty": "3 ½",
+                "unit": "pounds",
+                "name": "red potatoes"
+            }
+        ],
         "actions": [
             {
                 "verb": "bake",
-                "ingredients": [],
+                "ingredients": [
+                    "red potatoes"
+                ],
                 "tool": null
             }
         ],
