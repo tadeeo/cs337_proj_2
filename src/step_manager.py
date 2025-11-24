@@ -12,7 +12,7 @@ def get_steps():
         list: List of parsed step dictionaries for the recipe.
     """
     global steps
-    with open("parsed_recipes.json", "r") as f:
+    with open("src/parsed_recipes.json", "r") as f:
         steps = json.load(f)
     return steps
 
@@ -27,13 +27,7 @@ def get_current_step(steps, curr_step):
     Returns:
         list: List of steps matching the given step number.
     """
-    curr = []
-    for step in steps:
-        if step["step_number"] == curr_step:
-            curr.append(step)
-        else:
-            continue
-    return curr
+    return steps[curr_step-1]
 
 def set_next_step(steps, curr_step):
     """

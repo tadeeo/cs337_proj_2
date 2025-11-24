@@ -1,0 +1,380 @@
+[
+    {
+        "step_number": 1,
+        "description": "Combine chopped oranges and 1 tablespoon water in a small saucepan, cover, and cook over medium-low heat until oranges are soft and excess liquid has evaporated, about 30 minutes.",
+        "actions": [
+            {
+                "verb": "chop",
+                "ingredients": [
+                    "water",
+                    "salt"
+                ],
+                "tool": "saucepan"
+            },
+            {
+                "verb": "cook",
+                "ingredients": [
+                    "water",
+                    "salt"
+                ],
+                "tool": "saucepan"
+            }
+        ],
+        "time": {
+            "duration": "30 minutes"
+        },
+        "temperature": {
+            "stove/burner": "MED_LOW"
+        },
+        "actionable": true,
+        "notes": [],
+        "substep_number": "1.1"
+    },
+    {
+        "step_number": 2,
+        "description": "Set aside to cool, about 20 minutes.",
+        "actions": [],
+        "time": {
+            "duration": "20 minutes"
+        },
+        "temperature": {
+            "stove/burner": "MED_LOW"
+        },
+        "actionable": true,
+        "notes": [],
+        "substep_number": "1.2"
+    },
+    {
+        "step_number": 3,
+        "description": "Preheat oven to 350 degrees F (175 degrees C).",
+        "actions": [
+            {
+                "verb": "boil",
+                "ingredients": [
+                    "oil",
+                    "salt",
+                    "water"
+                ],
+                "tool": null
+            }
+        ],
+        "time": {
+            "duration": "20 minutes"
+        },
+        "temperature": {
+            "stove/burner": "MED_LOW",
+            "oven": "350°"
+        },
+        "actionable": true,
+        "notes": [],
+        "substep_number": "2.1"
+    },
+    {
+        "step_number": 4,
+        "description": "Line the bottom and sides of an 8-inch springform pan with parchment paper.",
+        "actions": [],
+        "time": {
+            "duration": "20 minutes"
+        },
+        "temperature": {
+            "stove/burner": "MED_LOW",
+            "oven": "350°"
+        },
+        "actionable": true,
+        "notes": [],
+        "substep_number": "2.2"
+    },
+    {
+        "step_number": 5,
+        "description": "Place oranges in the bowl of a food processor; pulse until finely chopped.",
+        "actions": [
+            {
+                "verb": "place",
+                "ingredients": [],
+                "tool": "food processor"
+            },
+            {
+                "verb": "chop",
+                "ingredients": [],
+                "tool": "food processor"
+            }
+        ],
+        "time": {
+            "duration": "20 minutes"
+        },
+        "temperature": {
+            "stove/burner": "MED_LOW",
+            "oven": "350°"
+        },
+        "actionable": true,
+        "notes": [],
+        "substep_number": "3.1"
+    },
+    {
+        "step_number": 6,
+        "description": "Beat egg whites in a glass, metal, or ceramic bowl until stiff peaks form.",
+        "actions": [],
+        "time": {
+            "duration": "20 minutes"
+        },
+        "temperature": {
+            "stove/burner": "MED_LOW",
+            "oven": "350°"
+        },
+        "actionable": true,
+        "notes": [],
+        "substep_number": "4.1"
+    },
+    {
+        "step_number": 7,
+        "description": "Gradually add 1/2 cup sugar, continuing to beat for 1 more minute.",
+        "actions": [
+            {
+                "verb": "mix",
+                "ingredients": [
+                    "cottage cheese",
+                    "eggs",
+                    "shredded parmesan cheese"
+                ],
+                "tool": null
+            }
+        ],
+        "time": {
+            "duration": "20 minutes"
+        },
+        "temperature": {
+            "stove/burner": "MED_LOW",
+            "oven": "350°"
+        },
+        "actionable": true,
+        "notes": [],
+        "substep_number": "4.2"
+    },
+    {
+        "step_number": 8,
+        "description": "Beat egg yolks and remaining 1/2 cup sugar in a separate bowl until pale and thick, 2 to 3 minutes.",
+        "actions": [],
+        "time": {
+            "duration": "3 minutes"
+        },
+        "temperature": {
+            "stove/burner": "MED_LOW",
+            "oven": "350°"
+        },
+        "actionable": true,
+        "notes": [],
+        "substep_number": "5.1"
+    },
+    {
+        "step_number": 9,
+        "description": "Whisk in finely chopped oranges.",
+        "actions": [
+            {
+                "verb": "chop",
+                "ingredients": [],
+                "tool": "whisk"
+            }
+        ],
+        "time": {
+            "duration": "3 minutes"
+        },
+        "temperature": {
+            "stove/burner": "MED_LOW",
+            "oven": "350°"
+        },
+        "actionable": true,
+        "notes": [],
+        "substep_number": "5.2"
+    },
+    {
+        "step_number": 10,
+        "description": "Fold in ground almonds, semolina, vanilla extract, and fiori di Sicilia.",
+        "actions": [],
+        "time": {
+            "duration": "3 minutes"
+        },
+        "temperature": {
+            "stove/burner": "MED_LOW",
+            "oven": "350°"
+        },
+        "actionable": true,
+        "notes": [],
+        "substep_number": "5.3"
+    },
+    {
+        "step_number": 11,
+        "description": "Stir in 3 spoonfuls of whisked egg white to loosen the batter.",
+        "actions": [
+            {
+                "verb": "stir",
+                "ingredients": [
+                    "butter",
+                    "water"
+                ],
+                "tool": "whisk"
+            }
+        ],
+        "time": {
+            "duration": "3 minutes"
+        },
+        "temperature": {
+            "stove/burner": "MED_LOW",
+            "oven": "350°"
+        },
+        "actionable": true,
+        "notes": [],
+        "substep_number": "5.4"
+    },
+    {
+        "step_number": 12,
+        "description": "Gently fold in remaining egg whites with a spatula or large metal spoon.",
+        "actions": [],
+        "time": {
+            "duration": "3 minutes"
+        },
+        "temperature": {
+            "stove/burner": "MED_LOW",
+            "oven": "350°"
+        },
+        "actionable": true,
+        "notes": [],
+        "substep_number": "5.5"
+    },
+    {
+        "step_number": 13,
+        "description": "Pour batter into prepared springform and level the top.",
+        "actions": [
+            {
+                "verb": "pour",
+                "ingredients": [
+                    "butter",
+                    "water"
+                ],
+                "tool": null
+            }
+        ],
+        "time": {
+            "duration": "3 minutes"
+        },
+        "temperature": {
+            "stove/burner": "MED_LOW",
+            "oven": "350°"
+        },
+        "actionable": true,
+        "notes": [],
+        "substep_number": "5.6"
+    },
+    {
+        "step_number": 14,
+        "description": "Bake in the preheated oven until cake is golden and a skewer inserted in the center comes out clean, about 50 minutes.",
+        "actions": [
+            {
+                "verb": "bake",
+                "ingredients": [],
+                "tool": null
+            },
+            {
+                "verb": "preheat",
+                "ingredients": [],
+                "tool": null
+            }
+        ],
+        "time": {
+            "duration": "50 minutes"
+        },
+        "temperature": {
+            "stove/burner": "MED_LOW",
+            "oven": "350°"
+        },
+        "actionable": true,
+        "notes": [],
+        "substep_number": "6.1"
+    },
+    {
+        "step_number": 15,
+        "description": "Check cake after 20 and 30 minutes to see if it is starting to brown too quickly.",
+        "actions": [],
+        "time": {
+            "duration": "30 minutes"
+        },
+        "temperature": {
+            "stove/burner": "MED_LOW",
+            "oven": "350°"
+        },
+        "actionable": true,
+        "notes": [],
+        "substep_number": "6.2"
+    },
+    {
+        "step_number": 16,
+        "description": "Cover top lightly with aluminum foil once cake starts to brown.",
+        "actions": [],
+        "time": {
+            "duration": "30 minutes"
+        },
+        "temperature": {
+            "stove/burner": "MED_LOW",
+            "oven": "350°"
+        },
+        "actionable": true,
+        "notes": [],
+        "substep_number": "6.3"
+    },
+    {
+        "step_number": 17,
+        "description": "Remove from oven and cool in the pan.",
+        "actions": [
+            {
+                "verb": "remove",
+                "ingredients": [],
+                "tool": null
+            }
+        ],
+        "time": {
+            "duration": "30 minutes"
+        },
+        "temperature": {
+            "stove/burner": "MED_LOW",
+            "oven": "350°"
+        },
+        "actionable": true,
+        "notes": [],
+        "substep_number": "7.1"
+    },
+    {
+        "step_number": 18,
+        "description": "Remove ring, peel away parchment paper and transfer cake to a serving plate.",
+        "actions": [
+            {
+                "verb": "remove",
+                "ingredients": [],
+                "tool": null
+            }
+        ],
+        "time": {
+            "duration": "30 minutes"
+        },
+        "temperature": {
+            "stove/burner": "MED_LOW",
+            "oven": "350°"
+        },
+        "actionable": true,
+        "notes": [],
+        "substep_number": "7.2"
+    },
+    {
+        "step_number": 19,
+        "description": "Drizzle with liqueur and dust with confectioners' sugar.",
+        "actions": [],
+        "time": {
+            "duration": "30 minutes"
+        },
+        "temperature": {
+            "stove/burner": "MED_LOW",
+            "oven": "350°"
+        },
+        "actionable": true,
+        "notes": [],
+        "substep_number": "7.3"
+    }
+]

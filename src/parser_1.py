@@ -16,11 +16,10 @@
 """
 import json
 import re
-import sys
 from typing import List, Dict
 import spacy
 from spacy.matcher import Matcher
-from rapidfuzz import process, fuzz
+from rapidfuzz import fuzz
 
 nlp = spacy.load("en_core_web_sm")
 
@@ -53,13 +52,14 @@ def load_list_from_file(filepath: str) -> List[str]:
 
 def extract_ingredients(step: str, ingredient_data: List[Dict]) -> List[Dict]:
     """
-    Return list of full ingredient dicts found in the step text.
+    Return list of full ingredient dicts found in the step text, using fuzzy matching.
     """
     step_lower = step.lower()
     results = []
     for ing in ingredient_data:
-        ing_name_norm = normalize_ingredient(ing["name"])
-        if ing_name_norm in step_lower:
+        ing_name_norm = normalize_ingredient(ing)
+        score = fuzz.partial_ratio(ing_name_norm, step_lower)
+        if score >= 70:
             results.append(ing)
     return results
 
@@ -83,7 +83,7 @@ def extract_methods(step: str) -> List[str]:
 
 def extract_time(step: str) -> Dict:
     """Extract time information from the step (e.g., 'bake for 20 minutes')."""
-    time_pattern = re.compile(r'(\d+)\s*(seconds?|minutes?|hours?)')
+    time_pattern = re.compile(r'(\d+(?:\s+\d+/\d+)?|\d+/\d+|\d+\.\d+)\s*(seconds?|minutes?|hours?)')
     times = time_pattern.findall(step.lower())
     if times:
         total_time = ", ".join([f"{n} {unit}" for n, unit in times])
@@ -135,23 +135,25 @@ def extract_temperature(step: str, ingredients: List[str]) -> Dict:
 
     return result
 
-def parse_step(step_number: int, step: str, ingredient_data: List[Dict], tools: List[str]) -> Dict:
-    """Parse a single recipe step into a structured dict, including ingredient quantities."""
-    step_ingredients = extract_ingredients(step, ingredient_data)  #full ingredient dicts
-    step_tools = extract_tools(step, [tool for tool in tools])
+def parse_step(step_number: int, step: str, ingredients: List[str], tools: List[str]) -> Dict:
+    """Parse a single recipe step into a structured dict."""
+    step_ingredients = extract_ingredients(step, ingredients)
+    step_tools = extract_tools(step, tools)
     methods = extract_methods(step)
     time_info = extract_time(step)
-    temp_info = extract_temperature(step, [ing["name"] for ing in step_ingredients])  # Use ingredient names for temperature function
+    temp_info = extract_temperature(step, step_ingredients)
 
-    actions = extract_actions_rule_based(step, [ing["name"] for ing in step_ingredients], COOKING_VERBS, step_tools)
+    # add structured action tags using spaCy
+    actions = extract_actions_rule_based(step, ingredients, COOKING_VERBS, step_tools)
 
     return {
         "step_number": step_number,
         "description": step.strip(),
-        "ingredients": step_ingredients,    # Now a list of dicts {qty, unit, name}
         "actions": actions,
         "time": time_info if time_info else {},
         "temperature": temp_info if temp_info else {},
+        "actionable": check_actionable(step),
+        "notes": []
     }
 
 
@@ -271,14 +273,14 @@ def main():
     # tools_file = sys.argv[2]
     # step_sentence = sys.argv[3]
 
-    with open("recipe.json", "r") as f:
+    with open("src/recipe.json", "r") as f:
         data = json.load(f)
 
     ingredients = [item["name"] for item in data["ingredients"]]
     # print("*********ingredients:", ingredients)
 
     # #ingredients = load_list_from_file(ingredients_file)
-    tools_file = 'tools.txt'
+    tools_file = 'src/tools.txt'
     tools = load_list_from_file(tools_file)
 
     # parsed = parse_step(1, step_sentence, ingredients, tools)
