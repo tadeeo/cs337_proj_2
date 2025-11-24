@@ -22,9 +22,9 @@
             {
                 "verb": "boil",
                 "ingredients": [
-                    "water",
                     "oil",
-                    "salt"
+                    "salt",
+                    "water"
                 ],
                 "tool": null
             }
@@ -113,8 +113,8 @@
             {
                 "verb": "mix",
                 "ingredients": [
-                    "eggs",
                     "cottage cheese",
+                    "eggs",
                     "shredded parmesan cheese"
                 ],
                 "tool": null

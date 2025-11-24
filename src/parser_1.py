@@ -57,7 +57,7 @@ def extract_ingredients(step: str, ingredient_data: List[Dict]) -> List[Dict]:
     step_lower = step.lower()
     results = []
     for ing in ingredient_data:
-        ing_name_norm = normalize_ingredient(ing["name"])
+        ing_name_norm = normalize_ingredient(ing)
         score = fuzz.partial_ratio(ing_name_norm, step_lower)
         if score >= 70:
             results.append(ing)
@@ -271,14 +271,14 @@ def main():
     # tools_file = sys.argv[2]
     # step_sentence = sys.argv[3]
 
-    with open("recipe.json", "r") as f:
+    with open("src/recipe.json", "r") as f:
         data = json.load(f)
 
     ingredients = [item["name"] for item in data["ingredients"]]
     # print("*********ingredients:", ingredients)
 
     # #ingredients = load_list_from_file(ingredients_file)
-    tools_file = 'tools.txt'
+    tools_file = 'src/tools.txt'
     tools = load_list_from_file(tools_file)
 
     # parsed = parse_step(1, step_sentence, ingredients, tools)
