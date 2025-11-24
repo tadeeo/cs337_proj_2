@@ -144,6 +144,9 @@ def handle_step_query(query, recipe_data, curr_idx, speech: bool) -> Tuple[bool,
     # REPEAT: do not change curr_idx, just fall through and re-read current step
     elif repeat_step.search(q):
         pass
+    
+    else:
+        return False, curr_idx, ""
 
     # Get all entries for this step_number
     step_entries = step_manager.get_current_step(steps, curr_idx)
@@ -182,8 +185,6 @@ def handle_can_i_query(query):
             word_print("Sorry, I couldn't find information about", action)
             handled = True
     return handled
-
-import re
 
 def handle_info_query(query: str, speech: bool) -> Tuple[bool, str]:
     handled = False
