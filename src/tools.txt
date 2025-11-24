@@ -17,126 +17,48 @@ Liquid measuring cup
 Saucepan
 Frying pan
 Ladle
-Aluminum Foil
-Baking Dishes
-Baking Sheet
-Baking/Cookie Sheet
-Baster
-Blender
-Bread Pan
-Broiler Pan
-Cake Pan
-Can Opener
-Candy Thermometer
-Carving Set
-Casserole
-Cheese Slicer
-Cheesecloth
-Colander
-Convection Oven
-Cookie Cutter
-Cooling Rack
-Corer
-Custard Cup
-Deep Fat Fryer
-Double Boiler
-Dutch Oven
-Egg Beater
-Egg Separator
-Egg Slicer
-Electric Mixer
-Electric Skillet
-Fondue Pot
-Food Processor
-Funnel
-Garlic Press
-Grater
-Griddle
-Grill Pan
-Grills
-Grinder
-Hot Pad
-Huller
-Immersion Blender
-Jelly-Roll Pan
-Juicer
-Kitchen Timer
-Knives
-Loaf Pan
-Mandoline
-Meat Fork
-Meat Mallet
-Melon Baller
-Microwave Oven
-Mixer
-Mortar and Pestle
-Muffin Pan
-Nut Cracker
-Pancake Turner
-Panini Grill
-Parchment Paper
-Pastry Bag
-Pastry Blender
-Pastry Brush
-Pastry Cloth
-Pastry Cutter
-Pepper Mill
-Pie Pans
-Pie Weights
-Pizza Wheel
-Plastic Wrap
-Potato Masher
-Potato Ricer
-Pots and Pans
-Pressure Cooker
-Ramekins
-Rice Cooker
-Roasting Pan
-Rolling Pin
-Salad Spinner
-Scale
-Scoop
-Sifter
-Skewer
-Skillet/Saute Pan
-Slow Cooker
-Spaghetti Server
-Spoon
-Steamer Insert
-Stockpot
-Thermometer
-Toaster
-Toaster Oven
-Toothpick
-Waffle Iron
-Wax Paper
-Wok
-Zester
 Slotted spoon
+Grater
+Colander
 Serving spoon
 Soup spoon
 Pie server
 Butter knife
 Salad tongs
 Tray
+Can opener
 Bottle opener
+Rolling pin
 Timer
+Aluminum foil
 Oven mitts
+Thermometer
+Mortar and pestle
 Manual juicer
 Grill press
 Mesh strainer
+Pastry brush
 Plastic knife
 Squeeze bottle
 Baking tray
 Muffin tin
+Cooling rack
 Piping bag
+Pastry cutter
+Cake pan
+Sifter
 Hand whisk
 Rubber spatula
 Silicone mat
+Blender
+Food Processor
+Electric Mixer
 Coffee Maker
+Toaster
 Glass Jar
 Plastic Container
 Vacuum Sealer
+Plastic Wrap
 Freezer Bag
 Dish Brush
 Sponge
@@ -144,6 +66,7 @@ Drying Rack
 Microfiber Cloth
 Dish Soap Dispenser
 Apron
+Oven Mitts
 Cut-Resistant Gloves
 Pot Holder
 Chef Hat
