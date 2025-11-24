@@ -50,10 +50,18 @@ def load_list_from_file(filepath: str) -> List[str]:
         return []
 
 
-def extract_ingredients(step: str, ingredients: List[str]) -> List[str]:
-    """Return list of ingredient names found in the step."""
+def extract_ingredients(step: str, ingredient_data: List[Dict]) -> List[Dict]:
+    """
+    Return list of full ingredient dicts found in the step text, using fuzzy matching.
+    """
     step_lower = step.lower()
-    return [i for i in ingredients if i in step_lower]
+    results = []
+    for ing in ingredient_data:
+        ing_name_norm = normalize_ingredient(ing)
+        score = fuzz.partial_ratio(ing_name_norm, step_lower)
+        if score >= 70:
+            results.append(ing)
+    return results
 
 
 def extract_tools(step: str, tools: List[str]) -> List[str]:
@@ -272,7 +280,7 @@ def main():
     # print("*********ingredients:", ingredients)
 
     # #ingredients = load_list_from_file(ingredients_file)
-    tools_file = 'tools.txt'
+    tools_file = 'src/tools.txt'
     tools = load_list_from_file(tools_file)
 
     # parsed = parse_step(1, step_sentence, ingredients, tools)

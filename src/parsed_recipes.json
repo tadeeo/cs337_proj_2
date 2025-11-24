@@ -49,8 +49,12 @@
         "description": "Preheat oven to 350 degrees F (175 degrees C).",
         "actions": [
             {
-                "verb": "preheat",
-                "ingredients": [],
+                "verb": "boil",
+                "ingredients": [
+                    "oil",
+                    "salt",
+                    "water"
+                ],
                 "tool": null
             }
         ],
@@ -126,8 +130,12 @@
         "description": "Gradually add 1/2 cup sugar, continuing to beat for 1 more minute.",
         "actions": [
             {
-                "verb": "add",
-                "ingredients": [],
+                "verb": "mix",
+                "ingredients": [
+                    "cottage cheese",
+                    "eggs",
+                    "shredded parmesan cheese"
+                ],
                 "tool": null
             }
         ],
