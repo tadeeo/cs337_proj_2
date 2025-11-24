@@ -241,9 +241,11 @@ def handle_info_query(query: str, speech: bool) -> Tuple[bool, str]:
     m = how_much_pat.match(q)
     if m:
         target = m.group(3).strip().lower()
+        #print("target: ", target)
         found = None
         for step in parsed_recipe_data:
             for ing in step.get("ingredients", []):
+                #print(ing)
                 if target in ing.get("name", "").lower():
                     qty = ing.get("qty", "").strip()
                     unit = ing.get("unit", "").strip()

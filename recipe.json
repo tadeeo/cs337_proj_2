@@ -1,188 +1,145 @@
 {
-    "title": "Fancy Crusted Rosemary Scalloped Potatoes",
-    "prep_time": "30 mins",
+    "title": "Classic and Simple Meat Lasagna",
+    "prep_time": "25 mins",
     "cook_time": "1 hr",
-    "additional_time": null,
-    "total_time": "1 hr 30 mins",
-    "yield": "6",
+    "additional_time": "10 mins",
+    "total_time": "1 hr 35 mins",
+    "yield": "8",
     "ingredients": [
         {
-            "qty": "",
+            "qty": "12",
             "unit": "",
-            "name": "cooking spray"
+            "name": "whole wheat lasagna noodles"
         },
         {
-            "qty": "1 ½",
-            "unit": "cups",
-            "name": "grated Parmesan cheese"
-        },
-        {
-            "qty": "2",
-            "unit": "tablespoons",
-            "name": "minced fresh rosemary"
+            "qty": "1",
+            "unit": "pound",
+            "name": "lean ground beef"
         },
         {
             "qty": "2",
             "unit": "cloves",
-            "name": "garlic, minced"
-        },
-        {
-            "qty": "3 ½",
-            "unit": "pounds",
-            "name": "red potatoes"
-        },
-        {
-            "qty": "3",
-            "unit": "tablespoons",
-            "name": "butter"
-        },
-        {
-            "qty": "3",
-            "unit": "tablespoons",
-            "name": "all-purpose flour"
-        },
-        {
-            "qty": "2",
-            "unit": "cups",
-            "name": "whole milk"
-        },
-        {
-            "qty": "½",
-            "unit": "teaspoon",
-            "name": "salt"
+            "name": "garlic, chopped"
         },
         {
             "qty": "1",
             "unit": "teaspoon",
-            "name": "olive oil"
+            "name": "dried oregano, or to taste"
+        },
+        {
+            "qty": "½",
+            "unit": "teaspoon",
+            "name": "garlic powder"
+        },
+        {
+            "qty": "",
+            "unit": "",
+            "name": "salt and ground black pepper to taste"
+        },
+        {
+            "qty": "1",
+            "unit": "(16 ounce) package",
+            "name": "cottage cheese"
+        },
+        {
+            "qty": "½",
+            "unit": "cup",
+            "name": "shredded Parmesan cheese"
+        },
+        {
+            "qty": "2",
+            "unit": "",
+            "name": "eggs"
+        },
+        {
+            "qty": "4 ½",
+            "unit": "cups",
+            "name": "tomato-basil pasta sauce"
+        },
+        {
+            "qty": "2",
+            "unit": "cups",
+            "name": "shredded mozzarella cheese"
         }
     ],
     "steps": [
         {
             "step_number": 1,
-            "text": "Preheat the oven to 400 degrees F (200 degrees C). Coat an 8-inch baking dish cooking spray.",
+            "text": "Preheat the oven to 350 degrees F (175 degrees C).",
             "substeps": [
                 {
                     "sub_number": "1.1",
-                    "text": "Preheat the oven to 400 degrees F (200 degrees C)."
-                },
-                {
-                    "sub_number": "1.2",
-                    "text": "Coat an 8-inch baking dish cooking spray."
+                    "text": "Preheat the oven to 350 degrees F (175 degrees C)."
                 }
             ]
         },
         {
             "step_number": 2,
-            "text": "Mix Parmesan cheese, rosemary, and garlic together in a bowl.",
+            "text": "Bring a large pot of lightly salted water to a boil. Add lasagna noodles and cook for 10 minutes or until al dente; drain.",
             "substeps": [
                 {
                     "sub_number": "2.1",
-                    "text": "Mix Parmesan cheese, rosemary, and garlic together in a bowl."
+                    "text": "Bring a large pot of lightly salted water to a boil."
+                },
+                {
+                    "sub_number": "2.2",
+                    "text": "Add lasagna noodles and cook for 10 minutes or until al dente; drain."
                 }
             ]
         },
         {
             "step_number": 3,
-            "text": "Slice 3 or 4 potatoes using a mandolin on the thinnest setting. Slice remaining potatoes using a slightly thicker setting on the mandolin.",
+            "text": "Meanwhile, place ground beef, garlic, oregano, garlic powder, salt, and black pepper in a large skillet over medium heat; cook and stir until beef is crumbly and evenly browned, about 10 minutes.",
             "substeps": [
                 {
                     "sub_number": "3.1",
-                    "text": "Slice 3 or 4 potatoes using a mandolin on the thinnest setting."
-                },
-                {
-                    "sub_number": "3.2",
-                    "text": "Slice remaining potatoes using a slightly thicker setting on the mandolin."
+                    "text": "Meanwhile, place ground beef, garlic, oregano, garlic powder, salt, and black pepper in a large skillet over medium heat; cook and stir until beef is crumbly and evenly browned, about 10 minutes."
                 }
             ]
         },
         {
             "step_number": 4,
-            "text": "Line the bottom of the prepared baking dish with thin potato slices, overlapping them to create a layer that is 2 to 3 slices deep. Stand remaining thin slices along the sides of the baking dish so that half an inch sticks over the rim, overlapping them to create a layer that is 4 slices deep.",
+            "text": "Mix cottage cheese, Parmesan cheese, and eggs together in a large bowl until thoroughly combined.",
             "substeps": [
                 {
                     "sub_number": "4.1",
-                    "text": "Line the bottom of the prepared baking dish with thin potato slices, overlapping them to create a layer that is 2 to 3 slices deep."
-                },
-                {
-                    "sub_number": "4.2",
-                    "text": "Stand remaining thin slices along the sides of the baking dish so that half an inch sticks over the rim, overlapping them to create a layer that is 4 slices deep."
+                    "text": "Mix cottage cheese, Parmesan cheese, and eggs together in a large bowl until thoroughly combined."
                 }
             ]
         },
         {
             "step_number": 5,
-            "text": "Spread 1/3 of the thicker potato slices in the baking dish. Sprinkle 1/3 of the Parmesan cheese mixture on top. Repeat once more. Arrange remaining potato slices in the baking dish. Reserve 1/3 of the Parmesan cheese mixture.",
+            "text": "Lay 4 noodles side by side on the bottom of a 9x13-inch baking pan; top with a layer of prepared tomato-basil sauce, a layer of ground beef mixture, and a layer of cottage cheese mixture. Repeat layers twice more, ending with a layer of sauce; sprinkle mozzarella cheese on top. Cover the dish with aluminum foil.",
             "substeps": [
                 {
                     "sub_number": "5.1",
-                    "text": "Spread 1/3 of the thicker potato slices in the baking dish."
+                    "text": "Lay 4 noodles side by side on the bottom of a 9x13-inch baking pan; top with a layer of prepared tomato-basil sauce, a layer of ground beef mixture, and a layer of cottage cheese mixture."
                 },
                 {
                     "sub_number": "5.2",
-                    "text": "Sprinkle 1/3 of the Parmesan cheese mixture on top."
+                    "text": "Repeat layers twice more, ending with a layer of sauce; sprinkle mozzarella cheese on top."
                 },
                 {
                     "sub_number": "5.3",
-                    "text": "Repeat once more."
-                },
-                {
-                    "sub_number": "5.4",
-                    "text": "Arrange remaining potato slices in the baking dish."
-                },
-                {
-                    "sub_number": "5.5",
-                    "text": "Reserve 1/3 of the Parmesan cheese mixture."
+                    "text": "Cover the dish with aluminum foil."
                 }
             ]
         },
         {
             "step_number": 6,
-            "text": "Melt butter in a saucepan over medium heat; whisk in flour. Pour in milk; cook, occasionally stirring, until sauce thickens, 5 to 6 minutes. Stir in salt.",
+            "text": "Bake in the preheated oven until the lasagna is bubbling and the cheese has melted, about 30 minutes. Remove foil and bake until cheese has begun to brown, about 10 more minutes. Allow to stand at least 10 minutes before serving.",
             "substeps": [
                 {
                     "sub_number": "6.1",
-                    "text": "Melt butter in a saucepan over medium heat; whisk in flour."
+                    "text": "Bake in the preheated oven until the lasagna is bubbling and the cheese has melted, about 30 minutes."
                 },
                 {
                     "sub_number": "6.2",
-                    "text": "Pour in milk; cook, occasionally stirring, until sauce thickens, 5 to 6 minutes."
+                    "text": "Remove foil and bake until cheese has begun to brown, about 10 more minutes."
                 },
                 {
                     "sub_number": "6.3",
-                    "text": "Stir in salt."
-                }
-            ]
-        },
-        {
-            "step_number": 7,
-            "text": "Shift potato slices in a few places with a knife to create wells for the sauce to flow through. Pour sauce evenly over potato slices in the baking dish. Sprinkle remaining 1/3 of the Parmesan cheese mixture on top. Brush potato edges sticking out of the baking dish with olive oil.",
-            "substeps": [
-                {
-                    "sub_number": "7.1",
-                    "text": "Shift potato slices in a few places with a knife to create wells for the sauce to flow through."
-                },
-                {
-                    "sub_number": "7.2",
-                    "text": "Pour sauce evenly over potato slices in the baking dish."
-                },
-                {
-                    "sub_number": "7.3",
-                    "text": "Sprinkle remaining 1/3 of the Parmesan cheese mixture on top."
-                },
-                {
-                    "sub_number": "7.4",
-                    "text": "Brush potato edges sticking out of the baking dish with olive oil."
-                }
-            ]
-        },
-        {
-            "step_number": 8,
-            "text": "Bake in the preheated oven until potatoes are soft and edges are crusted, 1 hour to 1 hour and 15 minutes.",
-            "substeps": [
-                {
-                    "sub_number": "8.1",
-                    "text": "Bake in the preheated oven until potatoes are soft and edges are crusted, 1 hour to 1 hour and 15 minutes."
+                    "text": "Allow to stand at least 10 minutes before serving."
                 }
             ]
         }
