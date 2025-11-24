@@ -22,6 +22,14 @@ def main_speech_to_text():
     # Loop infinitely for user to
     # speak
     idx = 1
+    combined = re.compile(
+        r"\b("
+            r"next|forward|advance|"
+            r"previous|prev|last|back|before|"
+            r"repeat|again|say (?:that|it) again|"
+            r"first step|start|begin"
+        r")\b"
+    )
 
     while(1):    
         
@@ -48,14 +56,17 @@ def main_speech_to_text():
                     break
 
                 print(query)
-                handled, idx = handle_step_query(query, recipe_data, idx)
-                if handled:
-                    continue
-                handled, output = handle_info_query(query, True)
-                if handled:
-                    speak_text(output)
-                    continue
-                speak_text("Sorry, I didn't understand that. Please try again.")
+                if combined.search(query):
+                    handled, idx, output = handle_step_query(query, recipe_data, idx, True)
+                    if handled:
+                        speak_text(output)
+                        continue
+                else:
+                    handled, output = handle_info_query(query, True)
+                    if handled:
+                        speak_text(output)
+                        continue
+                    speak_text("Sorry, I didn't understand that. Please try again.")
                         
         except sr.RequestError as e:
             print("Could not request results {0}".format(e))

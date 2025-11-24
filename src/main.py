@@ -83,12 +83,13 @@ def startup_base():
         print()
         word_print("Step ", step["step_number"], ": ", step["text"], delay=0.15), tactical_pause(1.5)
 
-def handle_step_query(query, recipe_data, curr_idx):
+def handle_step_query(query, recipe_data, curr_idx, speech: bool) -> Tuple[bool, int, str]:
     """ Handles step navigation queries.
         Returns (handled: bool, new_curr_idx: int)"""
     steps = step_manager.get_steps()
     total_steps = steps[len(steps)-1]["step_number"]
     handled = False
+    output = "Output example "
     
     q = query.lower().strip()
 
@@ -101,49 +102,42 @@ def handle_step_query(query, recipe_data, curr_idx):
     if next_step.search(q):
         if curr_idx < total_steps:
             curr_idx += 1
-            handled = True
-            step = step_manager.get_current_step(steps, curr_idx)
-            print(step)
-            word_print("Step", step[0]['step_number'], ":")
-            for sub in step:
-                word_print(sub['substep_number'], ":", sub['description'])
-                tactical_pause()
         else:
-            slow_print("You’re already on the last step!")
-            handled = True
+            if speech:
+                output = "You’re already on the last step!"
+                return True, curr_idx, output
+            else:
+                slow_print("You’re already on the last step!")
+                return True, curr_idx, output
             
     elif prev_step.search(q):
-        print(curr_idx)
         if curr_idx > 1:
             curr_idx -= 1
-            handled = True
-            step = step_manager.get_current_step(steps, curr_idx)
-            word_print("Step", step[0]['step_number'], ":")
-            for sub in step:
-                word_print(sub['substep_number'], ":", sub['description'])
-                tactical_pause()
         else:
-            slow_print("You’re already on the first step!")
-            handled = True
-            
-    elif repeat_step.search(q):
-        step = step_manager.get_current_step(steps, curr_idx)
-        word_print("Step", step[0]['step_number'], ":")
-        for sub in step:
-            word_print(sub['substep_number'], ":", sub['description'])
-            tactical_pause()
-        handled = True
-        
+            if speech:
+                output = "You’re already on the first step!"
+                return True, curr_idx, output
+            else:
+                slow_print("You’re already on the first step!")
+                return True, curr_idx, output
+
     elif first_step.search(q):
         curr_idx = 1
-        handled = True
-        step = step_manager.get_current_step(steps, curr_idx)
+
+    step = step_manager.get_current_step(steps, curr_idx)
+    if speech:
+        output += "Step " + str(step[0]['step_number']) + ": "
+        for sub in step:
+            output += str(sub['substep_number']) + ": " + str(sub['description'] + " ")
+        print(output)
+    else:
+        print(step)
         word_print("Step", step[0]['step_number'], ":")
         for sub in step:
             word_print(sub['substep_number'], ":", sub['description'])
             tactical_pause()
-
-    return handled, curr_idx
+    handled = True
+    return handled, curr_idx, output
 
 def handle_info_query(query: str, speech: bool) -> Tuple[bool, str]:
     handled = False
@@ -224,10 +218,10 @@ def query_handler():
             slow_print("Goodbye! Happy cooking!")
             break
         
-        handled, idx = handle_step_query(query, recipe_data, idx)
+        handled, idx, _ = handle_step_query(query, recipe_data, idx, False)
         if handled:
             continue
-        handled, output = handle_info_query(query)
+        handled, _ = handle_info_query(query, False)
         if handled:
             continue
         slow_print("Sorry, I didn't understand that. Please try again.")
