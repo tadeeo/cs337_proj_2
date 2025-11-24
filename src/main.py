@@ -6,9 +6,9 @@ import recipe_parser
 import step_manager
 import json
 
-_DELAY_MULTIPLIER = 0.75 # for testing, set to 0.0 to skip delays
+_DELAY_MULTIPLIER = 0.0 # for testing, set to 0.0 to skip delays
 
-with open("src/recipe.json", "r", encoding="utf-8") as f:
+with open("recipe.json", "r", encoding="utf-8") as f:
     recipe_data = json.load(f)
 
 with open("parsed_recipes.json", "r", encoding="utf-8") as f:
@@ -226,9 +226,20 @@ def handle_info_query(query):
             else:
                 word_print("Sorry, I don't know how much", target, "you need.")
             handled = True
-
     return handled
 
+def handle_temp_query(query):
+    handled = False
+    q = query.lower().strip()
+    temp_pat = re.compile(r"(what\s+is\s+the\s+temperature\s+for|set\s+the\s+temperature\s+to)[\?\s]*$")
+
+    m = temp_pat.match(q)
+    if m:
+        temperature_info = step_manager.get_temperature()
+        word_print("The temperature information is as follows:")
+        word_print(temperature_info)
+        handled = True
+    return handled
 
 def query_handler():
     slow_print(" Great!")

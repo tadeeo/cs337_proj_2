@@ -1,0 +1,116 @@
+[
+    {
+        "step_number": 1,
+        "description": "Gather the ingredients.",
+        "actions": [],
+        "time": {},
+        "temperature": {}
+    },
+    {
+        "step_number": 1,
+        "description": "Preheat the oven to 350 degrees F (175 degrees C).",
+        "actions": [
+            {
+                "verb": "preheat",
+                "ingredients": [],
+                "tool": null
+            }
+        ],
+        "time": {},
+        "temperature": {
+            "oven": "350°"
+        }
+    },
+    {
+        "step_number": 1,
+        "description": "Grease and flour two 9x5-inch loaf pans.",
+        "actions": [],
+        "time": {},
+        "temperature": {}
+    },
+    {
+        "step_number": 1,
+        "description": "Whisk flour, baking soda, salt, cinnamon, nutmeg, cloves, and ginger together in a large bowl.",
+        "actions": [
+            {
+                "verb": "bake",
+                "ingredients": [
+                    "salt",
+                    "baking soda"
+                ],
+                "tool": null
+            }
+        ],
+        "time": {},
+        "temperature": {}
+    },
+    {
+        "step_number": 1,
+        "description": "Mix pumpkin puree, eggs, oil, water, and sugar in a separate bowl until well blended.",
+        "actions": [
+            {
+                "verb": "mix",
+                "ingredients": [
+                    "pumpkin puree",
+                    "eggs",
+                    "oil",
+                    "water"
+                ],
+                "tool": null
+            }
+        ],
+        "time": {},
+        "temperature": {}
+    },
+    {
+        "step_number": 1,
+        "description": "Stir flour mixture into pumpkin mixture until just blended.",
+        "actions": [
+            {
+                "verb": "stir",
+                "ingredients": [],
+                "tool": null
+            }
+        ],
+        "time": {},
+        "temperature": {}
+    },
+    {
+        "step_number": 1,
+        "description": "Pour batter into the prepared pans.",
+        "actions": [
+            {
+                "verb": "pour",
+                "ingredients": [
+                    "butter",
+                    "water"
+                ],
+                "tool": null
+            }
+        ],
+        "time": {},
+        "temperature": {}
+    },
+    {
+        "step_number": 1,
+        "description": "Bake in the preheated oven until a toothpick inserted in center comes out clean, about 50 minutes.",
+        "actions": [
+            {
+                "verb": "bake",
+                "ingredients": [],
+                "tool": null
+            }
+        ],
+        "time": {
+            "duration": "50 minutes"
+        },
+        "temperature": {}
+    },
+    {
+        "step_number": 1,
+        "description": "Enjoy!",
+        "actions": [],
+        "time": {},
+        "temperature": {}
+    }
+]
