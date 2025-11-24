@@ -16,11 +16,10 @@
 """
 import json
 import re
-import sys
 from typing import List, Dict
 import spacy
 from spacy.matcher import Matcher
-from rapidfuzz import process, fuzz
+from rapidfuzz import fuzz
 
 nlp = spacy.load("en_core_web_sm")
 
