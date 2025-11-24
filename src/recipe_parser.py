@@ -36,6 +36,7 @@ def get_parsed_steps():
         parsed_step = parse_step_main(step['text'], tools, ingredients)
         parsed_step["step_number"] = step["step_number"]
         parsed_step["substep_number"] = step["substep_number"]
+        parsed_step = parse_step_main(step['text'], tools, ingredients)
         parsed_steps.append(parsed_step)
     return parsed_steps
 

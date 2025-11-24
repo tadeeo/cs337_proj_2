@@ -7,7 +7,7 @@ import step_manager
 import json
 from typing import Tuple
 
-_DELAY_MULTIPLIER = 1.0 # for testing, set to 0.0 to skip delays
+_DELAY_MULTIPLIER = 0.0 # for testing, set to 0.0 to skip delays
 
 with open("recipe.json", "r", encoding="utf-8") as f:
     recipe_data = json.load(f)
@@ -30,7 +30,7 @@ def load_cooking_tools():
 
 cooking_tools = load_cooking_tools()
 
-def slow_print(*args, delay=0.03):
+def slow_print(*args, delay=0.025):
     text = ''.join(str(arg) for arg in args)
     for char in text:
         print(char, end='', flush=True)
@@ -46,7 +46,7 @@ def word_print(*args, delay=0.15):
         time.sleep(_DELAY_MULTIPLIER*delay)
     print() 
 
-def tactical_pause(seconds = 0.5):
+def tactical_pause(seconds = 0.35):
     time.sleep(_DELAY_MULTIPLIER*seconds)
 
 def scrape_and_parse(url: str):
@@ -54,6 +54,14 @@ def scrape_and_parse(url: str):
     recipe_parser.main()
     step_manager.main()
     slow_print("Scraping and parsing complete!")
+
+def make_google_search_url(q):
+    g_query = q.replace(" ", "+")
+    return f"https://www.google.com/search?q={g_query}"
+
+def make_youtube_search_url(q):
+    yt_query = q.replace(" ", "+")
+    return f"https://www.youtube.com/results?search_query={yt_query}"
 
 def startup_base():
     slow_print("What recipe would you like to cook today?")
@@ -139,18 +147,43 @@ def handle_step_query(query, recipe_data, curr_idx, speech: bool) -> Tuple[bool,
     handled = True
     return handled, curr_idx, output
 
+def handle_can_i_query(query):
+    handled = False
+    q = query.lower().strip()
+    title = recipe_data["title"].lower().strip()
+    goog_title = title.replace(" ", "+")
+    can_i_pat = re.compile(r"can\s+i\s+(.+?)[\?\s]*$")
+
+    m = can_i_pat.match(q)
+    if m:
+        action = m.group(1).strip()
+        # check culinary dictionary
+        definition = culinary_dict.get(action)
+        if definition:
+            word_print("Yes, you can", action + ":", definition)
+            handled = True
+        else:
+            word_print("Sorry, I couldn't find information about", action)
+            handled = True
+    return handled
+
+import re
+
 def handle_info_query(query: str, speech: bool) -> Tuple[bool, str]:
     handled = False
     q = query.lower().strip()
 
-    # what is/ how do i/ what does ___ mean
+    # what is / what does ... mean
     what_is_pat = re.compile(r"(what\s+is|what\s+does)\s+(.+?)(?:\s+mean)?[\?\s]*$")
+    # how do / how to ...
     how_do_pat = re.compile(r"(how\s+(do|to)\s+(i\s+)?)(.+?)[\?\s]*$")
+    # how much / how many ...
+    how_much_pat = re.compile(r"(how\s+(much|many)\s+)(.+?)[\?\s]*$")
 
+    # what-is lookup
     m = what_is_pat.match(q)
     if m:
         term = m.group(2).strip()
-        # check culinary dictionary
         definition = culinary_dict.get(term)
         if speech: # Could also move speech check inside the ifs
             if definition:
@@ -195,17 +228,41 @@ def handle_info_query(query: str, speech: bool) -> Tuple[bool, str]:
             # check tools
             elif procedure in cooking_tools:
                 word_print(procedure, ":", cooking_tools[procedure])
-    
-            # generate YouTube search link for the procedure
-    yt_query = q.replace(" ", "+")
-    youtube_url = f"https://www.youtube.com/results?search_query={yt_query}"
-    word_print("To learn, feel free to try this YouTube search:")
-    word_print(youtube_url)
-    output = "I lack the knowledge to answer that. Try the youtube search I outputed to the terminal"
-    # Why use the variable handled at all? You don't return in any cases where handled is false? Interrupts?
-    handled = True
+
+    # Can't find lookup
+    if not handled:
+          yt_query = q.replace(" ", "+")
+          youtube_url = f"https://www.youtube.com/results?search_query={yt_query}"
+          word_print("For more information, feel free to try this YouTube search:")
+          word_print(youtube_url)
+          handled = True
+
+    # how-much / how-many lookup
+    if not handled:
+        m = how_much_pat.match(q)
+        if m:
+            target = m.group(3).strip()
+            amount = parsed_recipe_data["ingredients"]
+            if amount:
+                word_print("You typically need", amount, "of", target)
+            else:
+                word_print("Sorry, I don't know how much", target, "you need.")
+            handled = True
     return handled, output
-    
+
+def handle_temp_query(query):
+    handled = False
+    q = query.lower().strip()
+    temp_pat = re.compile(r"(what\s+is\s+the\s+temperature\s+for|set\s+the\s+temperature\s+to)[\?\s]*$")
+
+    m = temp_pat.match(q)
+    if m:
+        temperature_info = step_manager.get_temperature()
+        word_print("The temperature information is as follows:")
+        word_print(temperature_info)
+        handled = True
+    return handled
+
 def query_handler():
     slow_print(" Great!")
     slow_print(" Now, we will begin navigating the recipe! At any point during the experience, you can type 'exit' to quit.")
