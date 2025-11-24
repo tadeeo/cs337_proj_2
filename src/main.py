@@ -1,5 +1,4 @@
 import re
-import sys
 import time
 import recipe_scraper
 import recipe_parser

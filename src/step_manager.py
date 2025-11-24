@@ -11,13 +11,7 @@ def get_steps():
     return steps
 
 def get_current_step(steps, curr_step):
-    curr = []
-    for step in steps:
-        if step["step_number"] == curr_step:
-            curr.append(step)
-        else:
-            continue
-    return curr
+    return steps[curr_step-1]
 
 def set_next_step(steps, curr_step):
     curr_step

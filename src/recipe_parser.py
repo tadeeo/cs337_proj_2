@@ -33,9 +33,10 @@ def get_parsed_steps():
     parsed_steps = []
     prev = -1
 
+    i = 1
     for step in steps:
         parsed_step = parse_step_main(step['text'], tools, ingredients)
-        parsed_step["step_number"] = step["step_number"]
+        parsed_step["step_number"] = i
         parsed_step["substep_number"] = step["substep_number"]
         if prev >= 0 and len(parsed_steps[prev]["temperature"]) > 0:
             parsed_step["temperature"] = parsed_steps[prev]["temperature"] | parsed_step["temperature"]
@@ -43,6 +44,7 @@ def get_parsed_steps():
                 parsed_step["time"] = parsed_steps[prev]["time"] | parsed_step["time"]
         parsed_steps.append(parsed_step)
         prev += 1
+        i += 1
     return parsed_steps
 
 def main():
