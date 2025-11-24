@@ -143,7 +143,8 @@ def parse_step(step_number: int, step: str, ingredients: List[str], tools: List[
         "description": step.strip(),
         "actions": actions,
         "time": time_info if time_info else {},
-        "temperature": temp_info if temp_info else {}
+        "temperature": temp_info if temp_info else {},
+        "actionable": check_actionable(step)
     }
 
 
@@ -263,7 +264,7 @@ def main():
     # tools_file = sys.argv[2]
     # step_sentence = sys.argv[3]
 
-    with open("recipe.json", "r") as f:
+    with open("src/recipe.json", "r") as f:
         data = json.load(f)
 
     ingredients = [item["name"] for item in data["ingredients"]]

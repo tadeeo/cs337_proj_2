@@ -13,6 +13,7 @@
         "temperature": {
             "oven": "350°"
         },
+        "actionable": true,
         "substep_number": "1.1"
     },
     {
@@ -23,8 +24,8 @@
                 "verb": "boil",
                 "ingredients": [
                     "water",
-                    "oil",
-                    "salt"
+                    "salt",
+                    "oil"
                 ],
                 "tool": null
             }
@@ -33,6 +34,7 @@
         "temperature": {
             "oven": "350°"
         },
+        "actionable": true,
         "substep_number": "2.1"
     },
     {
@@ -60,6 +62,7 @@
         "temperature": {
             "oven": "350°"
         },
+        "actionable": true,
         "substep_number": "2.2"
     },
     {
@@ -70,8 +73,8 @@
                 "verb": "place",
                 "ingredients": [
                     "pepper",
-                    "garlic powder",
                     "salt",
+                    "garlic powder",
                     "lean ground beef"
                 ],
                 "tool": "skillet"
@@ -80,8 +83,8 @@
                 "verb": "cook",
                 "ingredients": [
                     "pepper",
-                    "garlic powder",
                     "salt",
+                    "garlic powder",
                     "lean ground beef"
                 ],
                 "tool": "skillet"
@@ -90,8 +93,8 @@
                 "verb": "stir",
                 "ingredients": [
                     "pepper",
-                    "garlic powder",
                     "salt",
+                    "garlic powder",
                     "lean ground beef"
                 ],
                 "tool": "skillet"
@@ -104,6 +107,7 @@
             "oven": "350°",
             "stove/burner": "MEDIUM"
         },
+        "actionable": true,
         "substep_number": "3.1"
     },
     {
@@ -127,6 +131,7 @@
             "oven": "350°",
             "stove/burner": "MEDIUM"
         },
+        "actionable": true,
         "substep_number": "4.1"
     },
     {
@@ -137,8 +142,8 @@
                 "verb": "bake",
                 "ingredients": [
                     "cottage cheese",
-                    "lean ground beef",
-                    "tomato-basil pasta sauce"
+                    "tomato-basil pasta sauce",
+                    "lean ground beef"
                 ],
                 "tool": null
             },
@@ -146,8 +151,8 @@
                 "verb": "layer",
                 "ingredients": [
                     "cottage cheese",
-                    "lean ground beef",
-                    "tomato-basil pasta sauce"
+                    "tomato-basil pasta sauce",
+                    "lean ground beef"
                 ],
                 "tool": null
             },
@@ -155,8 +160,8 @@
                 "verb": "layer",
                 "ingredients": [
                     "cottage cheese",
-                    "lean ground beef",
-                    "tomato-basil pasta sauce"
+                    "tomato-basil pasta sauce",
+                    "lean ground beef"
                 ],
                 "tool": null
             },
@@ -164,8 +169,8 @@
                 "verb": "layer",
                 "ingredients": [
                     "cottage cheese",
-                    "lean ground beef",
-                    "tomato-basil pasta sauce"
+                    "tomato-basil pasta sauce",
+                    "lean ground beef"
                 ],
                 "tool": null
             }
@@ -177,6 +182,7 @@
             "oven": "350°",
             "stove/burner": "MEDIUM"
         },
+        "actionable": true,
         "substep_number": "5.1"
     },
     {
@@ -212,6 +218,7 @@
             "oven": "350°",
             "stove/burner": "MEDIUM"
         },
+        "actionable": true,
         "substep_number": "5.2"
     },
     {
@@ -225,6 +232,7 @@
             "oven": "350°",
             "stove/burner": "MEDIUM"
         },
+        "actionable": true,
         "substep_number": "5.3"
     },
     {
@@ -244,6 +252,7 @@
             "oven": "350°",
             "stove/burner": "MEDIUM"
         },
+        "actionable": true,
         "substep_number": "6.1"
     },
     {
@@ -272,6 +281,7 @@
             "oven": "350°",
             "stove/burner": "MEDIUM"
         },
+        "actionable": true,
         "substep_number": "6.2"
     },
     {
@@ -285,6 +295,7 @@
             "oven": "350°",
             "stove/burner": "MEDIUM"
         },
+        "actionable": true,
         "substep_number": "6.3"
     }
 ]
