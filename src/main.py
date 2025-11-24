@@ -220,7 +220,7 @@ def handle_info_query(query):
         m = how_much_pat.match(q)
         if m:
             target = m.group(3).strip()
-            amount = parsed_recipe_data["ingredients"]  # you define this mapping
+            amount = parsed_recipe_data["ingredients"]
             if amount:
                 word_print("You typically need", amount, "of", target)
             else:
