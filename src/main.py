@@ -1,5 +1,4 @@
 import re
-import sys
 import time
 import recipe_scraper
 import recipe_parser
@@ -9,7 +8,7 @@ from typing import Tuple
 
 _DELAY_MULTIPLIER = 0.0 # for testing, set to 0.0 to skip delays
 
-with open("recipe.json", "r", encoding="utf-8") as f:
+with open("src/recipe.json", "r", encoding="utf-8") as f:
     recipe_data = json.load(f)
 
 # with open("parsed_recipes.json", "r", encoding="utf-8") as f:
@@ -134,16 +133,11 @@ def handle_step_query(query, recipe_data, curr_idx, speech: bool) -> Tuple[bool,
 
     step = step_manager.get_current_step(steps, curr_idx)
     if speech:
-        output += "Step " + str(step[0]['step_number']) + ": "
-        for sub in step:
-            output += str(sub['substep_number']) + ": " + str(sub['description'] + " ")
+        output += "Step " + str(step['step_number']) + ": " + str(step['description'] + " ")
         print(output)
     else:
         print(step)
-        word_print("Step", step[0]['step_number'], ":")
-        for sub in step:
-            word_print(sub['substep_number'], ":", sub['description'])
-            tactical_pause()
+        word_print("Step", step['step_number'], ":", step['description'])
     handled = True
     return handled, curr_idx, output
 
