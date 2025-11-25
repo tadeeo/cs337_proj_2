@@ -55,7 +55,7 @@ def main_speech_to_text():
                 if (query == "stop" or query == "quit" or query == "exit"):
                     break
 
-                print(query)
+                # print(query)
                 if combined.search(query):
                     handled, idx, output = handle_step_query(query, recipe_data, idx, True)
                     if handled:
@@ -65,28 +65,31 @@ def main_speech_to_text():
                     if not handled:
                         if (contains_vague_term(query)):
                             handled, output = handle_vague_query(query, idx, True)
-                            print("vague: " + output + ":")
+                            # print("vague: " + output + ":")
 
                     if not handled:
                         handled, output = handle_temp_query(query)
-                        print(output)
+                        # print(output)
                     
                     if not handled:
                         handled, output = handle_substitution_query(query, idx, True)
-                        print("sub: " + output + ":")
+                        # print("sub: " + output + ":")
 
                     if not handled:
                         handled, idx, output = handle_step_query(query, recipe_data, idx, True)
-                        print("step: " + output + ":")
+                        # print("step: " + output + ":")
 
                     if not handled:
                         handled, output = handle_info_query(query, True, idx)
-                        print("info: " + output + ":")
+                        # print("info: " + output + ":")
                     
                     if not handled:
-                        slow_print("Sorry, I didn't understand that. Please try again.")
+                        output = "Sorry, I didn't understand that. Please try again."
+                        handled = True
+                        # slow_print("Sorry, I didn't understand that. Please try again.")
 
                     if handled:
+                        print(output)
                         speak_text(output)
                         continue
                         

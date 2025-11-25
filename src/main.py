@@ -207,7 +207,7 @@ def handle_vague_query(query, curr_idx, speech: bool) -> Tuple[bool, str]:
         if not ingredient:
             return True, "I'm not sure which ingredient you're referring to."
 
-        qty = find_ingredient_quantity(ingredient, steps)
+        qty = find_ingredient_quantity(ingredient, steps, curr_idx)
         if qty:
             return True, f"You need {qty} of {ingredient}."
         else:
@@ -242,40 +242,20 @@ def handle_vague_query(query, curr_idx, speech: bool) -> Tuple[bool, str]:
 # ------------------------------------------------------------
 # Utility: find ingredient quantity from steps
 # ------------------------------------------------------------
-def find_ingredient_quantity(ingredient, steps): #TODO Pull from original ingredient list
+def find_ingredient_quantity(ingredient, steps, curr_idx): #TODO Pull from original ingredient list
     """
     Search ingredients across all steps to find a matching quantity entry.
     You can customize this depending on how you store quantities.
     """
-
-    ingredient = ingredient.lower()
-
-    for step in steps:
-        if step.get("actions"):
-            for act in step["actions"]:
-                if "ingredients" not in act:
-                    continue
-
-                # Your ingredients may have associated quantity metadata elsewhere.
-                # If quantity is stored in the ingredient list as a dict:
-                #   { "name": "sugar", "qty": "1 cup" }
-                # then use this version:
-                ing_list = act["ingredients"]
-
-                for ing in ing_list:
-                    if isinstance(ing, dict):
-                        name = ing.get("name", "").lower()
-                        qty = ing.get("qty")
-                        if name == ingredient and qty:
-                            return qty
-
-                    elif isinstance(ing, str):
-                        # If ingredient quantities are not stored in steps,
-                        # they may come from a recipe ingredient list.
-                        # You can plug that in here:
-                        continue
-
-    return None
+    target = ingredient.lower()
+    amount = step_manager.get_current_step(steps, curr_idx)
+    if amount:
+        for ing in amount["ingredients"]:
+            if ing["name"] == target:
+                return ing["qty"] + ing["unit"]
+    return
+    
+    
 
 def handle_substitution_query(query: str, curr_idx: int, speech: bool) -> Tuple[bool, str]:
     """
@@ -430,7 +410,9 @@ def handle_step_query(query, recipe_data, curr_idx, speech: bool) -> Tuple[bool,
             output += note + "\n"
     else:
         word_print("Step", step['step_number'], ":", step['description'])
-        word_print("Notes: \n" + print(s + "\n") for s in step["notes"])
+        word_print("Notes: \n")
+        for s in step["notes"]:
+            word_print(s, "\n")
     handled = True
     return handled, curr_idx, output
 
@@ -575,19 +557,21 @@ def query_handler():
         
         if not handled:
             if (contains_vague_term(query)):
-                handled, output = handle_vague_query(query, idx, True)
+                handled, output = handle_vague_query(query, idx, False)
+                print(output)
 
         if not handled:
             handled, output = handle_temp_query(query, False)
         
         if not handled:
-            handled, output = handle_substitution_query(query, idx, True)
+            handled, output = handle_substitution_query(query, idx, False)
+            print(output)
 
         if not handled:
-            handled, idx, output = handle_step_query(query, recipe_data, idx, True)
+            handled, idx, output = handle_step_query(query, recipe_data, idx, False)
 
         if not handled:
-            handled, output = handle_info_query(query, True, idx)
+            handled, output = handle_info_query(query, False, idx)
         
         if not handled:
             slow_print("Sorry, I didn't understand that. Please try again.")
