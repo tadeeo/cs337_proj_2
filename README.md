@@ -8,24 +8,21 @@ To run `main.py`, simply run `python3 src/main.py` (this is where user iterprete
 https://www.allrecipes.com/recipe/218091/classic-and-simple-meat-lasagna/
 
 #### Queries
-- “Show me the ingredients list.”
-- "Display the recipe"
-- “Go back one step.”
-- “Go to the next step.”
-- “Repeat please.”
-- “Take me to the first step.”
-- “What’s next?”
-- “What was that again?”
+- "first step"
+- “back”
+- “next”
+- “Repeat”
 
-**At step 2:**
-- “How much salt do I need?”
-- “What temperature should the oven be?”
-- “How long do I boil it?”
-- “When is it done?”
+**At step1:**
+- "what is the temperature for oven"
+
+**At step 3:**
+- "how much of that?"
 
 **At step 4:**
 - "What can I use instead of pepper?"
-- “What is a skillet?”
+- “What is skillet?”
+- "how much of that"
 
 **At step 5:**
 - "How do I mix?"
