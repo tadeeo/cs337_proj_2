@@ -415,10 +415,13 @@ def handle_step_query(query, recipe_data, curr_idx, speech: bool) -> Tuple[bool,
         curr_idx = 1
 
     elif repeat_step.search(q):
-        curr_idx = curr_idx
+        pass
     
     else:
         return False, curr_idx, ""
+
+    # Get all entries for this step_number
+    step_entries = step_manager.get_current_step(steps, curr_idx)
 
     step = step_manager.get_current_step(steps, curr_idx)
     if speech:
@@ -453,7 +456,7 @@ def handle_can_i_query(query):
             handled = True
     return handled
 
-def handle_info_query(query: str, speech: bool, curr_idx) -> Tuple[bool, str]:
+def handle_info_query(query: str, speech: bool) -> Tuple[bool, str]:
     handled = False
     output = ""
     q = query.lower().strip()
