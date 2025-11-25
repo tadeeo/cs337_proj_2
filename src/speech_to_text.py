@@ -53,12 +53,14 @@ def main_speech_to_text():
                 query = query.lower()
 
                 if (query == "stop" or query == "quit" or query == "exit"):
+                    speak_text("Thanks for using our recipe helper!")
                     break
 
                 # print(query)
                 if combined.search(query):
                     handled, idx, output = handle_step_query(query, recipe_data, idx, True)
                     if handled:
+                        print(output)
                         speak_text(output)
                         continue
                 else:
@@ -68,7 +70,7 @@ def main_speech_to_text():
                             # print("vague: " + output + ":")
 
                     if not handled:
-                        handled, output = handle_temp_query(query)
+                        handled, output = handle_temp_query(query, True)
                         # print(output)
                     
                     if not handled:
@@ -97,7 +99,7 @@ def main_speech_to_text():
             print("Could not request results {0}".format(e))
             
         except sr.UnknownValueError:
-            print("unknown error occurred")
+            print("Didn't recognize that, please repeat")
 
 if __name__ == "__main__":
     startup_base()

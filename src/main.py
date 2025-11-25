@@ -218,7 +218,7 @@ def handle_vague_query(query, curr_idx, speech: bool) -> Tuple[bool, str]:
     if how_long_pat.search(query):
         t = get_step_time_phrase(step)
         if t:
-            return True, f"You should cook it for {t}."
+            return True, f"You should do it for {t}."
         return True, "This step doesn't specify a cooking time."
 
     # --- Case 3: "what can I use instead of it/that" → ingredient substitution
@@ -236,7 +236,7 @@ def handle_vague_query(query, curr_idx, speech: bool) -> Tuple[bool, str]:
 
     rewritten_query = replace_vague_terms(query, replacement_phrase, vague_terms)
 
-    handled, output = handle_info_query(rewritten_query, speech)
+    handled, output = handle_info_query(rewritten_query, speech, curr_idx)
     return handled, output
 
 # ------------------------------------------------------------
@@ -509,12 +509,16 @@ def handle_info_query(query: str, speech: bool, curr_idx: str) -> Tuple[bool, st
             if amount:
                 for ing in amount["ingredients"]:
                     if ing["name"] == target:
-                        word_print("You typically need", ing["qty"], ing["unit"], "of", target)
+                        output += "You typically need " + ing["qty"] + " " + ing["unit"] + " of " + target
+                        if not speech:
+                            word_print("You typically need", ing["qty"], ing["unit"], "of", target)
                         known = True
                 if not known:
                     word_print("Sorry, I don't know how much", target, "you need.")
             else:
-                word_print("Sorry, I don't know how much", target, "you need.")
+                output = "Sorry, I don't know how much", target, "you need."
+                if not speech:
+                    word_print("Sorry, I don't know how much", target, "you need.")
             handled = True
 
     # Can't find lookup
@@ -523,6 +527,7 @@ def handle_info_query(query: str, speech: bool, curr_idx: str) -> Tuple[bool, st
           youtube_url = f"https://www.youtube.com/results?search_query={yt_query}"
           word_print("For more information, feel free to try this YouTube search:")
           word_print(youtube_url)
+          output += "Here is a youtube video to help."
           handled = True
     
     return handled, output
