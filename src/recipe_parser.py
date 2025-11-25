@@ -21,9 +21,7 @@ def load_steps():
     #sub_steps = [{"substeps": item["substeps"], "step_number": step for item in data["steps"]]
     for sub in data["steps"]:
         for i in range(len(sub["substeps"])):
-            text.append({ "step_number": sub["step_number"], "substep_number": sub["substeps"][i]["sub_number"], "text": sub["substeps"][i]["text"] })
-    
-    print(text)        
+            text.append({ "step_number": sub["step_number"], "substep_number": sub["substeps"][i]["sub_number"], "text": sub["substeps"][i]["text"] })   
     return text
 
 def get_parsed_steps():

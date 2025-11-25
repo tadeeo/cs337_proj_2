@@ -365,7 +365,7 @@ def handle_substitution_query(query: str, curr_idx: int, speech: bool) -> Tuple[
     if len(sub_list) == 1:
         sub_text = sub_list[0]
     else:
-        sub_text = ", ".join(sub_list[:-1]) + f", or {sub_list[-1]}"
+        sub_text = sub_list#", ".join(sub_list[:-1]) + f", or {sub_list[-1]}"
 
     # -------------------------------------------------
     #           RETURN FORMATTED SUBSTITUTION
@@ -379,7 +379,7 @@ def handle_step_query(query, recipe_data, curr_idx, speech: bool) -> Tuple[bool,
     steps = step_manager.get_steps()
     total_steps = steps[len(steps)-1]["step_number"]
     handled = False
-    output = "Output example "
+    output = ""
     
     q = query.lower().strip()
 
@@ -428,9 +428,7 @@ def handle_step_query(query, recipe_data, curr_idx, speech: bool) -> Tuple[bool,
         output += "Step " + str(step['step_number']) + ": " + str(step['description'] + " ")
         for note in step["notes"]:
             output += note + "\n"
-        print(output)
     else:
-        print(step)
         word_print("Step", step['step_number'], ":", step['description'])
         word_print("Notes: \n" + print(s + "\n") for s in step["notes"])
     handled = True
@@ -456,7 +454,7 @@ def handle_can_i_query(query):
             handled = True
     return handled
 
-def handle_info_query(query: str, speech: bool) -> Tuple[bool, str]:
+def handle_info_query(query: str, speech: bool, curr_idx: str) -> Tuple[bool, str]:
     handled = False
     output = ""
     q = query.lower().strip()
@@ -475,7 +473,7 @@ def handle_info_query(query: str, speech: bool) -> Tuple[bool, str]:
         definition = culinary_dict.get(term)
         if speech: # Could also move speech check inside the ifs
             if definition:
-                output = term + "means " + definition
+                output = term + " means " + definition
                 return True, output
             #  check cooking tools
             elif term in cooking_tools:
@@ -547,7 +545,7 @@ def handle_info_query(query: str, speech: bool) -> Tuple[bool, str]:
     
     return handled, output
 
-def handle_temp_query(query):
+def handle_temp_query(query, speech: bool):
     handled = False
     q = query.lower().strip()
     temp_pat = re.compile(r"what\s+is\s+the\s+temperature\s+for.*$")
@@ -556,8 +554,9 @@ def handle_temp_query(query):
     temperature_info = ""
     if m:
         temperature_info = step_manager.get_temperature()
-        word_print("The temperature information is as follows:")
-        word_print(temperature_info)
+        if not speech:
+            word_print("The temperature information is as follows:")
+            word_print(temperature_info)
         handled = True
     return handled, "The temperature is " + temperature_info
 
@@ -577,28 +576,21 @@ def query_handler():
         if not handled:
             if (contains_vague_term(query)):
                 handled, output = handle_vague_query(query, idx, True)
-                print("vague: " + output + ":")
 
         if not handled:
-            handled, output = handle_temp_query(query)
-            print(output)
+            handled, output = handle_temp_query(query, False)
         
         if not handled:
             handled, output = handle_substitution_query(query, idx, True)
-            print("sub: " + output + ":")
 
         if not handled:
             handled, idx, output = handle_step_query(query, recipe_data, idx, True)
-            print("step: " + output + ":")
 
         if not handled:
             handled, output = handle_info_query(query, True, idx)
-            print("info: " + output + ":")
         
         if not handled:
             slow_print("Sorry, I didn't understand that. Please try again.")
-
-        slow_print(output)
     
 def main():
     

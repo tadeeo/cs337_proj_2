@@ -39,7 +39,7 @@ def main_speech_to_text():
             
             # use the microphone as source for input.
             with sr.Microphone() as source2:
-                
+                handled = False
                 # wait for a second to let the recognizer
                 # adjust the energy threshold based on
                 # the surrounding noise level 
@@ -62,11 +62,33 @@ def main_speech_to_text():
                         speak_text(output)
                         continue
                 else:
-                    handled, output = handle_info_query(query, True)
+                    if not handled:
+                        if (contains_vague_term(query)):
+                            handled, output = handle_vague_query(query, idx, True)
+                            print("vague: " + output + ":")
+
+                    if not handled:
+                        handled, output = handle_temp_query(query)
+                        print(output)
+                    
+                    if not handled:
+                        handled, output = handle_substitution_query(query, idx, True)
+                        print("sub: " + output + ":")
+
+                    if not handled:
+                        handled, idx, output = handle_step_query(query, recipe_data, idx, True)
+                        print("step: " + output + ":")
+
+                    if not handled:
+                        handled, output = handle_info_query(query, True, idx)
+                        print("info: " + output + ":")
+                    
+                    if not handled:
+                        slow_print("Sorry, I didn't understand that. Please try again.")
+
                     if handled:
                         speak_text(output)
                         continue
-                    speak_text("Sorry, I didn't understand that. Please try again.")
                         
         except sr.RequestError as e:
             print("Could not request results {0}".format(e))

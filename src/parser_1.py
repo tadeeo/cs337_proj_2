@@ -139,7 +139,6 @@ def get_ingredient_amounts(ingredients):
     final = []
     with open("src/recipe.json", "r") as f:
         ingredients_data = json.load(f)["ingredients"]
-    print(ingredients_data)
     for ing_data in ingredients_data:
         if ing_data["name"] in ingredients:
             final.append(ing_data)
