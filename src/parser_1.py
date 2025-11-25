@@ -135,6 +135,16 @@ def extract_temperature(step: str, ingredients: List[str]) -> Dict:
 
     return result
 
+def get_ingredient_amounts(ingredients):
+    final = []
+    with open("src/recipe.json", "r") as f:
+        ingredients_data = json.load(f)["ingredients"]
+    print(ingredients_data)
+    for ing_data in ingredients_data:
+        if ing_data["name"] in ingredients:
+            final.append(ing_data)
+    return final
+
 def parse_step(step_number: int, step: str, ingredients: List[str], tools: List[str]) -> Dict:
     """Parse a single recipe step into a structured dict."""
     step_ingredients = extract_ingredients(step, ingredients)
@@ -153,7 +163,8 @@ def parse_step(step_number: int, step: str, ingredients: List[str], tools: List[
         "time": time_info if time_info else {},
         "temperature": temp_info if temp_info else {},
         "actionable": check_actionable(step),
-        "notes": []
+        "notes": [],
+        "ingredients": get_ingredient_amounts(step_ingredients)
     }
 
 

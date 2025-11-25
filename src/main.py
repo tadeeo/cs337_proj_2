@@ -423,7 +423,8 @@ def handle_step_query(query, recipe_data, curr_idx, speech: bool) -> Tuple[bool,
     step = step_manager.get_current_step(steps, curr_idx)
     if speech:
         output += "Step " + str(step['step_number']) + ": " + str(step['description'] + " ")
-        output += "Notes: \n" + (s + "\n" for s in step["notes"])
+        for note in step["notes"]:
+            output += note + "\n"
         print(output)
     else:
         print(step)
@@ -521,9 +522,14 @@ def handle_info_query(query: str, speech: bool, curr_idx) -> Tuple[bool, str]:
             target = m.group(3).strip()
             steps = step_manager.get_steps()
             amount = step_manager.get_current_step(steps, curr_idx)
-            print(amount)
+            known = False
             if amount:
-                word_print("You typically need", amount["qty"], amount["unit"], "of", target)
+                for ing in amount["ingredients"]:
+                    if ing["name"] == target:
+                        word_print("You typically need", ing["qty"], ing["unit"], "of", target)
+                        known = True
+                if not known:
+                    word_print("Sorry, I don't know how much", target, "you need.")
             else:
                 word_print("Sorry, I don't know how much", target, "you need.")
             handled = True
