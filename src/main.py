@@ -414,13 +414,24 @@ def handle_step_query(query, recipe_data, curr_idx, speech: bool) -> Tuple[bool,
     elif first_step.search(q):
         curr_idx = 1
 
+    elif repeat_step.search(q):
+        pass
+    
+    else:
+        return False, curr_idx, ""
+
+    # Get all entries for this step_number
+    step_entries = step_manager.get_current_step(steps, curr_idx)
+
     step = step_manager.get_current_step(steps, curr_idx)
     if speech:
         output += "Step " + str(step['step_number']) + ": " + str(step['description'] + " ")
+        output += "Notes: \n" + (s + "\n" for s in step["notes"])
         print(output)
     else:
         print(step)
         word_print("Step", step['step_number'], ":", step['description'])
+        word_print("Notes: \n" + print(s + "\n") for s in step["notes"])
     handled = True
     return handled, curr_idx, output
 
@@ -505,6 +516,29 @@ def handle_info_query(query: str, speech: bool) -> Tuple[bool, str]:
             elif procedure in cooking_tools:
                 word_print(procedure, ":", cooking_tools[procedure])
 
+    # how-much / how-many lookup
+    m = how_much_pat.match(q)
+    if m:
+        target = m.group(3).strip().lower()
+        #print("target: ", target)
+        found = None
+        for step in parsed_recipe_data:
+            for ing in step.get("ingredients", []):
+                #print(ing)
+                if target in ing.get("name", "").lower():
+                    qty = ing.get("qty", "").strip()
+                    unit = ing.get("unit", "").strip()
+                    if qty or unit:
+                        found = f"{qty} {unit}".strip()
+                        output = f"You typically need {found} of {ing['name']}"
+                        handled = True
+                        break
+            if handled:
+                break
+        if not handled:
+            output = f"Sorry, I don't know how much {target} you need."
+            handled = True
+
     # Can't find lookup
     if not handled:
           yt_query = q.replace(" ", "+")
@@ -512,32 +546,22 @@ def handle_info_query(query: str, speech: bool) -> Tuple[bool, str]:
           word_print("For more information, feel free to try this YouTube search:")
           word_print(youtube_url)
           handled = True
-
-    # how-much / how-many lookup
-    if not handled:
-        m = how_much_pat.match(q)
-        if m:
-            target = m.group(3).strip()
-            amount = parsed_recipe_data["ingredients"]
-            if amount:
-                word_print("You typically need", amount, "of", target)
-            else:
-                word_print("Sorry, I don't know how much", target, "you need.")
-            handled = True
+    
     return handled, output
 
 def handle_temp_query(query):
     handled = False
     q = query.lower().strip()
-    temp_pat = re.compile(r"(what\s+is\s+the\s+temperature\s+for|set\s+the\s+temperature\s+to)[\?\s]*$")
+    temp_pat = re.compile(r"what\s+is\s+the\s+temperature\s+for.*$")
 
     m = temp_pat.match(q)
+    temperature_info = ""
     if m:
         temperature_info = step_manager.get_temperature()
         word_print("The temperature information is as follows:")
         word_print(temperature_info)
         handled = True
-    return handled
+    return handled, "The temperature is " + temperature_info
 
 def query_handler():
     slow_print(" Great!")
@@ -556,6 +580,10 @@ def query_handler():
             if (contains_vague_term(query)):
                 handled, output = handle_vague_query(query, idx, True)
                 print("vague: " + output + ":")
+
+        if not handled:
+            handled, output = handle_temp_query(query)
+            print(output)
         
         if not handled:
             handled, output = handle_substitution_query(query, idx, True)
@@ -566,7 +594,7 @@ def query_handler():
             print("step: " + output + ":")
 
         if not handled:
-            handled, output = handle_info_query(query, True)
+            handled, output = handle_info_query(query, True, idx)
             print("info: " + output + ":")
         
         if not handled:
